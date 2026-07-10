@@ -2590,7 +2590,7 @@ export default function App() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5 text-gold shrink-0" />
-                  <a href="tel:+919984988208" className="text-slate-400 hover:text-gold transition-colors">+91 99849 88208</a>
+                  <a href="tel:+919988988208" className="text-slate-400 hover:text-gold transition-colors">+91 99889 88208</a>
                 </li>
                 <li className="flex items-start gap-2">
                   <Globe className="w-3.5 h-3.5 text-gold shrink-0 mt-0.5" />
