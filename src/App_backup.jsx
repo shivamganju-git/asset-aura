@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  TrendingUp, 
-  Users, 
-  ShieldCheck, 
-  Zap, 
-  BarChart3, 
-  Rocket, 
-  Award, 
-  ChevronDown, 
-  CheckCircle2, 
-  ArrowRight, 
-  Star, 
-  Plus, 
+import {
+  TrendingUp,
+  Users,
+  ShieldCheck,
+  Zap,
+  BarChart3,
+  Rocket,
+  Award,
+  ChevronDown,
+  CheckCircle2,
+  ArrowRight,
+  Star,
+  Plus,
   Minus,
   Mail,
   Phone,
@@ -136,21 +136,21 @@ const ConsultationModal = ({ isOpen, onClose }) => {
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="absolute inset-0 bg-slate-950/85 backdrop-blur-md"
           onClick={onClose}
         />
-        
+
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 30 }}
           className="relative w-full max-w-xl glass-card border-white/10 bg-slate-900/95 shadow-2xl p-6 md:p-8 overflow-hidden z-10"
         >
-          <button 
+          <button
             onClick={onClose}
             className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors bg-white/5 p-2 rounded-full border border-white/5 hover:border-white/20"
           >
@@ -171,24 +171,24 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Full Name</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
                       placeholder="e.g. Arshpreet Singh"
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Phone Number</label>
-                    <input 
-                      type="tel" 
+                    <input
+                      type="tel"
                       required
                       pattern="[0-9]{10}"
                       placeholder="e.g. 9988988208"
                       value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
@@ -197,23 +197,23 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Email Address</label>
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       required
                       placeholder="e.g. client@example.com"
                       value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">City / Region</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
                       placeholder="e.g. Mohali"
                       value={formData.city}
-                      onChange={(e) => setFormData({...formData, city: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
@@ -222,9 +222,9 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Service of Interest</label>
-                    <select 
+                    <select
                       value={formData.service}
-                      onChange={(e) => setFormData({...formData, service: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                       className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-gold/50 transition-all text-xs"
                     >
                       <option value="Portfolio Management (PMS)">Portfolio Management (PMS)</option>
@@ -236,9 +236,9 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Meeting Format</label>
-                    <select 
+                    <select
                       value={formData.slot}
-                      onChange={(e) => setFormData({...formData, slot: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, slot: e.target.value })}
                       className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-gold/50 transition-all text-xs"
                     >
                       <option value="Virtual Meeting">Virtual / Phone Meeting</option>
@@ -252,8 +252,8 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                   <span>By submitting, you consent to receive direct contact from our certified financial advisory team. We respect your privacy and never share your data.</span>
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={isSubmitting}
                   className="btn-gold w-full py-3.5 text-sm mt-2 flex items-center justify-center gap-2 group text-slate-950 font-bold"
                 >
@@ -275,7 +275,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
               </div>
             </div>
           ) : (
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="text-center py-6"
@@ -287,7 +287,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
               <p className="text-slate-300 text-xs max-w-sm mx-auto mb-6 leading-relaxed">
                 Thank you <span className="text-white font-bold">{formData.name}</span>. Our representative will contact you within <span className="text-gold font-bold">24 business hours</span> to confirm your scheduling token.
               </p>
-              
+
               <div className="glass-card bg-white/5 max-w-sm mx-auto p-4 rounded-xl text-left space-y-2 mb-6 border-white/5 text-xs text-slate-400">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
@@ -344,21 +344,21 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="absolute inset-0 bg-slate-950/85 backdrop-blur-md"
           onClick={onClose}
         />
-        
+
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 30 }}
           className="relative w-full max-w-md glass-card border-white/10 bg-slate-900/95 shadow-2xl p-6 overflow-hidden z-10"
         >
-          <button 
+          <button
             onClick={onClose}
             className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors bg-white/5 p-2 rounded-full border border-white/5 hover:border-white/20"
           >
@@ -373,7 +373,7 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                 <span>{step === 1 ? 'Personal Info' : step === 2 ? 'Regulatory KYC' : 'E-Sign & Launch'}</span>
               </div>
               <div className="w-full h-1 bg-slate-950 rounded-full overflow-hidden">
-                <div 
+                <div
                   className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
                   style={{ width: `${(step / 3) * 100}%` }}
                 />
@@ -394,41 +394,41 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
               <form onSubmit={handleNextStep} className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">Your Full Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     required
                     placeholder="e.g. Arshpreet Singh"
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">Mobile Number (Linked with Aadhaar)</label>
-                  <input 
-                    type="tel" 
+                  <input
+                    type="tel"
                     required
                     pattern="[0-9]{10}"
                     placeholder="e.g. 9988988208"
                     value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">Email Address</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     required
                     placeholder="e.g. name@example.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="btn-gold w-full py-3 mt-4 text-xs font-bold text-slate-950 flex items-center justify-center gap-1.5"
                 >
                   Continue to KYC <ArrowRight className="w-4 h-4" />
@@ -447,24 +447,24 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
               <form onSubmit={handleNextStep} className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">PAN Card Number</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     required
                     pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
                     placeholder="e.g. ABCDE1234F"
                     value={formData.pan}
-                    onChange={(e) => setFormData({...formData, pan: e.target.value.toUpperCase()})}
+                    onChange={(e) => setFormData({ ...formData, pan: e.target.value.toUpperCase() })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs uppercase"
                   />
                 </div>
 
                 <div className="glass-card bg-slate-950/60 p-4 rounded-xl border-white/5 space-y-3">
                   <label className="flex items-start gap-2.5 cursor-pointer">
-                    <input 
+                    <input
                       type="checkbox"
                       required
                       checked={formData.kycCheck}
-                      onChange={(e) => setFormData({...formData, kycCheck: e.target.checked})}
+                      onChange={(e) => setFormData({ ...formData, kycCheck: e.target.checked })}
                       className="mt-0.5 rounded border-white/10 bg-slate-950 focus:ring-0 text-gold"
                     />
                     <span className="text-[11px] text-slate-400 leading-normal">
@@ -474,15 +474,15 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                 </div>
 
                 <div className="flex gap-3 mt-4">
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setStep(1)}
                     className="btn-secondary flex-1 py-3 text-xs"
                   >
                     Back
                   </button>
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="btn-gold flex-1 py-3 text-xs font-bold text-slate-950 flex items-center justify-center gap-1"
                   >
                     Verify KYC <ArrowRight className="w-4 h-4" />
@@ -513,15 +513,15 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                 </div>
 
                 <div className="flex gap-3 mt-4">
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setStep(2)}
                     className="btn-secondary flex-1 py-3 text-xs"
                   >
                     Back
                   </button>
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isSubmitting}
                     className="btn-gold flex-1 py-3 text-xs font-bold text-slate-950 flex items-center justify-center gap-1.5"
                   >
@@ -539,7 +539,7 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
           )}
 
           {step === 4 && (
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="text-center py-6 space-y-4"
@@ -586,10 +586,10 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDematModalOpen, setIsDematModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   const [heroPhone, setHeroPhone] = useState('');
   const [prefilledPhone, setPrefilledPhone] = useState('');
-  
+
   const handleHeroSubmit = (e) => {
     e.preventDefault();
     if (heroPhone.length === 10 && /^\d+$/.test(heroPhone)) {
@@ -599,13 +599,13 @@ export default function App() {
       alert("Please enter a valid 10-digit mobile number.");
     }
   };
-  
+
   // Interactive Services Tab State
   const [activeTab, setActiveTab] = useState('advisory');
 
   // Interactive Wealth Calculator State
   const [calcType, setCalcType] = useState('sip');
-  
+
   // SIP states
   const [sipMonthly, setSipMonthly] = useState(5000);
   const [sipRate, setSipRate] = useState(12);
@@ -633,7 +633,7 @@ export default function App() {
   }, []);
 
   // Calculator computations
-  
+
   // 1. SIP Formulas
   const P_sip = sipMonthly;
   const i_sip = (sipRate / 100) / 12;
@@ -652,21 +652,21 @@ export default function App() {
 
   // Formatting utility
   const formatCurrency = (val) => {
-    return new Intl.NumberFormat('en-IN', { 
-      style: 'currency', 
-      currency: 'INR', 
-      maximumFractionDigits: 0 
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
     }).format(val);
   };
 
   // FAQ Category lists
   const faqCategories = ["All", "Regulatory", "Advisory", "Trading", "Onboarding", "Education"];
-  
+
   // Filtering FAQs
   const filteredFAQs = FAQ_DATA.filter(faq => {
     const matchesCategory = activeFAQCategory === "All" || faq.category === activeFAQCategory;
-    const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -697,8 +697,8 @@ export default function App() {
       )}>
         <div className={cn(
           "max-w-7xl mx-auto flex items-center justify-between transition-all duration-300 px-6 rounded-full border shadow-2xl backdrop-blur-md",
-          isScrolled 
-            ? "bg-slate-950/90 border-white/10 py-2.5 shadow-slate-950/80 shadow-2xl" 
+          isScrolled
+            ? "bg-slate-950/90 border-white/10 py-2.5 shadow-slate-950/80 shadow-2xl"
             : "bg-slate-950/45 border-white/5 py-3"
         )}>
           <a href="#" className="flex items-center gap-2.5 group">
@@ -723,8 +723,8 @@ export default function App() {
               { label: 'Academy', target: '#education' },
               { label: 'Contact', target: '#about-us' }
             ].map((item) => (
-              <a 
-                key={item.label} 
+              <a
+                key={item.label}
                 href={item.target}
                 className="text-slate-400 hover:text-white transition-colors text-[10px] xl:text-xs font-semibold uppercase tracking-wider relative group"
               >
@@ -739,14 +739,14 @@ export default function App() {
             <button className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:border-gold/30 hover:bg-gold/10 hover:text-gold text-slate-400 hover:text-white transition-all shrink-0">
               <Search className="w-4 h-4" />
             </button>
-            <button 
-              onClick={() => setIsDematModalOpen(true)} 
+            <button
+              onClick={() => setIsDematModalOpen(true)}
               className="hidden sm:inline-block px-4 py-2 border border-white/10 hover:border-gold/30 hover:bg-gold/10 hover:text-gold text-white rounded-full text-xs font-semibold transition-all"
             >
               Open Demat
             </button>
-            <button 
-              onClick={() => setIsModalOpen(true)} 
+            <button
+              onClick={() => setIsModalOpen(true)}
               className="btn-gold py-2 px-5 md:py-2.5 md:px-6 text-xs font-bold shadow-lg shadow-gold/10 hover:shadow-gold/25"
             >
               Book Consultation
@@ -773,7 +773,7 @@ export default function App() {
       {/* --- HERO SECTION --- */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
-          
+
           {/* Left Column: Heading and info */}
           <div className="lg:col-span-7 text-left space-y-4 md:space-y-5">
             <motion.div
@@ -788,7 +788,7 @@ export default function App() {
 
             {/* Anand Rathi styled Heading */}
             <div className="space-y-2 md:space-y-3">
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
@@ -805,7 +805,7 @@ export default function App() {
               >
                 Whatever your investing style, we have a solution for you!
               </motion.h2>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -830,8 +830,8 @@ export default function App() {
                   <p className="text-[10px] text-slate-500">Fields marked with * are required</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <input 
-                    type="tel" 
+                  <input
+                    type="tel"
                     required
                     pattern="[0-9]{10}"
                     placeholder="Enter your mobile"
@@ -839,8 +839,8 @@ export default function App() {
                     onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                     className="flex-1 bg-slate-950/80 border border-white/15 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="btn-gold py-2.5 px-5 text-xs font-bold text-slate-950 rounded-xl flex items-center justify-center gap-1.5 shrink-0 shadow-lg shadow-gold/15"
                   >
                     Start Investing <ArrowRight className="w-3.5 h-3.5" />
@@ -850,7 +850,7 @@ export default function App() {
             </motion.div>
 
             {/* Quick alert badge */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.28 }}
@@ -861,7 +861,7 @@ export default function App() {
             </motion.div>
 
             {/* Quick trust metrics structured with vertical dividers */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -870,7 +870,7 @@ export default function App() {
               <div className="flex items-center">
                 <div className="pl-3 border-l-2 border-gold/45">
                   <div className="text-xs sm:text-sm md:text-base font-display font-extrabold text-white">
-                    SEBI Registered RA
+                    SEBI Registered
                   </div>
                   <div className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Investment Advisory</div>
                 </div>
@@ -906,9 +906,9 @@ export default function App() {
 
               {/* Shaking Hands Image */}
               <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-slate-950/80 bg-slate-950/40 p-2 backdrop-blur-xl max-w-[340px] shrink-0">
-                <img 
-                  src="/handshake_partners.png" 
-                  alt="Asset Aura Shaking Hands Partnership" 
+                <img
+                  src="/handshake_partners.png"
+                  alt="Asset Aura Shaking Hands Partnership"
                   className="w-full h-auto rounded-2xl opacity-90 border border-white/5"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
@@ -950,7 +950,7 @@ export default function App() {
                     <rect x="52" y="68" width="6" height="6" />
                     <rect x="42" y="78" width="6" height="6" />
                     <rect x="52" y="78" width="6" height="6" />
-                    
+
                     <rect x="68" y="44" width="6" height="6" />
                     <rect x="78" y="44" width="6" height="6" />
                     <rect x="68" y="54" width="6" height="6" />
@@ -969,7 +969,7 @@ export default function App() {
 
               {/* Floating Cards (positioned next to the handshake box) */}
               <div className="absolute top-1/2 left-0 -translate-x-12 -translate-y-1/2 hidden xl:flex flex-col gap-4 z-20">
-                <motion.div 
+                <motion.div
                   animate={{ x: [0, 4, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   className="glass-card border-white/10 bg-slate-950/90 p-3 shadow-2xl max-w-[150px] text-left border-l-gold/45 border-l-2"
@@ -983,7 +983,7 @@ export default function App() {
                   </div>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   animate={{ x: [0, -4, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   className="glass-card border-white/10 bg-slate-950/90 p-3 shadow-2xl max-w-[150px] text-left border-l-blue-500/40 border-l-2"
@@ -1023,8 +1023,8 @@ export default function App() {
                 onClick={() => setActiveTab('advisory')}
                 className={cn(
                   "px-5 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center gap-2",
-                  activeTab === 'advisory' 
-                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg" 
+                  activeTab === 'advisory'
+                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg"
                     : "text-slate-400 hover:text-white"
                 )}
               >
@@ -1034,8 +1034,8 @@ export default function App() {
                 onClick={() => setActiveTab('trading')}
                 className={cn(
                   "px-5 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center gap-2",
-                  activeTab === 'trading' 
-                    ? "bg-gradient-to-r from-gold-dark to-gold text-slate-950 shadow-lg font-bold" 
+                  activeTab === 'trading'
+                    ? "bg-gradient-to-r from-gold-dark to-gold text-slate-950 shadow-lg font-bold"
                     : "text-slate-400 hover:text-white"
                 )}
               >
@@ -1048,7 +1048,7 @@ export default function App() {
         {/* Dynamic Offerings Grid Content */}
         <AnimatePresence mode="wait">
           {activeTab === 'advisory' ? (
-            <motion.div 
+            <motion.div
               key="advisory-tab"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1153,7 +1153,7 @@ export default function App() {
               </div>
             </motion.div>
           ) : (
-            <motion.div 
+            <motion.div
               key="trading-tab"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1238,7 +1238,7 @@ export default function App() {
                     Access all these trading products under one unified ecosystem. Open your free Demat and Trading account online in minutes.
                   </p>
                 </div>
-                <button 
+                <button
                   onClick={() => setIsDematModalOpen(true)}
                   className="btn-gold w-full py-2.5 text-xs font-bold text-slate-950 flex items-center justify-center gap-1"
                 >
@@ -1389,14 +1389,14 @@ export default function App() {
                       <span>Monthly SIP Amount:</span>
                       <span className="text-gold font-bold text-sm">{formatCurrency(sipMonthly)}</span>
                     </div>
-                    <input 
-                      type="range" 
-                      min="500" 
-                      max="100000" 
+                    <input
+                      type="range"
+                      min="500"
+                      max="100000"
                       step="500"
-                      value={sipMonthly} 
+                      value={sipMonthly}
                       onChange={(e) => setSipMonthly(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5" 
+                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5"
                     />
                     <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
                       <span>₹500</span>
@@ -1412,14 +1412,14 @@ export default function App() {
                       <span>Expected Annual Return (p.a.):</span>
                       <span className="text-blue-400 font-bold text-sm">{sipRate}%</span>
                     </div>
-                    <input 
-                      type="range" 
-                      min="5" 
-                      max="30" 
+                    <input
+                      type="range"
+                      min="5"
+                      max="30"
                       step="0.5"
-                      value={sipRate} 
+                      value={sipRate}
                       onChange={(e) => setSipRate(parseFloat(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 border border-white/5" 
+                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 border border-white/5"
                     />
                     <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
                       <span>5%</span>
@@ -1435,13 +1435,13 @@ export default function App() {
                       <span>Duration / Time Period:</span>
                       <span className="text-purple-400 font-bold text-sm">{sipYears} Years</span>
                     </div>
-                    <input 
-                      type="range" 
-                      min="1" 
-                      max="40" 
-                      value={sipYears} 
+                    <input
+                      type="range"
+                      min="1"
+                      max="40"
+                      value={sipYears}
                       onChange={(e) => setSipYears(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-purple-500 border border-white/5" 
+                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-purple-500 border border-white/5"
                     />
                     <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
                       <span>1 Year</span>
@@ -1459,14 +1459,14 @@ export default function App() {
                       <span>Lump Sum PMS Investment:</span>
                       <span className="text-gold font-bold text-sm">{formatCurrency(pmsLumpSum)}</span>
                     </div>
-                    <input 
-                      type="range" 
-                      min="50000" 
-                      max="5000000" 
+                    <input
+                      type="range"
+                      min="50000"
+                      max="5000000"
                       step="50000"
-                      value={pmsLumpSum} 
+                      value={pmsLumpSum}
                       onChange={(e) => setPmsLumpSum(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5" 
+                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5"
                     />
                     <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
                       <span>₹50,000</span>
@@ -1482,14 +1482,14 @@ export default function App() {
                       <span>Expected Advisory Growth Rate (p.a.):</span>
                       <span className="text-blue-400 font-bold text-sm">{pmsRate}%</span>
                     </div>
-                    <input 
-                      type="range" 
-                      min="5" 
-                      max="30" 
+                    <input
+                      type="range"
+                      min="5"
+                      max="30"
                       step="0.5"
-                      value={pmsRate} 
+                      value={pmsRate}
                       onChange={(e) => setPmsRate(parseFloat(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 border border-white/5" 
+                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 border border-white/5"
                     />
                     <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
                       <span>5%</span>
@@ -1505,13 +1505,13 @@ export default function App() {
                       <span>Advisory Horizon:</span>
                       <span className="text-purple-400 font-bold text-sm">{pmsYears} Years</span>
                     </div>
-                    <input 
-                      type="range" 
-                      min="1" 
-                      max="30" 
-                      value={pmsYears} 
+                    <input
+                      type="range"
+                      min="1"
+                      max="30"
+                      value={pmsYears}
                       onChange={(e) => setPmsYears(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-purple-500 border border-white/5" 
+                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-purple-500 border border-white/5"
                     />
                     <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
                       <span>1 Year</span>
@@ -1559,7 +1559,7 @@ export default function App() {
             </div>
 
             <div className="mt-8 space-y-3">
-              <button 
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="btn-gold w-full py-4 text-xs font-black text-slate-950 uppercase tracking-wider flex items-center justify-center gap-1 shadow-lg shadow-gold/10 hover:shadow-gold/20"
               >
@@ -1625,7 +1625,7 @@ export default function App() {
       {/* --- FINANCIAL EDUCATION SECTION --- */}
       <section id="education" className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-16 items-center">
-          
+
           <div className="lg:col-span-5 space-y-6 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/25 text-pink-400 text-xs font-bold uppercase tracking-wider">
               Financial Literacy
@@ -1638,7 +1638,7 @@ export default function App() {
               We believe an informed investor is an empowered investor. Our structured educational programmes cover every aspect of the Indian stock market — from the basics to advanced trading and analysis.
             </p>
             <div className="pt-2">
-              <button 
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="btn-primary py-3 px-6 text-xs font-bold shadow-lg shadow-blue-500/10"
               >
@@ -1682,7 +1682,7 @@ export default function App() {
       {/* --- DEMAT ONBOARDING SECTION --- */}
       <section id="demat-onboarding" className="py-24 px-6 bg-slate-950/40 border-y border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto">
-          
+
           <div className="text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 text-xs font-bold uppercase tracking-wider">
               Onboarding Roadmap
@@ -1737,7 +1737,7 @@ export default function App() {
           </div>
 
           <div className="mt-12 text-center">
-            <button 
+            <button
               onClick={() => setIsDematModalOpen(true)}
               className="btn-gold py-3.5 px-8 text-xs font-bold text-slate-950 shadow-lg shadow-gold/15"
             >
@@ -1751,7 +1751,7 @@ export default function App() {
       {/* --- TESTIMONIALS SLIDER SECTION --- */}
       <section className="py-24 px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          
+
           <div className="text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-bold uppercase tracking-wider">
               Client Feedback
@@ -1782,9 +1782,9 @@ export default function App() {
                 <div className="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
                   <div className="space-y-6 max-w-2xl">
                     <div className="flex items-center gap-1 text-gold">
-                      {[1,2,3,4,5].map(s => <Star key={s} className="w-3.5 h-3.5 fill-gold text-gold" />)}
+                      {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-3.5 h-3.5 fill-gold text-gold" />)}
                     </div>
-                    
+
                     <p className="text-slate-200 text-sm md:text-base italic font-medium leading-relaxed">
                       "{TESTIMONIALS_DATA[testimonialIdx].quote}"
                     </p>
@@ -1818,13 +1818,13 @@ export default function App() {
 
             {/* Slide Arrows */}
             <div className="flex justify-center md:justify-end gap-3 mt-6">
-              <button 
+              <button
                 onClick={prevTestimonial}
                 className="w-10 h-10 rounded-full border border-white/10 hover:border-white/20 bg-slate-900/60 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-95 animate-none"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              <button 
+              <button
                 onClick={nextTestimonial}
                 className="w-10 h-10 rounded-full border border-white/10 hover:border-white/20 bg-slate-900/60 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-95 animate-none"
               >
@@ -1839,7 +1839,7 @@ export default function App() {
       {/* --- FAQ SECTION WITH DYNAMIC FILTERING & SEARCH --- */}
       <section id="faqs" className="py-24 px-6 relative z-10">
         <div className="max-w-3xl mx-auto">
-          
+
           <div className="text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 text-xs font-bold uppercase tracking-wider">
               Answers Hub
@@ -1857,7 +1857,7 @@ export default function App() {
             {/* Search Input */}
             <div className="relative">
               <Search className="absolute left-4 top-3 w-4 h-4 text-slate-500" />
-              <input 
+              <input
                 type="text"
                 placeholder="Search questions or keywords (e.g. SEBI, Demat, PMS)..."
                 value={searchQuery}
@@ -1865,7 +1865,7 @@ export default function App() {
                 className="w-full bg-slate-900/60 border border-white/10 rounded-2xl pl-11 pr-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
               />
               {searchQuery && (
-                <button 
+                <button
                   onClick={() => setSearchQuery("")}
                   className="absolute right-4 top-3 text-[10px] text-slate-500 hover:text-slate-300 underline font-semibold"
                 >
@@ -1882,8 +1882,8 @@ export default function App() {
                   onClick={() => setActiveFAQCategory(cat)}
                   className={cn(
                     "px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all duration-300",
-                    activeFAQCategory === cat 
-                      ? "bg-gold text-slate-950 border-gold shadow-lg shadow-gold/15" 
+                    activeFAQCategory === cat
+                      ? "bg-gold text-slate-950 border-gold shadow-lg shadow-gold/15"
                       : "bg-slate-900/40 border-white/5 text-slate-400 hover:text-white"
                   )}
                 >
@@ -1900,7 +1900,7 @@ export default function App() {
                 const [isOpen, setIsOpen] = useState(index === 0 && !searchQuery);
                 return (
                   <div key={index} className="border-b border-white/5 last:border-none pb-2 last:pb-0">
-                    <button 
+                    <button
                       onClick={() => setIsOpen(!isOpen)}
                       className="w-full flex items-center justify-between py-3 text-left hover:text-gold transition-colors group"
                     >
@@ -1909,7 +1909,7 @@ export default function App() {
                         {isOpen ? <Minus className="text-gold w-3.5 h-3.5" /> : <Plus className="text-gold w-3.5 h-3.5" />}
                       </div>
                     </button>
-                    
+
                     <AnimatePresence initial={false}>
                       {isOpen && (
                         <motion.div
@@ -1932,7 +1932,7 @@ export default function App() {
               <div className="text-center py-8 text-slate-500 space-y-2">
                 <HelpCircle className="w-8 h-8 mx-auto text-slate-600" />
                 <p className="text-xs font-semibold">No questions found matching your search.</p>
-                <button 
+                <button
                   onClick={() => { setSearchQuery(""); setActiveFAQCategory("All"); }}
                   className="text-xs text-gold underline font-bold"
                 >
@@ -1947,7 +1947,7 @@ export default function App() {
 
       {/* --- EMBEDDED CTA SECTION --- */}
       <section className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -1967,19 +1967,19 @@ export default function App() {
               Start Compounding <br />
               <span className="gold-gradient-text">Your Wealth Today</span>
             </h2>
-            
+
             <p className="text-slate-400 text-xs md:text-sm max-w-md mx-auto leading-relaxed">
               Connect with SEBI-registered portfolio advisory expertise and open trading terminals to control your assets.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto pt-2">
-              <button 
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="btn-gold py-3 px-6 text-xs font-bold text-slate-950 shadow-lg shadow-gold/10 hover:shadow-gold/20 flex-1"
               >
                 Book Consultation Now
               </button>
-              <button 
+              <button
                 onClick={() => setIsDematModalOpen(true)}
                 className="btn-secondary py-3 px-6 text-xs font-bold flex-1 border-white/10 text-white"
               >
@@ -1999,7 +1999,7 @@ export default function App() {
       {/* --- CONTACT & GET IN TOUCH SECTION --- */}
       <section id="about-us" className="py-24 px-6 relative z-10 max-w-7xl mx-auto border-t border-white/5">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
+
           {/* Left: Detail blocks */}
           <div className="lg:col-span-5 text-left space-y-8">
             <div className="space-y-4">
@@ -2077,7 +2077,7 @@ export default function App() {
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   <span>Verified Location & Regulatory Center</span>
                 </div>
-                <button 
+                <button
                   onClick={() => setIsModalOpen(true)}
                   className="btn-gold py-2.5 px-5 text-xs font-bold text-slate-950"
                 >
@@ -2101,9 +2101,9 @@ export default function App() {
       {/* --- FOOTER --- */}
       <footer className="pt-20 pb-10 px-6 border-t border-white/5 bg-slate-950/80 relative z-10 text-left">
         <div className="max-w-7xl mx-auto space-y-12">
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
-            
+
             {/* Column 1: Info */}
             <div className="lg:col-span-5 space-y-4">
               <a href="#" className="flex items-center gap-2">
@@ -2122,9 +2122,9 @@ export default function App() {
                   { Icon: Instagram, link: "#" },
                   { Icon: Facebook, link: "#" }
                 ].map((item, i) => (
-                  <a 
-                    key={i} 
-                    href={item.link} 
+                  <a
+                    key={i}
+                    href={item.link}
                     className="w-8 h-8 rounded-full bg-white/5 border border-white/5 flex items-center justify-center hover:bg-gold/15 hover:border-gold/30 hover:text-gold transition-all text-slate-400"
                   >
                     <item.Icon className="w-3.5 h-3.5 animate-none" />

@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  TrendingUp, 
-  Users, 
-  ShieldCheck, 
-  Zap, 
-  BarChart3, 
-  Rocket, 
-  Award, 
-  ChevronDown, 
-  CheckCircle2, 
-  ArrowRight, 
-  Star, 
-  Plus, 
+import {
+  TrendingUp,
+  Users,
+  ShieldCheck,
+  Zap,
+  BarChart3,
+  Rocket,
+  Award,
+  ChevronDown,
+  CheckCircle2,
+  ArrowRight,
+  Star,
+  Plus,
   Minus,
   Mail,
   Phone,
@@ -48,6 +48,21 @@ import { twMerge } from 'tailwind-merge';
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
+
+const HighlightText = ({ text }) => {
+  if (!text) return null;
+  const parts = text.split(/(Angel One platform|Angel One)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part === 'Angel One platform' || part === 'Angel One') {
+          return <span key={i} className="font-bold text-gold">{part}</span>;
+        }
+        return part;
+      })}
+    </>
+  );
+};
 
 // --- CONSTANTS & DATA ---
 
@@ -130,6 +145,63 @@ const TESTIMONIALS_DATA = [
     stats: "Trader",
     badge: "Digital Onboarding",
     avatarGrad: "from-emerald-400 to-emerald-600"
+  }
+];
+
+const BLOGS_DATA = [
+  {
+    id: 1,
+    title: "Understanding SIPs: The Power of Compounding",
+    excerpt: "Discover how Systematic Investment Plans can help you build long-term wealth through the magic of compounding, even with small monthly contributions.",
+    date: "July 12, 2026",
+    category: "Mutual Funds",
+    readTime: "5 min read",
+    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    id: 2,
+    title: "Navigating the Stock Market: A Beginner's Guide",
+    excerpt: "Everything you need to know before you make your first trade on the Angel One platform. Learn the basics of equity trading and risk management.",
+    date: "June 28, 2026",
+    category: "Equity Trading",
+    readTime: "8 min read",
+    imageUrl: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    id: 3,
+    title: "Why Portfolio Management Services (PMS)?",
+    excerpt: "Is PMS right for you? We break down the benefits of professional portfolio management for high-net-worth individuals and how it differs from mutual funds.",
+    date: "June 15, 2026",
+    category: "Wealth Management",
+    readTime: "6 min read",
+    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
+  },
+  {
+    id: 4,
+    title: "Top 5 Mistakes to Avoid in Derivatives Trading",
+    excerpt: "Futures and options can be highly profitable but carry significant risk. Learn the common pitfalls and how to protect your capital while trading F&O.",
+    date: "May 30, 2026",
+    category: "F&O Trading",
+    readTime: "7 min read",
+    imageUrl: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    id: 5,
+    title: "The Ultimate Guide to Tax-Saving Investments (ELSS)",
+    excerpt: "Maximize your tax savings under Section 80C while participating in equity markets. We explain how ELSS mutual funds offer the best of both worlds.",
+    date: "May 12, 2026",
+    category: "Tax Planning",
+    readTime: "5 min read",
+    imageUrl: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2071&auto=format&fit=crop"
+  },
+  {
+    id: 6,
+    title: "IPO Allotment Process Explained",
+    excerpt: "Curious about how IPO shares are allocated? We dive deep into the allotment process, bidding strategies, and how to increase your chances of getting shares.",
+    date: "April 25, 2026",
+    category: "IPO",
+    readTime: "6 min read",
+    imageUrl: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2070&auto=format&fit=crop"
   }
 ];
 
@@ -283,21 +355,21 @@ const ConsultationModal = ({ isOpen, onClose }) => {
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="absolute inset-0 bg-slate-950/85 backdrop-blur-md"
           onClick={onClose}
         />
-        
+
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 30 }}
           className="relative w-full max-w-xl glass-card border-white/10 bg-slate-900/95 shadow-2xl p-6 md:p-8 overflow-hidden z-10"
         >
-          <button 
+          <button
             onClick={onClose}
             className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors bg-white/5 p-2 rounded-full border border-white/5 hover:border-white/20"
           >
@@ -305,7 +377,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
           </button>
 
           {!isSuccess ? (
-            <div>
+            <div className="mt-6">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/15 border border-gold/30 text-gold text-xs font-bold mb-3 uppercase tracking-wider">
                   <Award className="w-3 h-3 text-gold" /> SEBI Registered Advisory
@@ -318,24 +390,24 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Full Name</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
                       placeholder="e.g. Arshpreet Singh"
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Phone Number</label>
-                    <input 
-                      type="tel" 
+                    <input
+                      type="tel"
                       required
                       pattern="[0-9]{10}"
                       placeholder="e.g. 9988988208"
                       value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
@@ -344,23 +416,23 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Email Address</label>
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       required
                       placeholder="e.g. client@example.com"
                       value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">City / Region</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
                       placeholder="e.g. Mohali"
                       value={formData.city}
-                      onChange={(e) => setFormData({...formData, city: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
@@ -369,9 +441,9 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Service of Interest</label>
-                    <select 
+                    <select
                       value={formData.service}
-                      onChange={(e) => setFormData({...formData, service: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                       className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-gold/50 transition-all text-xs"
                     >
                       <option value="Portfolio Management (PMS)">Portfolio Management (PMS)</option>
@@ -383,9 +455,9 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Meeting Format</label>
-                    <select 
+                    <select
                       value={formData.slot}
-                      onChange={(e) => setFormData({...formData, slot: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, slot: e.target.value })}
                       className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-gold/50 transition-all text-xs"
                     >
                       <option value="Virtual Meeting">Virtual / Phone Meeting</option>
@@ -399,8 +471,8 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                   <span>By submitting, you consent to receive direct contact from our certified financial advisory team. We respect your privacy and never share your data.</span>
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={isSubmitting}
                   className="btn-gold w-full py-3.5 text-sm mt-2 flex items-center justify-center gap-2 group text-slate-50 font-bold"
                 >
@@ -422,7 +494,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
               </div>
             </div>
           ) : (
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="text-center py-6"
@@ -434,7 +506,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
               <p className="text-slate-300 text-xs max-w-sm mx-auto mb-6 leading-relaxed">
                 Thank you <span className="text-white font-bold">{formData.name}</span>. Our representative will contact you within <span className="text-gold font-bold">24 business hours</span> to confirm your scheduling token.
               </p>
-              
+
               <div className="glass-card bg-white/5 max-w-sm mx-auto p-4 rounded-xl text-left space-y-2 mb-6 border-white/5 text-xs text-slate-400">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
@@ -491,21 +563,21 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="absolute inset-0 bg-slate-950/85 backdrop-blur-md"
           onClick={onClose}
         />
-        
+
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 30 }}
           className="relative w-full max-w-md glass-card border-white/10 bg-slate-900/95 shadow-2xl p-6 overflow-hidden z-10"
         >
-          <button 
+          <button
             onClick={onClose}
             className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors bg-white/5 p-2 rounded-full border border-white/5 hover:border-white/20"
           >
@@ -514,13 +586,13 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
 
           {/* Progress bar */}
           {step < 4 && (
-            <div className="mb-6">
+            <div className="mb-6 mt-8">
               <div className="flex justify-between text-[10px] text-slate-500 uppercase font-semibold mb-2">
                 <span>Step {step} of 3</span>
                 <span>{step === 1 ? 'Personal Info' : step === 2 ? 'Regulatory KYC' : 'E-Sign & Launch'}</span>
               </div>
               <div className="w-full h-1 bg-slate-950 rounded-full overflow-hidden">
-                <div 
+                <div
                   className="h-full bg-gradient-to-r from-gold-dark via-gold to-gold-light transition-all duration-300"
                   style={{ width: `${(step / 3) * 100}%` }}
                 />
@@ -541,41 +613,41 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
               <form onSubmit={handleNextStep} className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">Your Full Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     required
                     placeholder="e.g. Arshpreet Singh"
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">Mobile Number (Linked with Aadhaar)</label>
-                  <input 
-                    type="tel" 
+                  <input
+                    type="tel"
                     required
                     pattern="[0-9]{10}"
                     placeholder="e.g. 9988988208"
                     value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">Email Address</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     required
                     placeholder="e.g. name@example.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="btn-gold w-full py-3 mt-4 text-xs font-bold text-slate-50 flex items-center justify-center gap-1.5"
                 >
                   Continue to KYC <ArrowRight className="w-4 h-4" />
@@ -594,24 +666,24 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
               <form onSubmit={handleNextStep} className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">PAN Card Number</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     required
                     pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
                     placeholder="e.g. ABCDE1234F"
                     value={formData.pan}
-                    onChange={(e) => setFormData({...formData, pan: e.target.value.toUpperCase()})}
+                    onChange={(e) => setFormData({ ...formData, pan: e.target.value.toUpperCase() })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs uppercase"
                   />
                 </div>
 
                 <div className="glass-card bg-slate-950/60 p-4 rounded-xl border-white/5 space-y-3">
                   <label className="flex items-start gap-2.5 cursor-pointer">
-                    <input 
+                    <input
                       type="checkbox"
                       required
                       checked={formData.kycCheck}
-                      onChange={(e) => setFormData({...formData, kycCheck: e.target.checked})}
+                      onChange={(e) => setFormData({ ...formData, kycCheck: e.target.checked })}
                       className="mt-0.5 rounded border-white/10 bg-slate-950 focus:ring-0 text-gold"
                     />
                     <span className="text-[11px] text-slate-400 leading-normal">
@@ -621,15 +693,15 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                 </div>
 
                 <div className="flex gap-3 mt-4">
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setStep(1)}
                     className="btn-secondary flex-1 py-3 text-xs"
                   >
                     Back
                   </button>
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="btn-gold flex-1 py-3 text-xs font-bold text-slate-50 flex items-center justify-center gap-1"
                   >
                     Verify KYC <ArrowRight className="w-4 h-4" />
@@ -660,15 +732,15 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                 </div>
 
                 <div className="flex gap-3 mt-4">
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setStep(2)}
                     className="btn-secondary flex-1 py-3 text-xs"
                   >
                     Back
                   </button>
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isSubmitting}
                     className="btn-gold flex-1 py-3 text-xs font-bold text-slate-50 flex items-center justify-center gap-1.5"
                   >
@@ -686,7 +758,7 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
           )}
 
           {step === 4 && (
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="text-center py-6 space-y-4"
@@ -774,8 +846,8 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
                   <p className="text-[10px] text-slate-500">Fields marked with * are required</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <input 
-                    type="tel" 
+                  <input
+                    type="tel"
                     required
                     pattern="[0-9]{10}"
                     placeholder="Enter your mobile"
@@ -783,8 +855,8 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
                     onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                     className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="px-5 py-2.5 bg-gold hover:bg-gold-dark text-slate-50 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
                   >
                     Start Investing
@@ -794,7 +866,7 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
             </div>
 
             {product.hasKnowMore && (
-              <button 
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="px-6 py-3 bg-gold hover:bg-gold-dark text-slate-50 text-xs font-bold uppercase tracking-wider rounded-md"
               >
@@ -834,8 +906,8 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
           {/* Right: Graphic and QR Code */}
           <div className="lg:col-span-5 flex flex-col items-center gap-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 p-2 max-w-[420px] w-full">
-              <img 
-                src={product.image} 
+              <img
+                src={product.image}
                 alt={product.name}
                 className="rounded-2xl w-full h-auto object-cover"
               />
@@ -862,14 +934,14 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
 
 const FAQItem = ({ faq, isInitiallyOpen }) => {
   const [isOpen, setIsOpen] = useState(isInitiallyOpen);
-  
+
   useEffect(() => {
     setIsOpen(isInitiallyOpen);
   }, [isInitiallyOpen]);
 
   return (
     <div className="border-b border-white/5 last:border-none pb-2 last:pb-0">
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between py-3 text-left hover:text-gold transition-colors group"
       >
@@ -878,7 +950,7 @@ const FAQItem = ({ faq, isInitiallyOpen }) => {
           {isOpen ? <Minus className="text-gold w-3.5 h-3.5" /> : <Plus className="text-gold w-3.5 h-3.5" />}
         </div>
       </button>
-      
+
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
@@ -898,17 +970,440 @@ const FAQItem = ({ faq, isInitiallyOpen }) => {
   );
 };
 
+const BlogsPage = () => {
+  return (
+    <div className="pt-24 min-h-screen">
+      <div className="text-center space-y-4 pt-12 pb-8 px-6">
+        <h1 className="text-4xl md:text-6xl font-display font-black text-white">Market <span className="gold-gradient-text">Insights</span></h1>
+        <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+          Stay updated with the latest trends, strategies, and financial knowledge to make informed investment decisions.
+        </p>
+      </div>
+
+      <section className="py-12 px-6 bg-slate-950/40 relative z-10 border-t border-white/5">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {BLOGS_DATA.map((blog) => (
+            <div key={blog.id} className="glass-card glass-card-hover border-white/10 bg-slate-900/40 rounded-3xl overflow-hidden flex flex-col group cursor-pointer">
+              <div className="h-48 overflow-hidden relative">
+                <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10" />
+                <img 
+                  src={blog.imageUrl} 
+                  alt={blog.title}
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 z-20">
+                  <span className="px-3 py-1 bg-slate-950/80 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-bold text-gold uppercase tracking-wider">
+                    {blog.category}
+                  </span>
+                </div>
+              </div>
+              <div className="p-6 flex flex-col flex-grow space-y-4">
+                <div className="flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                  <span>{blog.date}</span>
+                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {blog.readTime}</span>
+                </div>
+                <h3 className="text-xl font-display font-bold text-white group-hover:text-gold transition-colors leading-tight">
+                  {blog.title}
+                </h3>
+                <p className="text-slate-400 text-sm leading-relaxed flex-grow">
+                  {blog.excerpt}
+                </p>
+                <div className="pt-4 border-t border-white/5">
+                  <button className="text-xs font-bold text-gold hover:text-gold-light uppercase tracking-wider flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Read Article <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+const FAQPage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeFAQCategory, setActiveFAQCategory] = useState("All");
+
+  const faqCategories = ["All", "Regulatory", "Advisory", "Trading", "Onboarding", "Education"];
+
+  const filteredFAQs = FAQ_DATA.filter(faq => {
+    const matchesCategory = activeFAQCategory === "All" || faq.category === activeFAQCategory;
+    const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  return (
+    <div className="pt-24 min-h-screen pb-16">
+      <section id="faqs" className="py-24 px-6 relative z-10">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
+              FREQUENTLY ASKED QUESTIONS
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold">
+              Everything You Need to Know <br className="hidden md:block" />
+              <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">About the Angel One Platform</span>
+            </h2>
+            <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+              Find answers to common questions about Demat & Trading Account opening, the Angel One platform, investment products, onboarding, account support, and investor education.
+            </p>
+          </div>
+
+          <div className="space-y-4 mb-8 text-left">
+            <div className="relative">
+              <Search className="absolute left-4 top-3 w-4 h-4 text-slate-500" />
+              <input
+                type="text"
+                placeholder="Search questions or keywords (e.g. SEBI, Demat, PMS)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-slate-900/60 border border-white/10 rounded-2xl pl-11 pr-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-3 text-[10px] text-slate-500 hover:text-slate-300 underline font-semibold"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-1.5 justify-center pt-2">
+              {faqCategories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveFAQCategory(cat)}
+                  className={cn(
+                    "px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all duration-300",
+                    activeFAQCategory === cat
+                      ? "bg-gold text-slate-50 border-gold shadow-lg shadow-gold/15"
+                      : "bg-slate-900/40 border-white/5 text-slate-400 hover:text-white"
+                  )}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="glass-card border-white/10 bg-slate-900/60 p-6 shadow-xl space-y-2 text-left">
+            {filteredFAQs.length > 0 ? (
+              filteredFAQs.map((faq, index) => (
+                <FAQItem
+                  key={index}
+                  faq={faq}
+                  isInitiallyOpen={index === 0 && !searchQuery}
+                />
+              ))
+            ) : (
+              <div className="text-center py-8 text-slate-500 space-y-2">
+                <HelpCircle className="w-8 h-8 mx-auto text-slate-600" />
+                <p className="text-xs font-semibold">No questions found matching your search.</p>
+                <button
+                  onClick={() => { setSearchQuery(""); setActiveFAQCategory("All"); }}
+                  className="text-xs text-gold underline font-bold"
+                >
+                  Reset filters
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+const ContactUsPage = ({ setIsModalOpen }) => {
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+  const [status, setStatus] = useState('idle');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    setTimeout(() => {
+      setStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    }, 1500);
+  };
+
+  return (
+    <div className="pt-24 min-h-screen">
+      <section id="contact-us" className="py-24 px-6 relative z-10 max-w-7xl mx-auto border-t border-white/5">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="lg:col-span-5 text-left space-y-8">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
+                Get in Touch
+              </div>
+              <h2 className="text-3xl md:text-5xl font-display font-black text-white">
+                Contact <span className="gold-gradient-text">Our Team</span>
+              </h2>
+              <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                Have questions or want to schedule an appointment? Reach out to us using the contact details below or send us a message directly.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              {[
+                {
+                  title: "Phone",
+                  desc: "9988988208",
+                  sub: "Call for support or bookings",
+                  icon: Phone,
+                  href: "tel:9988988208"
+                },
+                {
+                  title: "Email",
+                  desc: "hrassetaura@gmail.com",
+                  sub: "For general inquiries",
+                  icon: Mail,
+                  href: "mailto:hrassetaura@gmail.com"
+                },
+                {
+                  title: "Address",
+                  desc: "Asset Aura, D-254, 5th Floor, GR Square Building, Sector 75, Mohali, Punjab",
+                  sub: "Headquarters",
+                  icon: MapPin,
+                  href: "https://maps.google.com/?q=Asset+Aura+Mohali"
+                }
+              ].map((item, idx) => {
+                const ItemIcon = item.icon;
+                return (
+                  <a key={idx} href={item.href} target={item.title === 'Address' ? "_blank" : undefined} rel="noreferrer" className="flex gap-4 items-start group cursor-pointer block">
+                    <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0 group-hover:bg-gold transition-colors">
+                      <ItemIcon className="text-gold w-5 h-5 group-hover:text-slate-950 transition-colors" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs text-slate-500 font-bold uppercase tracking-widest">{item.title}</h4>
+                      <div className="text-sm font-bold text-white mt-0.5 group-hover:text-gold transition-colors">{item.desc}</div>
+                      <div className="text-[10px] text-slate-400 mt-0.5 font-medium">{item.sub}</div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+
+            <div className="pt-4 border-t border-white/5">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="btn-gold py-3 px-6 text-xs md:text-sm font-bold text-slate-50 w-full sm:w-auto"
+                >
+                  Schedule Office Visit
+                </button>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="glass-card border-white/10 bg-slate-900/60 p-6 md:p-8 shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />
+              
+              {status === 'success' ? (
+                <div className="py-12 flex flex-col items-center justify-center text-center space-y-4">
+                  <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/30">
+                    <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+                  </div>
+                  <h3 className="text-2xl font-display font-bold text-white">Message Sent!</h3>
+                  <p className="text-slate-400 text-sm max-w-sm">
+                    Thank you for reaching out. A member of our team will get back to you shortly.
+                  </p>
+                  <button 
+                    onClick={() => setStatus('idle')}
+                    className="mt-4 px-6 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold text-white transition-all uppercase tracking-wider"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-bold text-white mb-2">Send us a Message</h3>
+                    <p className="text-slate-400 text-xs md:text-sm">
+                      Fill out the form below and we'll get back to you as soon as possible.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-semibold text-slate-300">Your Name</label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.name}
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          placeholder="e.g. Arshpreet Singh"
+                          className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-semibold text-slate-300">Email Address</label>
+                        <input
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          placeholder="e.g. example@email.com"
+                          className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold text-slate-300">Phone Number</label>
+                      <input
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        placeholder="e.g. 9988988208"
+                        className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold text-slate-300">Message</label>
+                      <textarea
+                        required
+                        rows={4}
+                        value={formData.message}
+                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        placeholder="How can we help you?"
+                        className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs resize-none"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={status === 'submitting'}
+                      className="btn-gold w-full py-3.5 text-sm mt-4 flex items-center justify-center gap-2 group text-slate-50 font-bold"
+                    >
+                      {status === 'submitting' ? (
+                        <span className="w-4 h-4 border-2 border-slate-50 border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <>
+                          Send Message <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+const AboutUsPage = () => {
+  return (
+    <div className="pt-24 min-h-screen">
+      <div className="text-center space-y-4 pt-12 pb-8 px-6">
+        <h1 className="text-4xl md:text-6xl font-display font-black text-white">About <span className="gold-gradient-text">Asset Aura</span></h1>
+        <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+          Your Trusted Partner in Wealth Creation, providing seamless access to the Angel One platform.
+        </p>
+      </div>
+      <section className="py-12 px-6 bg-slate-950/40 relative z-10 border-t border-white/5">
+        <div className="max-w-7xl mx-auto text-center space-y-16">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-bold uppercase tracking-wider">
+              WHY CHOOSE US
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-white">
+              Invest with Confidence <br className="hidden md:block" />
+              <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">Through the Angel One Platform</span>
+            </h2>
+            <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
+              <HighlightText text="As an Authorized Person/Sub-Broker of Angel One, Asset Aura provides seamless access to the Angel One platform with dedicated account opening assistance, platform support, investor education, and access to a wide range of financial products—all within a secure and regulated ecosystem." />
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 pt-4">
+            {[
+              {
+                title: "Secure & Trusted Platform",
+                desc: "Trade and invest through the Angel One platform, one of India's leading SEBI-registered stockbroking platforms. Your investments remain in your own Demat and trading account.",
+                icon: ShieldCheck,
+                color: "text-emerald-400"
+              },
+              {
+                title: "Authorized Partner",
+                desc: "Asset Aura is an Authorized Person/Sub-Broker of Angel One, helping clients with account opening, onboarding, platform access, and customer support throughout their investment journey.",
+                icon: Award,
+                color: "text-gold"
+              },
+              {
+                title: "Investor Education",
+                desc: "We help you understand the Angel One platform, stocks, mutual funds, SIPs, ETFs, IPOs, and other financial products so you can make informed investment decisions with confidence.",
+                icon: BookOpen,
+                color: "text-gold"
+              },
+              {
+                title: "Dedicated Customer Support",
+                desc: "Receive assistance with Demat account opening, KYC, platform navigation, account-related queries, and access to the financial products available through the Angel One platform.",
+                icon: Users,
+                color: "text-slate-300"
+              }
+            ].map((item, idx) => {
+              const WhyIcon = item.icon;
+              return (
+                <div key={idx} className="glass-card glass-card-hover p-6 flex flex-col items-start text-left space-y-4 border-white/5 bg-slate-900/20">
+                  <div className={cn("w-12 h-12 rounded-2xl bg-slate-950 border border-white/5 flex items-center justify-center", item.color)}>
+                    <WhyIcon className="w-6 h-6" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-bold text-white"><HighlightText text={item.title} /></h3>
+                    <p className="text-slate-400 text-xs md:text-sm leading-relaxed"><HighlightText text={item.desc} /></p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="pt-10 border-t border-white/5 space-y-6">
+            <h4 className="text-xs uppercase font-extrabold tracking-widest text-slate-500">PLATFORM BENEFITS</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { title: "Trusted Angel One Platform", desc: "Access equities, derivatives, mutual funds, ETFs, IPOs, bonds, and more through a secure and reliable trading platform." },
+                { title: "Easy Digital Account Opening", desc: "Fast online Demat & Trading Account opening with a simple and paperless KYC process." },
+                { title: "Advanced Trading Technology", desc: "Experience fast order execution, live market data, powerful charting tools, and mobile & web trading." },
+                { title: "Dedicated Support", desc: "Our team assists you with onboarding, platform usage, and account-related support whenever you need it." }
+              ].map((p, i) => (
+                <div key={i} className="flex items-start gap-2 text-left">
+                  <Check className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
+                  <div>
+                    <span className="text-xs font-bold text-white block mb-0.5"><HighlightText text={p.title} /></span>
+                    <span className="text-[10px] text-slate-500 font-semibold leading-relaxed block"><HighlightText text={p.desc} /></span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 // --- MAIN PORTAL ---
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDematModalOpen, setIsDematModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   const [activeOffering, setActiveOffering] = useState(null);
   const [isOfferingsOpen, setIsOfferingsOpen] = useState(false);
   const [offeringsTab, setOfferingsTab] = useState('product');
-  
+
   const offeringsRef = useRef(null);
 
   useEffect(() => {
@@ -925,7 +1420,7 @@ export default function App() {
 
   const [heroPhone, setHeroPhone] = useState('');
   const [prefilledPhone, setPrefilledPhone] = useState('');
-  
+
   const handleHeroSubmit = (e) => {
     e.preventDefault();
     if (heroPhone.length === 10 && /^\d+$/.test(heroPhone)) {
@@ -935,13 +1430,13 @@ export default function App() {
       alert("Please enter a valid 10-digit mobile number.");
     }
   };
-  
+
   // Interactive Services Tab State
   const [activeTab, setActiveTab] = useState('advisory');
 
   // Interactive Wealth Calculator State
   const [calcType, setCalcType] = useState('sip');
-  
+
   // SIP states
   const [sipMonthly, setSipMonthly] = useState(5000);
   const [sipRate, setSipRate] = useState(12);
@@ -951,10 +1446,6 @@ export default function App() {
   const [pmsLumpSum, setPmsLumpSum] = useState(500000);
   const [pmsRate, setPmsRate] = useState(15);
   const [pmsYears, setPmsYears] = useState(5);
-
-  // FAQ states
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeFAQCategory, setActiveFAQCategory] = useState("All");
 
   // Testimonials Carousel state
   const [testimonialIdx, setTestimonialIdx] = useState(0);
@@ -969,7 +1460,7 @@ export default function App() {
   }, []);
 
   // Calculator computations
-  
+
   // 1. SIP Formulas
   const P_sip = sipMonthly;
   const i_sip = (sipRate / 100) / 12;
@@ -988,23 +1479,12 @@ export default function App() {
 
   // Formatting utility
   const formatCurrency = (val) => {
-    return new Intl.NumberFormat('en-IN', { 
-      style: 'currency', 
-      currency: 'INR', 
-      maximumFractionDigits: 0 
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
     }).format(val);
   };
-
-  // FAQ Category lists
-  const faqCategories = ["All", "Regulatory", "Advisory", "Trading", "Onboarding", "Education"];
-  
-  // Filtering FAQs
-  const filteredFAQs = FAQ_DATA.filter(faq => {
-    const matchesCategory = activeFAQCategory === "All" || faq.category === activeFAQCategory;
-    const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
 
   const nextTestimonial = () => {
     setTestimonialIdx((prev) => (prev + 1) % TESTIMONIALS_DATA.length);
@@ -1029,23 +1509,41 @@ export default function App() {
       {/* Redesigned Navbar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-700/70 transition-all duration-300 px-6 md:px-12 py-3.5 flex items-center justify-between shadow-sm">
         {/* Left: Brand Logo */}
-        <a href="#" onClick={() => { setActiveOffering(null); setIsOfferingsOpen(false); }} className="flex flex-col items-start leading-tight select-none shrink-0 group">
-          <span className="font-display font-extrabold tracking-widest text-base sm:text-lg uppercase gold-gradient-text">ASSET AURA</span>
-          <span className="text-[6px] sm:text-[7.5px] tracking-[0.22em] uppercase font-sans font-extrabold text-slate-400 group-hover:text-gold transition-colors">Investment Services</span>
-        </a>
+        <div className="flex-1 flex items-center justify-start">
+          <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex flex-col items-start leading-tight select-none shrink-0 group">
+            <span className="font-display font-extrabold tracking-widest text-base sm:text-lg uppercase gold-gradient-text">ASSET AURA</span>
+            <span className="text-[6px] sm:text-[7.5px] tracking-[0.22em] uppercase font-sans font-extrabold text-slate-400 group-hover:text-gold transition-colors">Investment Services</span>
+          </a>
+        </div>
 
         {/* Center: Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 relative">
-          {/* Offerings Menu Link */}
+        <nav className="hidden lg:flex items-center justify-center gap-8 xl:gap-12 relative">
+          <button onClick={() => { setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className={cn("hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0", currentPage === 'home' && !activeOffering ? "text-gold" : "text-slate-200")}>
+            Home
+          </button>
+          <button onClick={() => { setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('about'); window.scrollTo(0,0); }} className={cn("hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0", currentPage === 'about' && !activeOffering ? "text-gold" : "text-slate-200")}>
+            About Us
+          </button>
+          <button onClick={() => { setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('blogs'); window.scrollTo(0,0); }} className={cn("hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0", currentPage === 'blogs' && !activeOffering ? "text-gold" : "text-slate-200")}>
+            Blogs
+          </button>
+          <button onClick={() => { setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('faq'); window.scrollTo(0,0); }} className={cn("hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0", currentPage === 'faq' && !activeOffering ? "text-gold" : "text-slate-200")}>
+            FAQ
+          </button>
+          <button onClick={() => { setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('contact'); window.scrollTo(0,0); }} className={cn("hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0", currentPage === 'contact' && !activeOffering ? "text-gold" : "text-slate-200")}>
+            Contact Us
+          </button>
+
+          {/* Services Menu Link */}
           <div className="relative" ref={offeringsRef}>
-            <button 
+            <button
               onClick={() => setIsOfferingsOpen(!isOfferingsOpen)}
               className={cn(
-                "text-slate-200 hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0 py-2",
-                isOfferingsOpen && "text-gold"
+                "hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0 py-2",
+                (isOfferingsOpen || activeOffering) ? "text-gold" : "text-slate-200"
               )}
             >
-              Offerings <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-300", isOfferingsOpen && "rotate-180")} />
+              Services <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-300", isOfferingsOpen && "rotate-180")} />
             </button>
 
             {/* Offerings Mega Dropdown Panel */}
@@ -1065,8 +1563,8 @@ export default function App() {
                         onClick={() => setOfferingsTab(tab.id)}
                         className={cn(
                           "px-4 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all",
-                          offeringsTab === tab.id 
-                            ? "bg-gold text-slate-50 shadow-sm" 
+                          offeringsTab === tab.id
+                            ? "bg-gold text-slate-50 shadow-sm"
                             : "bg-slate-900 hover:bg-slate-800 text-slate-200"
                         )}
                       >
@@ -1110,41 +1608,17 @@ export default function App() {
               </>
             )}
           </div>
-
-          <button className="text-slate-200 hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0">
-            Partner With Us <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-          </button>
-          <button className="text-slate-200 hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0">
-            Finshala <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-          </button>
-          <button className="text-slate-200 hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0">
-            Markets <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-          </button>
-          <a 
-            href="#offerings" 
-            onClick={() => { setActiveOffering(null); setTimeout(() => document.getElementById('offerings')?.scrollIntoView({ behavior: 'smooth' }), 100); }} 
-            className="text-slate-200 hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0"
-          >
-            Research
-          </a>
-          <a 
-            href="#about-us" 
-            onClick={() => { setActiveOffering(null); setTimeout(() => document.getElementById('about-us')?.scrollIntoView({ behavior: 'smooth' }), 100); }} 
-            className="text-slate-200 hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0"
-          >
-            Support
-          </a>
         </nav>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex-1 flex items-center justify-end gap-3 shrink-0">
           {/* Search */}
           <button className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-50 transition-all shrink-0">
             <Search className="w-4 h-4" />
           </button>
 
           {/* Open Demat A/C */}
-          <button 
+          <button
             onClick={() => setIsDematModalOpen(true)}
             className="hidden sm:inline-block px-4 py-2 bg-gold hover:bg-gold-dark text-slate-50 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all"
           >
@@ -1152,7 +1626,7 @@ export default function App() {
           </button>
 
           {/* Open MF A/C */}
-          <button 
+          <button
             onClick={() => setIsModalOpen(true)}
             className="hidden sm:inline-block px-4 py-2 bg-slate-950 border border-slate-700 hover:border-slate-650 text-slate-200 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all"
           >
@@ -1177,1146 +1651,877 @@ export default function App() {
       </header>
 
       {activeOffering ? (
-        <ProductDetailView 
-          offeringKey={activeOffering} 
-          setIsDematModalOpen={setIsDematModalOpen} 
+        <ProductDetailView
+          offeringKey={activeOffering}
+          setIsDematModalOpen={setIsDematModalOpen}
           setIsModalOpen={setIsModalOpen}
           setPrefilledPhone={setPrefilledPhone}
         />
+      ) : currentPage === 'about' ? (
+        <AboutUsPage />
+      ) : currentPage === 'blogs' ? (
+        <BlogsPage />
+      ) : currentPage === 'faq' ? (
+        <FAQPage />
+      ) : currentPage === 'contact' ? (
+        <ContactUsPage setIsModalOpen={setIsModalOpen} />
       ) : (
         <>
           {/* --- HERO SECTION --- */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 px-6 overflow-hidden border-b border-slate-700/50">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
-          
-          {/* Left Column: Heading and info */}
-          <div className="lg:col-span-7 text-left space-y-4 md:space-y-5">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950 border border-gold/30 text-gold-dark text-[10px] sm:text-xs font-bold tracking-wide shadow-lg"
-            >
-              <Award className="w-3.5 h-3.5 text-gold-dark shrink-0 animate-pulse" />
-              <span className="font-extrabold text-gold-dark">Angel One Ltd. is a SEBI-registered Stock Broker</span>
-            </motion.div>
+          <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 px-6 overflow-hidden border-b border-slate-700/50">
+            <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
 
-            {/* Anand Rathi styled Heading */}
-            <div className="space-y-2 md:space-y-3">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gold mb-2"
-              >
-                INVESTMENT OPPORTUNITY
-              </motion.div>
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black leading-[1.1] tracking-tight text-white"
-              >
-                Asset Aura <br />
-                <span className="gold-gradient-text">Empower Your Finances</span>
-              </motion.h1>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.15 }}
-                className="text-base sm:text-lg md:text-xl font-sans font-light leading-normal text-slate-300 mt-2"
-              >
-                Your Trusted Partner in Wealth Creation
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-xl mt-3"
-              >
-                Asset Aura, a trusted Sub Broker of Angel One, is committed to helping individuals achieve their financial goals through smart investing and expert market guidance. Whether you're a beginner or an experienced investor, we provide the right tools, research, and support to help you make informed financial decisions.
-              </motion.p>
+              {/* Left Column: Heading and info */}
+              <div className="lg:col-span-7 text-left space-y-4 md:space-y-5">
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950 border border-gold/30 text-gold-dark text-[10px] sm:text-xs font-bold tracking-wide shadow-lg"
+                >
+                  <Award className="w-3.5 h-3.5 text-gold-dark shrink-0 animate-pulse" />
+                  <span className="font-extrabold text-gold-dark">Angel One Ltd. is a SEBI-registered Stock Broker</span>
+                </motion.div>
+
+                {/* Anand Rathi styled Heading */}
+                <div className="space-y-2 md:space-y-3">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.1 }}
+                    className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gold mb-2"
+                  >
+                    INVESTMENT OPPORTUNITY
+                  </motion.div>
+                  <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.1 }}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black leading-[1.1] tracking-tight text-white"
+                  >
+                    Asset Aura <br />
+                    <span className="gold-gradient-text">Empower Your Finances</span>
+                  </motion.h1>
+                  <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.15 }}
+                    className="text-base sm:text-lg md:text-xl font-sans font-light leading-normal text-slate-300 mt-2"
+                  >
+                    Your Trusted Partner in Wealth Creation
+                  </motion.h2>
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-xl mt-3"
+                  >
+                    Asset Aura, a trusted Sub Broker of Angel One, is committed to helping individuals achieve their financial goals through smart investing and expert market guidance. Whether you're a beginner or an experienced investor, we provide the right tools, research, and support to help you make informed financial decisions.
+                  </motion.p>
+                </div>
+
+                {/* Mobile number intake card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.25 }}
+                  className="glass-card border-white/10 bg-slate-900/60 p-4 md:p-5 shadow-2xl max-w-md text-left space-y-3 rounded-2xl"
+                >
+                  <form onSubmit={handleHeroSubmit} className="space-y-2.5">
+                    <div className="space-y-0.5">
+                      <label className="text-xs font-semibold text-slate-300 flex items-center gap-1">
+                        Enter Your Mobile <span className="text-red-500 font-bold">*</span>
+                      </label>
+                      <p className="text-[10px] text-slate-500">Fields marked with * are required</p>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <input
+                        type="tel"
+                        required
+                        pattern="[0-9]{10}"
+                        placeholder="Enter your mobile"
+                        value={heroPhone}
+                        onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                        className="flex-1 bg-slate-950/80 border border-white/15 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
+                      />
+                      <button
+                        type="submit"
+                        className="btn-gold py-2.5 px-5 text-xs font-bold text-slate-50 rounded-xl flex items-center justify-center gap-1.5 shrink-0 shadow-lg shadow-gold/15"
+                      >
+                        Start Investing <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </form>
+                </motion.div>
+
+                {/* Quick alert badge */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.28 }}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] sm:text-xs"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0 animate-none" />
+                  <span>We never ask for your OTPs, passwords, or direct cash transfers. Your capital remains safe in your account.</span>
+                </motion.div>
+
+                {/* Quick trust metrics structured with vertical dividers */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.3 }}
+                  className="pt-4 border-t border-white/5 flex flex-wrap items-center gap-x-6 gap-y-3"
+                >
+                  <div className="flex items-center">
+                    <div className="pl-3 border-l-2 border-gold/45">
+                      <div className="text-xs sm:text-sm md:text-base font-display font-extrabold text-white">
+                        Authorized Person
+
+                      </div>
+                      <div className="text-[8px] font-bold text-slate-500 uppercase tracking-widest"> Angel One</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="pl-3 border-l-2 border-gold/45">
+                      <div className="text-xs sm:text-sm md:text-base font-display font-extrabold text-white">
+                        Platform Support
+
+                      </div>
+                      <div className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">  Account Opening & Onboarding</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="pl-3 border-l-2 border-gold/45">
+                      <div className="text-xs sm:text-sm md:text-base font-display font-extrabold text-white">
+                        Mohali Office
+
+                      </div>
+                      <div className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Client Assistance Centre</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Right Column: Handshake Partners & Glowing QR Code */}
+              <div className="lg:col-span-5 relative mt-8 lg:mt-0">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                  className="relative mx-auto max-w-md lg:max-w-none flex flex-col items-center sm:flex-row lg:flex-col xl:flex-row gap-6 justify-center"
+                >
+                  {/* Shaking Hands Image */}
+                  <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-slate-950/80 bg-slate-950/10 p-2 max-w-[340px] shrink-0">
+                    <img
+                      src="/handshake_partners.png"
+                      alt="Asset Aura Shaking Hands Partnership"
+                      className="w-full h-auto rounded-2xl opacity-90 border border-white/5"
+                    />
+                  </div>
+
+
+
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* --- SERVICES / OFFERINGS SECTION --- */}
+          <section id="offerings" className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
+                Angel One Platform Services
+              </div>
+              <h2 className="text-3xl md:text-5xl font-display font-bold">
+                Comprehensive <span className="gold-gradient-text">Financial Services</span>
+              </h2>
+              <h3 className="text-xl md:text-2xl text-white font-medium">Through the Angel One Platform</h3>
+              <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
+                As an Authorized Person/Sub-Broker of Angel One, Asset Aura provides access to a wide range of financial products and investment solutions through the Angel One platform. We assist clients with Demat account opening, account onboarding, platform support, and seamless access to investment opportunities. Our experienced team helps you understand the platform's features and available financial products, enabling you to invest with confidence while ensuring compliance with applicable regulatory guidelines.
+              </p>
             </div>
 
-            {/* Mobile number intake card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.25 }}
-              className="glass-card border-white/10 bg-slate-900/60 p-4 md:p-5 shadow-2xl max-w-md text-left space-y-3 rounded-2xl"
-            >
-              <form onSubmit={handleHeroSubmit} className="space-y-2.5">
-                <div className="space-y-0.5">
-                  <label className="text-xs font-semibold text-slate-300 flex items-center gap-1">
-                    Enter Your Mobile <span className="text-red-500 font-bold">*</span>
-                  </label>
-                  <p className="text-[10px] text-slate-500">Fields marked with * are required</p>
+            {/* Offerings Grid Content */}
+            <div className="mt-12 grid md:grid-cols-2 gap-6 lg:gap-8">
+              {/* Card 1: PMS */}
+              <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                    <Briefcase className="text-gold w-6 h-6" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-white">Portfolio Management Services (PMS)</h3>
+                    <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                      Access professionally managed Portfolio Management Services (PMS) through the Angel One platform. These portfolios are managed by SEBI-registered Portfolio Managers and are customized according to your financial goals and risk profile. Your investments remain in your own Demat and bank accounts, and all services are delivered in accordance with applicable SEBI regulations.
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <input 
-                    type="tel" 
-                    required
-                    pattern="[0-9]{10}"
-                    placeholder="Enter your mobile"
-                    value={heroPhone}
-                    onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                    className="flex-1 bg-slate-950/80 border border-white/15 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
-                  />
-                  <button 
-                    type="submit" 
-                    className="btn-gold py-2.5 px-5 text-xs font-bold text-slate-50 rounded-xl flex items-center justify-center gap-1.5 shrink-0 shadow-lg shadow-gold/15"
+              </div>
+
+              {/* Card 2: Mutual Funds */}
+              <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                    <Activity className="text-gold w-6 h-6" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-white">Mutual Funds, SIPs, SWPs & STPs</h3>
+                    <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                      Invest in a comprehensive range of Mutual Funds, SIPs, SWPs, and STPs through the Angel One platform. We help you understand various fund categories—including Equity, Debt, Hybrid, Index, and Thematic Funds—and assist you in selecting investment options that align with your financial objectives. Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: Stocks */}
+              <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                    <LineChart className="text-gold w-6 h-6" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-white">Stocks & Equity Markets</h3>
+                    <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                      Trade and invest in equities through the Angel One platform, with access to the NSE and BSE. We assist you with Demat account opening, onboarding, and platform guidance, while Angel One provides the trading infrastructure, research tools, and order execution. Investments in the stock market are subject to market risks.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 4: Insurance */}
+              <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                    <ShieldCheck className="text-gold w-6 h-6" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-white">Insurance Solutions</h3>
+                    <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                      Access a range of Life and Health Insurance products through the Angel One platform. We help you understand policy features, benefits, coverage, and documentation, enabling you to make informed insurance decisions as part of your overall financial planning. Insurance products are regulated by IRDAI and are subject to the terms and conditions of the respective insurers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Disclaimer */}
+            <div className="mt-12 p-6 rounded-2xl bg-slate-900/50 border border-white/5 text-left space-y-2">
+              <h4 className="text-white font-bold text-sm">Disclaimer</h4>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Asset Aura is an Authorized Person/Sub-Broker of Angel One. We facilitate access to financial products and services through the Angel One platform. Trading, investment, mutual fund, PMS, and insurance products are offered by their respective regulated entities. All investments are subject to market risks and applicable regulatory guidelines. Please read all relevant documents carefully before investing.
+              </p>
+            </div>
+          </section>
+
+          {/* --- WHY ASSET AURA SECTION --- */}
+          <section id="why-us" className="py-24 px-6 bg-slate-950/40 border-y border-white/5 relative z-10">
+            <div className="max-w-7xl mx-auto text-center space-y-16">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-bold uppercase tracking-wider">
+                  WHY CHOOSE US
+                </div>
+                <h2 className="text-3xl md:text-5xl font-display font-bold">
+                  Invest with Confidence <br className="hidden md:block" />
+                  <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">Through the Angel One Platform</span>
+                </h2>
+                <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
+                  <HighlightText text="As an Authorized Person/Sub-Broker of Angel One, Asset Aura provides seamless access to the Angel One platform with dedicated account opening assistance, platform support, investor education, and access to a wide range of financial products—all within a secure and regulated ecosystem." />
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 pt-4">
+                {[
+                  {
+                    title: "Secure & Trusted Platform",
+                    desc: "Trade and invest through the Angel One platform, one of India's leading SEBI-registered stockbroking platforms. Your investments remain in your own Demat and trading account.",
+                    icon: ShieldCheck,
+                    color: "text-emerald-400"
+                  },
+                  {
+                    title: "Authorized Partner",
+                    desc: "Asset Aura is an Authorized Person/Sub-Broker of Angel One, helping clients with account opening, onboarding, platform access, and customer support throughout their investment journey.",
+                    icon: Award,
+                    color: "text-gold"
+                  },
+                  {
+                    title: "Investor Education",
+                    desc: "We help you understand the Angel One platform, stocks, mutual funds, SIPs, ETFs, IPOs, and other financial products so you can make informed investment decisions with confidence.",
+                    icon: BookOpen,
+                    color: "text-gold"
+                  },
+                  {
+                    title: "Dedicated Customer Support",
+                    desc: "Receive assistance with Demat account opening, KYC, platform navigation, account-related queries, and access to the financial products available through the Angel One platform.",
+                    icon: Users,
+                    color: "text-slate-300"
+                  }
+                ].map((item, idx) => {
+                  const WhyIcon = item.icon;
+                  return (
+                    <div key={idx} className="glass-card glass-card-hover p-6 flex flex-col items-start text-left space-y-4 border-white/5 bg-slate-900/20">
+                      <div className={cn("w-12 h-12 rounded-2xl bg-slate-950 border border-white/5 flex items-center justify-center", item.color)}>
+                        <WhyIcon className="w-6 h-6" />
+                      </div>
+                      <div className="space-y-2">
+                        <h3 className="text-lg font-bold text-white"><HighlightText text={item.title} /></h3>
+                        <p className="text-slate-400 text-xs md:text-sm leading-relaxed"><HighlightText text={item.desc} /></p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Platform Benefits */}
+              <div className="pt-10 border-t border-white/5 space-y-6">
+                <h4 className="text-xs uppercase font-extrabold tracking-widest text-slate-500">PLATFORM BENEFITS</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {[
+                    { title: "Trusted Angel One Platform", desc: "Access equities, derivatives, mutual funds, ETFs, IPOs, bonds, and more through a secure and reliable trading platform." },
+                    { title: "Easy Digital Account Opening", desc: "Fast online Demat & Trading Account opening with a simple and paperless KYC process." },
+                    { title: "Advanced Trading Technology", desc: "Experience fast order execution, live market data, powerful charting tools, and mobile & web trading." },
+                    { title: "Dedicated Support", desc: "Our team assists you with onboarding, platform usage, and account-related support whenever you need it." }
+                  ].map((p, i) => (
+                    <div key={i} className="flex items-start gap-2 text-left">
+                      <Check className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
+                      <div>
+                        <span className="text-xs font-bold text-white block mb-0.5"><HighlightText text={p.title} /></span>
+                        <span className="text-[10px] text-slate-500 font-semibold leading-relaxed block"><HighlightText text={p.desc} /></span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* --- INTERACTIVE WEALTH CALCULATOR --- */}
+          <section id="calculator" className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
+                Wealth Projection
+              </div>
+              <h2 className="text-3xl md:text-5xl font-display font-bold">
+                Interactive <span className="gold-gradient-text">Compounding Calculator</span>
+              </h2>
+              <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                See the mathematical power of systematic investing and professional portfolio advisory compounding over time.
+              </p>
+
+              <div className="flex justify-center pt-6">
+                <div className="bg-slate-950 border border-white/5 rounded-full p-1 flex shadow-inner">
+                  <button
+                    onClick={() => setCalcType('sip')}
+                    className={cn(
+                      "px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5",
+                      calcType === 'sip' ? "bg-gold text-slate-50 font-black shadow" : "text-slate-400 hover:text-white"
+                    )}
                   >
-                    Start Investing <ArrowRight className="w-3.5 h-3.5" />
+                    <Calculator className="w-3.5 h-3.5" /> SIP Calculator
+                  </button>
+                  <button
+                    onClick={() => setCalcType('pms')}
+                    className={cn(
+                      "px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5",
+                      calcType === 'pms' ? "bg-gold text-slate-50 font-black shadow" : "text-slate-400 hover:text-white"
+                    )}
+                  >
+                    <BriefcaseBusiness className="w-3.5 h-3.5" /> PMS Lump Sum Projector
                   </button>
                 </div>
-              </form>
-            </motion.div>
-
-            {/* Quick alert badge */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.28 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] sm:text-xs"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0 animate-none" />
-              <span>We never ask for your OTPs, passwords, or direct cash transfers. Your capital remains safe in your account.</span>
-            </motion.div>
-
-            {/* Quick trust metrics structured with vertical dividers */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="pt-4 border-t border-white/5 flex flex-wrap items-center gap-x-6 gap-y-3"
-            >
-              <div className="flex items-center">
-                <div className="pl-3 border-l-2 border-gold/45">
-                  <div className="text-xs sm:text-sm md:text-base font-display font-extrabold text-white">
-                    SEBI Registered RA
-                  </div>
-                  <div className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Investment Advisory</div>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="pl-3 border-l-2 border-gold/45">
-                  <div className="text-xs sm:text-sm md:text-base font-display font-extrabold text-white">
-                    Angel One AP
-                  </div>
-                  <div className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Brokerage Partner</div>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="pl-3 border-l-2 border-gold/45">
-                  <div className="text-xs sm:text-sm md:text-base font-display font-extrabold text-white">
-                    Mohali Office
-                  </div>
-                  <div className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Core Operations</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Column: Handshake Partners & Glowing QR Code */}
-          <div className="lg:col-span-5 relative mt-8 lg:mt-0">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative mx-auto max-w-md lg:max-w-none flex flex-col items-center sm:flex-row lg:flex-col xl:flex-row gap-6 justify-center"
-            >
-              {/* Shaking Hands Image */}
-              <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-slate-950/80 bg-slate-950/10 p-2 max-w-[340px] shrink-0">
-                <img 
-                  src="/handshake_partners.png" 
-                  alt="Asset Aura Shaking Hands Partnership" 
-                  className="w-full h-auto rounded-2xl opacity-90 border border-white/5"
-                />
-              </div>
-
-              {/* Elegant Glowing QR Code mockup */}
-              <div className="glass-card border-white/10 bg-slate-950/80 p-5 shadow-2xl rounded-3xl flex flex-col items-center justify-center text-center gap-3 shrink-0 max-w-[170px] border-t-gold/30">
-                <div className="w-24 h-24 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center p-2.5 relative group overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-gold/10 to-gold/10 opacity-50" />
-                  <svg className="w-full h-full text-gold-light" viewBox="0 0 100 100" fill="currentColor">
-                    {/* Outer frames */}
-                    <path d="M0,0 h30 v8 h-22 v22 h-8 z" />
-                    <path d="M70,0 h30 v30 h-8 v-22 h-22 z" />
-                    <path d="M0,70 h8 v22 h22 v8 h-30 z" />
-                    <path d="M70,92 v8 h30 v-30 h-8 v22 z" />
-                    {/* Corner squares */}
-                    <rect x="12" y="12" width="22" height="22" />
-                    <rect x="16" y="16" width="14" height="14" fill="#020617" />
-                    <rect x="20" y="20" width="6" height="6" />
-
-                    <rect x="66" y="12" width="22" height="22" />
-                    <rect x="70" y="16" width="14" height="14" fill="#020617" />
-                    <rect x="74" y="24" width="6" height="6" />
-
-                    <rect x="12" y="66" width="22" height="22" />
-                    <rect x="16" y="70" width="14" height="14" fill="#020617" />
-                    <rect x="20" y="74" width="6" height="6" />
-
-                    {/* Random bits */}
-                    <rect x="42" y="16" width="6" height="6" />
-                    <rect x="52" y="24" width="6" height="6" />
-                    <rect x="42" y="32" width="6" height="6" />
-                    <rect x="32" y="44" width="6" height="6" />
-                    <rect x="48" y="44" width="6" height="6" />
-                    <rect x="58" y="44" width="6" height="6" />
-                    <rect x="44" y="56" width="6" height="6" />
-                    <rect x="54" y="56" width="6" height="6" />
-                    <rect x="42" y="68" width="6" height="6" />
-                    <rect x="52" y="68" width="6" height="6" />
-                    <rect x="42" y="78" width="6" height="6" />
-                    <rect x="52" y="78" width="6" height="6" />
-                    
-                    <rect x="68" y="44" width="6" height="6" />
-                    <rect x="78" y="44" width="6" height="6" />
-                    <rect x="68" y="54" width="6" height="6" />
-                    <rect x="78" y="54" width="6" height="6" />
-                    <rect x="68" y="68" width="6" height="6" />
-                    <rect x="78" y="68" width="6" height="6" />
-                    <rect x="68" y="78" width="6" height="6" />
-                    <rect x="78" y="78" width="6" height="6" />
-                  </svg>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-[10px] font-bold text-white uppercase tracking-wider">Fast Access</div>
-                  <div className="text-[8px] text-slate-500 font-semibold leading-normal">Scan to Open Demat Account</div>
-                </div>
-              </div>
-
-
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- SERVICES / OFFERINGS SECTION --- */}
-      <section id="offerings" className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
-        <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
-            Angel One Platform Services
-          </div>
-          <h2 className="text-3xl md:text-5xl font-display font-bold">
-            Comprehensive <span className="gold-gradient-text">Financial Services</span>
-          </h2>
-          <h3 className="text-xl md:text-2xl text-white font-medium">Through the Angel One Platform</h3>
-          <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
-            As an Authorized Person/Sub-Broker of Angel One, Asset Aura provides access to a wide range of financial products and investment solutions through the Angel One platform. We assist clients with Demat account opening, account onboarding, platform support, and seamless access to investment opportunities. Our experienced team helps you understand the platform's features and available financial products, enabling you to invest with confidence while ensuring compliance with applicable regulatory guidelines.
-          </p>
-        </div>
-
-        {/* Offerings Grid Content */}
-        <div className="mt-12 grid md:grid-cols-2 gap-6 lg:gap-8">
-           {/* Card 1: PMS */}
-           <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
-             <div className="space-y-4">
-               <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
-                 <Briefcase className="text-gold w-6 h-6" />
-               </div>
-               <div className="space-y-2">
-                 <h3 className="text-xl md:text-2xl font-bold text-white">Portfolio Management Services (PMS)</h3>
-                 <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                   Access professionally managed Portfolio Management Services (PMS) through the Angel One platform. These portfolios are managed by SEBI-registered Portfolio Managers and are customized according to your financial goals and risk profile. Your investments remain in your own Demat and bank accounts, and all services are delivered in accordance with applicable SEBI regulations.
-                 </p>
-               </div>
-             </div>
-           </div>
-
-           {/* Card 2: Mutual Funds */}
-           <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
-             <div className="space-y-4">
-               <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
-                 <Activity className="text-gold w-6 h-6" />
-               </div>
-               <div className="space-y-2">
-                 <h3 className="text-xl md:text-2xl font-bold text-white">Mutual Funds, SIPs, SWPs & STPs</h3>
-                 <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                   Invest in a comprehensive range of Mutual Funds, SIPs, SWPs, and STPs through the Angel One platform. We help you understand various fund categories—including Equity, Debt, Hybrid, Index, and Thematic Funds—and assist you in selecting investment options that align with your financial objectives. Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.
-                 </p>
-               </div>
-             </div>
-           </div>
-
-           {/* Card 3: Stocks */}
-           <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
-             <div className="space-y-4">
-               <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
-                 <LineChart className="text-gold w-6 h-6" />
-               </div>
-               <div className="space-y-2">
-                 <h3 className="text-xl md:text-2xl font-bold text-white">Stocks & Equity Markets</h3>
-                 <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                   Trade and invest in equities through the Angel One platform, with access to the NSE and BSE. We assist you with Demat account opening, onboarding, and platform guidance, while Angel One provides the trading infrastructure, research tools, and order execution. Investments in the stock market are subject to market risks.
-                 </p>
-               </div>
-             </div>
-           </div>
-
-           {/* Card 4: Insurance */}
-           <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
-             <div className="space-y-4">
-               <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
-                 <ShieldCheck className="text-gold w-6 h-6" />
-               </div>
-               <div className="space-y-2">
-                 <h3 className="text-xl md:text-2xl font-bold text-white">Insurance Solutions</h3>
-                 <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                   Access a range of Life and Health Insurance products through the Angel One platform. We help you understand policy features, benefits, coverage, and documentation, enabling you to make informed insurance decisions as part of your overall financial planning. Insurance products are regulated by IRDAI and are subject to the terms and conditions of the respective insurers.
-                 </p>
-               </div>
-             </div>
-           </div>
-        </div>
-
-        {/* Disclaimer */}
-        <div className="mt-12 p-6 rounded-2xl bg-slate-900/50 border border-white/5 text-left space-y-2">
-          <h4 className="text-white font-bold text-sm">Disclaimer</h4>
-          <p className="text-slate-400 text-xs leading-relaxed">
-            Asset Aura is an Authorized Person/Sub-Broker of Angel One. We facilitate access to financial products and services through the Angel One platform. Trading, investment, mutual fund, PMS, and insurance products are offered by their respective regulated entities. All investments are subject to market risks and applicable regulatory guidelines. Please read all relevant documents carefully before investing.
-          </p>
-        </div>
-      </section>
-
-      {/* --- WHY ASSET AURA SECTION --- */}
-      <section id="why-us" className="py-24 px-6 bg-slate-950/40 border-y border-white/5 relative z-10">
-        <div className="max-w-7xl mx-auto text-center space-y-16">
-          <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-bold uppercase tracking-wider">
-              WHY CHOOSE US
-            </div>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              Invest with Confidence <br className="hidden md:block"/>
-              <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">Through the Angel One Platform</span>
-            </h2>
-            <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
-              As an Authorized Person/Sub-Broker of Angel One, Asset Aura provides seamless access to the Angel One platform with dedicated account opening assistance, platform support, investor education, and access to a wide range of financial products—all within a secure and regulated ecosystem.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 pt-4">
-            {[
-              {
-                title: "Secure & Trusted Platform",
-                desc: "Trade and invest through the Angel One platform, one of India's leading SEBI-registered stockbroking platforms. Your investments remain in your own Demat and trading account.",
-                icon: ShieldCheck,
-                color: "text-emerald-400"
-              },
-              {
-                title: "Authorized Partner",
-                desc: "Asset Aura is an Authorized Person/Sub-Broker of Angel One, helping clients with account opening, onboarding, platform access, and customer support throughout their investment journey.",
-                icon: Award,
-                color: "text-gold"
-              },
-              {
-                title: "Investor Education",
-                desc: "We help you understand the Angel One platform, stocks, mutual funds, SIPs, ETFs, IPOs, and other financial products so you can make informed investment decisions with confidence.",
-                icon: BookOpen,
-                color: "text-gold"
-              },
-              {
-                title: "Dedicated Customer Support",
-                desc: "Receive assistance with Demat account opening, KYC, platform navigation, account-related queries, and access to the financial products available through the Angel One platform.",
-                icon: Users,
-                color: "text-slate-300"
-              }
-            ].map((item, idx) => {
-              const WhyIcon = item.icon;
-              return (
-                <div key={idx} className="glass-card glass-card-hover p-6 flex flex-col items-start text-left space-y-4 border-white/5 bg-slate-900/20">
-                  <div className={cn("w-12 h-12 rounded-2xl bg-slate-950 border border-white/5 flex items-center justify-center", item.color)}>
-                    <WhyIcon className="w-6 h-6" />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-bold text-white">{item.title}</h3>
-                    <p className="text-slate-400 text-xs md:text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Platform Benefits */}
-          <div className="pt-10 border-t border-white/5 space-y-6">
-            <h4 className="text-xs uppercase font-extrabold tracking-widest text-slate-500">PLATFORM BENEFITS</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { title: "Trusted Angel One Platform", desc: "Access equities, derivatives, mutual funds, ETFs, IPOs, bonds, and more through a secure and reliable trading platform." },
-                { title: "Easy Digital Account Opening", desc: "Fast online Demat & Trading Account opening with a simple and paperless KYC process." },
-                { title: "Advanced Trading Technology", desc: "Experience fast order execution, live market data, powerful charting tools, and mobile & web trading." },
-                { title: "Dedicated Support", desc: "Our team assists you with onboarding, platform usage, and account-related support whenever you need it." }
-              ].map((p, i) => (
-                <div key={i} className="flex items-start gap-2 text-left">
-                  <Check className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
-                  <div>
-                    <span className="text-xs font-bold text-white block mb-0.5">{p.title}</span>
-                    <span className="text-[10px] text-slate-500 font-semibold leading-relaxed block">{p.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- INTERACTIVE WEALTH CALCULATOR --- */}
-      <section id="calculator" className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
-        <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
-            Wealth Projection
-          </div>
-          <h2 className="text-3xl md:text-5xl font-display font-bold">
-            Interactive <span className="gold-gradient-text">Compounding Calculator</span>
-          </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-            See the mathematical power of systematic investing and professional portfolio advisory compounding over time.
-          </p>
-
-          <div className="flex justify-center pt-6">
-            <div className="bg-slate-950 border border-white/5 rounded-full p-1 flex shadow-inner">
-              <button
-                onClick={() => setCalcType('sip')}
-                className={cn(
-                  "px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5",
-                  calcType === 'sip' ? "bg-gold text-slate-50 font-black shadow" : "text-slate-400 hover:text-white"
-                )}
-              >
-                <Calculator className="w-3.5 h-3.5" /> SIP Calculator
-              </button>
-              <button
-                onClick={() => setCalcType('pms')}
-                className={cn(
-                  "px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5",
-                  calcType === 'pms' ? "bg-gold text-slate-50 font-black shadow" : "text-slate-400 hover:text-white"
-                )}
-              >
-                <BriefcaseBusiness className="w-3.5 h-3.5" /> PMS Lump Sum Projector
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-          {/* Controls Panel */}
-          <div className="lg:col-span-7 glass-card p-6 md:p-8 flex flex-col justify-between space-y-8 border-white/10 bg-slate-900/60 shadow-xl text-left">
-            <div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Calculator className="w-5 h-5 text-gold" />
-                <span>{calcType === 'sip' ? 'Systematic Investment Plan (SIP) Parameters' : 'PMS Lump Sum Growth Projections'}</span>
-              </h3>
-              <p className="text-slate-400 text-xs mt-1">
-                Drag the sliders below to estimate the potential growth of your financial portfolio.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {calcType === 'sip' ? (
-                <>
-                  {/* SIP Amount */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-semibold text-slate-300">
-                      <span>Monthly SIP Amount:</span>
-                      <span className="text-gold font-bold text-sm">{formatCurrency(sipMonthly)}</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="500" 
-                      max="100000" 
-                      step="500"
-                      value={sipMonthly} 
-                      onChange={(e) => setSipMonthly(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5" 
-                    />
-                    <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
-                      <span>₹500</span>
-                      <span>₹10,000</span>
-                      <span>₹50,000</span>
-                      <span>₹1,00,000</span>
-                    </div>
-                  </div>
-
-                  {/* SIP Rate */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-semibold text-slate-300">
-                      <span>Expected Annual Return (p.a.):</span>
-                      <span className="text-gold font-bold text-sm">{sipRate}%</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="5" 
-                      max="30" 
-                      step="0.5"
-                      value={sipRate} 
-                      onChange={(e) => setSipRate(parseFloat(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5" 
-                    />
-                    <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
-                      <span>5%</span>
-                      <span>12% (Equity Avg)</span>
-                      <span>20% (High Growth)</span>
-                      <span>30%</span>
-                    </div>
-                  </div>
-
-                  {/* SIP Years */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-semibold text-slate-300">
-                      <span>Duration / Time Period:</span>
-                      <span className="text-gold font-bold text-sm">{sipYears} Years</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="1" 
-                      max="40" 
-                      value={sipYears} 
-                      onChange={(e) => setSipYears(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5" 
-                    />
-                    <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
-                      <span>1 Year</span>
-                      <span>10 Years</span>
-                      <span>25 Years</span>
-                      <span>40 Years</span>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {/* PMS Lump Sum Amount */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-semibold text-slate-300">
-                      <span>Lump Sum PMS Investment:</span>
-                      <span className="text-gold font-bold text-sm">{formatCurrency(pmsLumpSum)}</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="50000" 
-                      max="5000000" 
-                      step="50000"
-                      value={pmsLumpSum} 
-                      onChange={(e) => setPmsLumpSum(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5" 
-                    />
-                    <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
-                      <span>₹50,000</span>
-                      <span>₹5,00,000</span>
-                      <span>₹25,00,000</span>
-                      <span>₹50,00,000</span>
-                    </div>
-                  </div>
-
-                  {/* PMS Rate */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-semibold text-slate-300">
-                      <span>Expected Advisory Growth Rate (p.a.):</span>
-                      <span className="text-gold font-bold text-sm">{pmsRate}%</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="5" 
-                      max="30" 
-                      step="0.5"
-                      value={pmsRate} 
-                      onChange={(e) => setPmsRate(parseFloat(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5" 
-                    />
-                    <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
-                      <span>5%</span>
-                      <span>15% (PMS Target)</span>
-                      <span>22% (Active Advisor)</span>
-                      <span>30%</span>
-                    </div>
-                  </div>
-
-                  {/* PMS Years */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-semibold text-slate-300">
-                      <span>Advisory Horizon:</span>
-                      <span className="text-gold font-bold text-sm">{pmsYears} Years</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="1" 
-                      max="30" 
-                      value={pmsYears} 
-                      onChange={(e) => setPmsYears(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5" 
-                    />
-                    <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
-                      <span>1 Year</span>
-                      <span>5 Years</span>
-                      <span>15 Years</span>
-                      <span>30 Years</span>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-
-            <div className="pt-4 border-t border-white/5 text-[10px] text-slate-500">
-              Disclaimer: Projections are computed based on compound interest equations. Actual returns are subject to market volatility and performance ratios. Past record is not guaranteed of future outcomes.
-            </div>
-          </div>
-
-          {/* Results Display Panel */}
-          <div className="lg:col-span-5 glass-card border-white/10 bg-gradient-to-b from-slate-900/30 via-slate-950/40 to-slate-950/80 p-6 md:p-8 flex flex-col justify-between text-center relative overflow-hidden shadow-xl">
-            <div className="absolute top-4 right-4 bg-slate-950 border border-white/5 rounded-full px-3 py-1 text-[9px] font-bold text-slate-500 uppercase tracking-widest">
-              Compound Projection
-            </div>
-
-            <div className="space-y-6 pt-6 text-left">
-              <div className="space-y-1">
-                <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Total Principal Invested</span>
-                <div className="text-xl font-bold text-white">
-                  {calcType === 'sip' ? formatCurrency(sipTotalInvested) : formatCurrency(pmsTotalInvested)}
-                </div>
-              </div>
-
-              <div className="space-y-1 py-4 border-y border-white/5">
-                <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Estimated Returns Share</span>
-                <div className="text-xl font-bold text-emerald-400">
-                  + {calcType === 'sip' ? formatCurrency(sipEstReturns) : formatCurrency(pmsEstReturns)}
-                </div>
-              </div>
-
-              <div className="space-y-1 bg-slate-950/60 p-4 rounded-2xl border border-white/5">
-                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Future Portfolio Value</span>
-                <div className="text-3xl font-display font-black text-gold mt-1">
-                  {calcType === 'sip' ? formatCurrency(sipFutureValue) : formatCurrency(pmsFutureValue)}
-                </div>
               </div>
             </div>
 
-            <div className="mt-8 space-y-3">
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="btn-gold w-full py-4 text-xs font-black text-slate-50 uppercase tracking-wider flex items-center justify-center gap-1 shadow-lg shadow-gold/10 hover:shadow-gold/20"
-              >
-                Inquire Investment Plan <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- THE PROCESS SECTION --- */}
-      <section id="methodology" className="py-24 px-6 relative z-10">
-        <div className="max-w-7xl mx-auto text-center space-y-16">
-          <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
-              THE PROCESS
-            </div>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              How We Assist You <br className="hidden md:block"/>
-              <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">Through the Angel One Platform</span>
-            </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-              Getting started with Asset Aura is simple and seamless. As an Authorized Person/Sub-Broker of Angel One, we guide you through every step of the account opening process and help you access financial products and services available on the Angel One platform.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                step: "01",
-                title: "Schedule a Consultation",
-                desc: "Contact us to book an appointment at our Mohali office or connect with us virtually. Our team will understand your requirements and explain the account opening process and the services available through the Angel One platform."
-              },
-              {
-                step: "02",
-                title: "Complete Your Onboarding",
-                desc: "We assist you with Demat and Trading Account opening, KYC verification, documentation, and platform activation, ensuring a smooth and hassle-free onboarding experience."
-              },
-              {
-                step: "03",
-                title: "Access the Angel One Platform",
-                desc: "Once your account is activated, you can access the Angel One platform to invest and trade across Equities, Mutual Funds, SIPs, ETFs, IPOs, Derivatives, PMS (where applicable), and other financial products offered through the platform."
-              },
-              {
-                step: "04",
-                title: "Ongoing Support",
-                desc: "Our relationship doesn't end after account activation. We continue to assist you with platform navigation, account-related support, and help you understand the available investment products so you can use the platform confidently."
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="glass-card border-white/5 bg-slate-900/30 p-6 md:p-8 flex flex-col justify-between space-y-6 relative hover:border-white/10 hover:bg-slate-900/50 transition-all">
-                <div className="space-y-4 text-left">
-                  <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold font-bold text-sm shrink-0">
-                    {item.step}
-                  </div>
-                  <h3 className="text-lg font-bold text-white">{item.title}</h3>
-                  <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- FINANCIAL EDUCATION SECTION --- */}
-      <section id="education" className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-12 gap-16 items-center">
-          
-          <div className="lg:col-span-5 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-bold uppercase tracking-wider">
-              FINANCIAL EDUCATION
-            </div>
-            <h2 className="text-3xl md:text-5xl font-display font-black leading-tight text-white">
-              Learn, Understand &<br />
-              <span className="gold-gradient-text">Invest with Confidence</span>
-            </h2>
-            <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-              At Asset Aura, we believe informed investors make better financial decisions. As an Authorized Person/Sub-Broker of Angel One, we provide educational support to help clients understand financial markets and the investment products available through the Angel One platform. Our objective is to improve financial awareness—not to provide guaranteed returns or personalized investment advice.
-            </p>
-            <div className="pt-2">
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="btn-gold py-3 px-6 text-xs font-bold shadow-lg shadow-gold/15"
-              >
-                Inquire Education Schedule
-              </button>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
-            {[
-              {
-                title: "Market Fundamentals",
-                desc: "Learn the basics of the Indian stock market, stock exchanges, market participants, and the factors that influence market movements."
-              },
-              {
-                title: "Trading Platform Guidance",
-                desc: "Understand how to use the Angel One platform, including account management, watchlists, order placement, portfolio tracking, market research tools, and other platform features."
-              },
-              {
-                title: "Mutual Funds, SIPs, SWPs & STPs",
-                desc: "Learn how Mutual Funds, SIPs, SWPs, and STPs work, their benefits, associated risks, and how they can support long-term financial planning."
-              },
-              {
-                title: "Stocks & Equity Markets",
-                desc: "Understand equity investing, company fundamentals, market risks, and the trading process through the Angel One platform."
-              },
-              {
-                title: "Insurance & Financial Awareness",
-                desc: "Gain knowledge about Life and Health Insurance products available through the Angel One platform, including their features, benefits, and the importance of financial protection as part of overall financial planning."
-              }
-            ].map((point, index) => (
-              <div key={index} className="glass-card border-white/5 bg-slate-900/20 p-6 text-left space-y-3">
-                <div className="w-8 h-8 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center text-gold font-bold text-xs shrink-0">
-                  {index + 1}
-                </div>
-                <h4 className="text-sm font-bold text-white">{point.title}</h4>
-                <p className="text-slate-400 text-[11px] leading-relaxed">{point.desc}</p>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* --- DEMAT ONBOARDING SECTION --- */}
-      <section id="demat-onboarding" className="py-24 px-6 bg-slate-950/40 border-y border-white/5 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
-              SECTION 1 – ONBOARDING ROADMAP
-            </div>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              OPEN YOUR ACCOUNT <br className="hidden md:block"/>
-              <span className="gold-gradient-text text-2xl md:text-3xl mt-2 block">Start Investing Through the Angel One Platform</span>
-            </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-              Open your Demat and Trading Account through the trusted Angel One platform with assistance from Asset Aura. Our team helps you complete the onboarding process quickly and securely.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-            {[
-              {
-                step: "01",
-                title: "Register Online",
-                desc: "Submit your basic details to begin your Demat and Trading Account opening through the Angel One platform.",
-                perk: "Simple Online Registration"
-              },
-              {
-                step: "02",
-                title: "Complete KYC",
-                desc: "Upload your PAN, Aadhaar, and other required documents to complete the digital KYC process as per regulatory requirements.",
-                perk: "Paperless Verification"
-              },
-              {
-                step: "03",
-                title: "Account Verification",
-                desc: "Your details are verified and your Demat and Trading Account is activated through the Angel One platform.",
-                perk: "Secure & SEBI-Compliant Process"
-              },
-              {
-                step: "04",
-                title: "Start Investing",
-                desc: "Access equities, mutual funds, ETFs, IPOs, derivatives, and other financial products available through the Angel One platform.",
-                perk: "Platform Ready"
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="glass-card border-white/5 bg-slate-900/30 p-6 flex flex-col justify-between space-y-6 hover:border-white/10 hover:bg-slate-900/50 transition-all">
-                <div className="space-y-3">
-                  <span className="text-[10px] text-gold uppercase tracking-widest font-extrabold">Step {item.step}</span>
-                  <h3 className="text-base font-bold text-white">{item.title}</h3>
-                  <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
-                </div>
-                <div className="pt-3 border-t border-white/5 flex items-center gap-1.5 text-[10px] text-slate-500 font-semibold uppercase">
-                  <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span>{item.perk}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <button 
-              onClick={() => setIsDematModalOpen(true)}
-              className="px-8 py-3.5 bg-gold hover:bg-gold-dark text-slate-50 rounded-full font-bold text-xs shadow-lg shadow-gold/15 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center mx-auto gap-2"
-            >
-              Open Your Angel One Demat Account <ArrowRight className="w-4 h-4"/>
-            </button>
-          </div>
-
-        </div>
-      </section>
-
-      {/* --- TESTIMONIALS SLIDER SECTION --- */}
-      <section className="py-24 px-6 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-bold uppercase tracking-wider">
-              SECTION 2 – WHY CLIENTS CHOOSE US
-            </div>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              CLIENT EXPERIENCES <br className="hidden md:block"/>
-              <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">Why Investors Choose Asset Aura</span>
-            </h2>
-            <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-              Asset Aura helps clients access the Angel One platform with a smooth onboarding experience, dedicated support, and investor education designed to simplify investing.
-            </p>
-          </div>
-
-          {/* Testimonial Box */}
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={testimonialIdx}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
-                className="glass-card border-white/10 bg-slate-900/60 p-8 md:p-12 shadow-2xl relative overflow-hidden text-left"
-              >
-                <div className="absolute right-8 top-4 text-white/[0.02] text-[180px] font-serif select-none pointer-events-none font-bold">
-                  “
+            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+              {/* Controls Panel */}
+              <div className="lg:col-span-7 glass-card p-6 md:p-8 flex flex-col justify-between space-y-8 border-white/10 bg-slate-900/60 shadow-xl text-left">
+                <div>
+                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Calculator className="w-5 h-5 text-gold" />
+                    <span>{calcType === 'sip' ? 'Systematic Investment Plan (SIP) Parameters' : 'PMS Lump Sum Growth Projections'}</span>
+                  </h3>
+                  <p className="text-slate-400 text-xs mt-1">
+                    Drag the sliders below to estimate the potential growth of your financial portfolio.
+                  </p>
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
-                  <div className="space-y-6 max-w-2xl">
-                    <div className="flex items-center gap-1 text-gold">
-                      {[1,2,3,4,5].map(s => <Star key={s} className="w-3.5 h-3.5 fill-gold text-gold" />)}
-                    </div>
-                    
-                    <p className="text-slate-200 text-sm md:text-base italic font-medium leading-relaxed">
-                      "{TESTIMONIALS_DATA[testimonialIdx].quote}"
-                    </p>
-
-                    <div className="flex items-center gap-4">
-                      <div className={cn(
-                        "w-10 h-10 rounded-full bg-gradient-to-tr flex items-center justify-center font-display font-black text-white shadow-md shrink-0 text-xs",
-                        TESTIMONIALS_DATA[testimonialIdx].avatarGrad
-                      )}>
-                        {TESTIMONIALS_DATA[testimonialIdx].name.charAt(0)}
+                <div className="space-y-6">
+                  {calcType === 'sip' ? (
+                    <>
+                      {/* SIP Amount */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-xs font-semibold text-slate-300">
+                          <span>Monthly SIP Amount:</span>
+                          <span className="text-gold font-bold text-sm">{formatCurrency(sipMonthly)}</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="500"
+                          max="100000"
+                          step="500"
+                          value={sipMonthly}
+                          onChange={(e) => setSipMonthly(parseInt(e.target.value))}
+                          className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5"
+                        />
+                        <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
+                          <span>₹500</span>
+                          <span>₹10,000</span>
+                          <span>₹50,000</span>
+                          <span>₹1,00,000</span>
+                        </div>
                       </div>
 
-                      <div className="space-y-0.5">
-                        <h4 className="font-bold text-white text-sm">{TESTIMONIALS_DATA[testimonialIdx].name}</h4>
-                        <p className="text-slate-500 text-[10px] font-semibold">{TESTIMONIALS_DATA[testimonialIdx].role} &bull; {TESTIMONIALS_DATA[testimonialIdx].location}</p>
+                      {/* SIP Rate */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-xs font-semibold text-slate-300">
+                          <span>Expected Annual Return (p.a.):</span>
+                          <span className="text-gold font-bold text-sm">{sipRate}%</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="5"
+                          max="30"
+                          step="0.5"
+                          value={sipRate}
+                          onChange={(e) => setSipRate(parseFloat(e.target.value))}
+                          className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5"
+                        />
+                        <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
+                          <span>5%</span>
+                          <span>12% (Equity Avg)</span>
+                          <span>20% (High Growth)</span>
+                          <span>30%</span>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  {/* Payout highlight card */}
-                  <div className="w-full md:w-auto shrink-0 bg-slate-950/60 p-4 rounded-xl border border-white/5 text-center md:text-left space-y-1 max-w-[200px] mx-auto md:mx-0">
-                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Client Profile</span>
-                    <div className="text-lg font-display font-black text-gold-light">{TESTIMONIALS_DATA[testimonialIdx].stats}</div>
-                    <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-white text-[9px] font-bold uppercase tracking-wide">
-                      <Check className="w-2.5 h-2.5 text-emerald-400 shrink-0" /> {TESTIMONIALS_DATA[testimonialIdx].badge}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                      {/* SIP Years */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-xs font-semibold text-slate-300">
+                          <span>Duration / Time Period:</span>
+                          <span className="text-gold font-bold text-sm">{sipYears} Years</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="1"
+                          max="40"
+                          value={sipYears}
+                          onChange={(e) => setSipYears(parseInt(e.target.value))}
+                          className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5"
+                        />
+                        <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
+                          <span>1 Year</span>
+                          <span>10 Years</span>
+                          <span>25 Years</span>
+                          <span>40 Years</span>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* PMS Lump Sum Amount */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-xs font-semibold text-slate-300">
+                          <span>Lump Sum PMS Investment:</span>
+                          <span className="text-gold font-bold text-sm">{formatCurrency(pmsLumpSum)}</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="50000"
+                          max="5000000"
+                          step="50000"
+                          value={pmsLumpSum}
+                          onChange={(e) => setPmsLumpSum(parseInt(e.target.value))}
+                          className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5"
+                        />
+                        <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
+                          <span>₹50,000</span>
+                          <span>₹5,00,000</span>
+                          <span>₹25,00,000</span>
+                          <span>₹50,00,000</span>
+                        </div>
+                      </div>
 
-            {/* Slide Arrows */}
-            <div className="flex justify-center md:justify-end gap-3 mt-6">
-              <button 
-                onClick={prevTestimonial}
-                className="w-10 h-10 rounded-full border border-white/10 hover:border-white/20 bg-slate-900/60 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-95 animate-none"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={nextTestimonial}
-                className="w-10 h-10 rounded-full border border-white/10 hover:border-white/20 bg-slate-900/60 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-95 animate-none"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-          
-          <div className="mt-12 p-6 rounded-2xl bg-slate-900/50 border border-white/5 text-center space-y-3">
-            <div className="text-gold font-bold text-sm tracking-wider uppercase">Trusted Support • Secure Onboarding • Angel One Platform Access</div>
-            <p className="text-slate-400 text-xs leading-relaxed max-w-3xl mx-auto">
-              Asset Aura is an Authorized Person/Sub-Broker of Angel One, helping clients open Demat and Trading Accounts and access financial products available through the Angel One platform.
-            </p>
-          </div>
+                      {/* PMS Rate */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-xs font-semibold text-slate-300">
+                          <span>Expected Advisory Growth Rate (p.a.):</span>
+                          <span className="text-gold font-bold text-sm">{pmsRate}%</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="5"
+                          max="30"
+                          step="0.5"
+                          value={pmsRate}
+                          onChange={(e) => setPmsRate(parseFloat(e.target.value))}
+                          className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5"
+                        />
+                        <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
+                          <span>5%</span>
+                          <span>15% (PMS Target)</span>
+                          <span>22% (Active Advisor)</span>
+                          <span>30%</span>
+                        </div>
+                      </div>
 
-        </div>
-      </section>
-
-      {/* --- FAQ SECTION WITH DYNAMIC FILTERING & SEARCH --- */}
-      <section id="faqs" className="py-24 px-6 relative z-10">
-        <div className="max-w-3xl mx-auto">
-          
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
-              FREQUENTLY ASKED QUESTIONS
-            </div>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              Everything You Need to Know <br className="hidden md:block"/>
-              <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">About the Angel One Platform</span>
-            </h2>
-            <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-              Find answers to common questions about Demat & Trading Account opening, the Angel One platform, investment products, onboarding, account support, and investor education.
-            </p>
-          </div>
-
-          {/* FAQ Controls Container */}
-          <div className="space-y-4 mb-8 text-left">
-            {/* Search Input */}
-            <div className="relative">
-              <Search className="absolute left-4 top-3 w-4 h-4 text-slate-500" />
-              <input 
-                type="text"
-                placeholder="Search questions or keywords (e.g. SEBI, Demat, PMS)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-900/60 border border-white/10 rounded-2xl pl-11 pr-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
-              />
-              {searchQuery && (
-                <button 
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-3 text-[10px] text-slate-500 hover:text-slate-300 underline font-semibold"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-
-            {/* Category Pill Tabs */}
-            <div className="flex flex-wrap gap-1.5 justify-center pt-2">
-              {faqCategories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveFAQCategory(cat)}
-                  className={cn(
-                    "px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all duration-300",
-                    activeFAQCategory === cat 
-                      ? "bg-gold text-slate-50 border-gold shadow-lg shadow-gold/15" 
-                      : "bg-slate-900/40 border-white/5 text-slate-400 hover:text-white"
+                      {/* PMS Years */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-xs font-semibold text-slate-300">
+                          <span>Advisory Horizon:</span>
+                          <span className="text-gold font-bold text-sm">{pmsYears} Years</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="1"
+                          max="30"
+                          value={pmsYears}
+                          onChange={(e) => setPmsYears(parseInt(e.target.value))}
+                          className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-gold border border-white/5"
+                        />
+                        <div className="flex justify-between text-[9px] text-slate-500 font-bold uppercase">
+                          <span>1 Year</span>
+                          <span>5 Years</span>
+                          <span>15 Years</span>
+                          <span>30 Years</span>
+                        </div>
+                      </div>
+                    </>
                   )}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
+                </div>
 
-          {/* Accordion FAQ List */}
-          <div className="glass-card border-white/10 bg-slate-900/60 p-6 shadow-xl space-y-2 text-left">
-            {filteredFAQs.length > 0 ? (
-              filteredFAQs.map((faq, index) => (
-                <FAQItem 
-                  key={index} 
-                  faq={faq} 
-                  isInitiallyOpen={index === 0 && !searchQuery} 
-                />
-              ))
-            ) : (
-              <div className="text-center py-8 text-slate-500 space-y-2">
-                <HelpCircle className="w-8 h-8 mx-auto text-slate-600" />
-                <p className="text-xs font-semibold">No questions found matching your search.</p>
-                <button 
-                  onClick={() => { setSearchQuery(""); setActiveFAQCategory("All"); }}
-                  className="text-xs text-gold underline font-bold"
-                >
-                  Reset filters
-                </button>
+                <div className="pt-4 border-t border-white/5 text-[10px] text-slate-500">
+                  Disclaimer: Projections are computed based on compound interest equations. Actual returns are subject to market volatility and performance ratios. Past record is not guaranteed of future outcomes.
+                </div>
               </div>
-            )}
-          </div>
 
-        </div>
-      </section>
+              {/* Results Display Panel */}
+              <div className="lg:col-span-5 glass-card border-white/10 bg-gradient-to-b from-slate-900/30 via-slate-950/40 to-slate-950/80 p-6 md:p-8 flex flex-col justify-between text-center relative overflow-hidden shadow-xl">
+                <div className="absolute top-4 right-4 bg-slate-950 border border-white/5 rounded-full px-3 py-1 text-[9px] font-bold text-slate-500 uppercase tracking-widest">
+                  Compound Projection
+                </div>
 
-      {/* --- EMBEDDED CTA SECTION --- */}
-      <section className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="rounded-[3rem] bg-gradient-to-br from-slate-900/40 via-slate-950/40 to-gold-dark/10 border border-gold/25 p-8 md:p-16 text-center relative overflow-hidden shadow-2xl shadow-slate-950"
-        >
-          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-            <div className="absolute top-[-40%] left-[-20%] w-[60%] h-[120%] bg-gold/10 blur-[120px]" />
-            <div className="absolute bottom-[-40%] right-[-20%] w-[60%] h-[120%] bg-gold-dark/5 blur-[120px]" />
-          </div>
-
-          <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/15 border border-gold/30 text-gold text-xs font-bold uppercase tracking-wider">
-              Schedule Your Free Consultation Slot
-            </div>
-
-            <h2 className="text-3xl md:text-5xl font-display font-black leading-tight text-white">
-              Start Compounding <br />
-              <span className="gold-gradient-text">Your Wealth Today</span>
-            </h2>
-            
-            <p className="text-slate-400 text-xs md:text-sm max-w-md mx-auto leading-relaxed">
-              Connect with SEBI-registered portfolio advisory expertise and open trading terminals to control your assets.
-            </p>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto pt-2">
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="btn-gold py-3 px-6 text-xs font-bold text-slate-50 shadow-lg shadow-gold/10 hover:shadow-gold/20 flex-1"
-              >
-                Book Consultation Now
-              </button>
-              <button 
-                onClick={() => setIsDematModalOpen(true)}
-                className="btn-secondary py-3 px-6 text-xs font-bold flex-1 border-white/10 text-white"
-              >
-                Open Free Demat Account
-              </button>
-            </div>
-
-            <div className="pt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[10px] text-slate-500 uppercase tracking-widest font-semibold">
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 animate-none" /> SEBI RA Compliant</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 animate-none" /> Angel One Platforms</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 animate-none" /> Zero Advisory Fees initially</span>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* --- CONTACT & GET IN TOUCH SECTION --- */}
-      <section id="about-us" className="py-24 px-6 relative z-10 max-w-7xl mx-auto border-t border-white/5">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left: Detail blocks */}
-          <div className="lg:col-span-5 text-left space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
-                Visit Us in Mohali
-              </div>
-              <h2 className="text-3xl md:text-5xl font-display font-black text-white">
-                Contact <span className="gold-gradient-text">Our Team</span>
-              </h2>
-              <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-                All meetings are by appointment only. Contact us to schedule your session and we will confirm your slot within 24 hours.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {[
-                {
-                  title: "Phone",
-                  desc: "9988988208",
-                  sub: "Call for support or bookings",
-                  icon: Phone
-                },
-                {
-                  title: "Email",
-                  desc: "hrassetaura@gmail.com",
-                  sub: "For general inquiries",
-                  icon: Mail
-                },
-                {
-                  title: "Address",
-                  desc: "Asset Aura, D-254, 5th Floor, GR Square Building, Sector 75, Mohali, Punjab",
-                  sub: "Headquarters",
-                  icon: MapPin
-                }
-              ].map((item, idx) => {
-                const ItemIcon = item.icon;
-                return (
-                  <div key={idx} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
-                      <ItemIcon className="text-gold w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs text-slate-500 font-bold uppercase tracking-widest">{item.title}</h4>
-                      <div className="text-sm font-bold text-white mt-0.5">{item.desc}</div>
-                      <div className="text-[10px] text-slate-400 mt-0.5 font-medium">{item.sub}</div>
+                <div className="space-y-6 pt-6 text-left">
+                  <div className="space-y-1">
+                    <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Total Principal Invested</span>
+                    <div className="text-xl font-bold text-white">
+                      {calcType === 'sip' ? formatCurrency(sipTotalInvested) : formatCurrency(pmsTotalInvested)}
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
 
-          {/* Right: Office description */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="glass-card border-white/10 bg-slate-900/60 p-6 md:p-8 shadow-xl space-y-6">
-              <h3 className="text-xl font-bold text-white">ABOUT ASSET AURA</h3>
-              <h4 className="text-sm text-gold font-bold">Financial Services Through the Angel One Platform</h4>
-              <p className="text-slate-300 text-xs md:text-sm leading-relaxed">
-                Asset Aura is an Authorized Person/Sub-Broker of Angel One, one of India's leading SEBI-registered stockbrokers. We facilitate access to a comprehensive range of financial products and investment services through the Angel One platform, including equity trading, mutual funds, SIPs, ETFs, IPOs, derivatives, insurance, and other investment solutions available on the platform.
-              </p>
-              <p className="text-slate-300 text-xs md:text-sm leading-relaxed">
-                Whether you are a salaried professional starting your investment journey, a business owner building long-term wealth, or an individual planning for retirement, we assist you with Demat account opening, onboarding, platform support, and access to investment opportunities through the trusted Angel One ecosystem.
-              </p>
-              <p className="text-slate-300 text-xs md:text-sm leading-relaxed">
-                What sets Asset Aura apart is our education-first approach. We help clients understand the features of the Angel One platform, financial markets, stocks, mutual funds, SIPs, SWPs, STPs, insurance, and other investment products before they begin investing. Our goal is to empower investors with knowledge so they can make informed financial decisions with confidence.
-              </p>
-              <p className="text-slate-400 text-xs leading-relaxed">
-                We proudly serve clients across Mohali, Chandigarh, Panchkula, Punjab, and Haryana, while also offering virtual onboarding and support for clients across India.
-              </p>
+                  <div className="space-y-1 py-4 border-y border-white/5">
+                    <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Estimated Returns Share</span>
+                    <div className="text-xl font-bold text-emerald-400">
+                      + {calcType === 'sip' ? formatCurrency(sipEstReturns) : formatCurrency(pmsEstReturns)}
+                    </div>
+                  </div>
 
-              <div className="pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-bold">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Authorized Angel One Partner</span>
+                  <div className="space-y-1 bg-slate-950/60 p-4 rounded-2xl border border-white/5">
+                    <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Future Portfolio Value</span>
+                    <div className="text-3xl font-display font-black text-gold mt-1">
+                      {calcType === 'sip' ? formatCurrency(sipFutureValue) : formatCurrency(pmsFutureValue)}
+                    </div>
+                  </div>
                 </div>
-                <button 
-                  onClick={() => setIsModalOpen(true)}
-                  className="btn-gold py-2.5 px-5 text-xs font-bold text-slate-50"
-                >
-                  Schedule Office Visit
-                </button>
+
+                <div className="mt-8 space-y-3">
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="btn-gold w-full py-4 text-xs font-black text-slate-50 uppercase tracking-wider flex items-center justify-center gap-1 shadow-lg shadow-gold/10 hover:shadow-gold/20"
+                  >
+                    Inquire Investment Plan <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </section>
 
-        </div>
-      </section>
+          {/* --- THE PROCESS SECTION --- */}
+          <section id="methodology" className="py-24 px-6 relative z-10">
+            <div className="max-w-7xl mx-auto text-center space-y-16">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
+                  THE PROCESS
+                </div>
+                <h2 className="text-3xl md:text-5xl font-display font-bold">
+                  How We Assist You <br className="hidden md:block" />
+                  <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">Through the Angel One Platform</span>
+                </h2>
+                <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                  Getting started with Asset Aura is simple and seamless. As an Authorized Person/Sub-Broker of Angel One, we guide you through every step of the account opening process and help you access financial products and services available on the Angel One platform.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  {
+                    step: "01",
+                    title: "Schedule a Consultation",
+                    desc: "Contact us to book an appointment at our Mohali office or connect with us virtually. Our team will understand your requirements and explain the account opening process and the services available through the Angel One platform."
+                  },
+                  {
+                    step: "02",
+                    title: "Complete Your Onboarding",
+                    desc: "We assist you with Demat and Trading Account opening, KYC verification, documentation, and platform activation, ensuring a smooth and hassle-free onboarding experience."
+                  },
+                  {
+                    step: "03",
+                    title: "Access the Angel One Platform",
+                    desc: "Once your account is activated, you can access the Angel One platform to invest and trade across Equities, Mutual Funds, SIPs, ETFs, IPOs, Derivatives, PMS (where applicable), and other financial products offered through the platform."
+                  },
+                  {
+                    step: "04",
+                    title: "Ongoing Support",
+                    desc: "Our relationship doesn't end after account activation. We continue to assist you with platform navigation, account-related support, and help you understand the available investment products so you can use the platform confidently."
+                  }
+                ].map((item, idx) => (
+                  <div key={idx} className="glass-card border-white/5 bg-slate-900/30 p-6 md:p-8 flex flex-col justify-between space-y-6 relative hover:border-white/10 hover:bg-slate-900/50 transition-all">
+                    <div className="space-y-4 text-left">
+                      <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold font-bold text-sm shrink-0">
+                        {item.step}
+                      </div>
+                      <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                      <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* --- FINANCIAL EDUCATION SECTION --- */}
+          <section id="education" className="py-24 px-6 relative z-10 max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-12 gap-16 items-center">
+
+              <div className="lg:col-span-5 space-y-6 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-bold uppercase tracking-wider">
+                  FINANCIAL EDUCATION
+                </div>
+                <h2 className="text-3xl md:text-5xl font-display font-black leading-tight text-white">
+                  Learn, Understand &<br />
+                  <span className="gold-gradient-text">Invest with Confidence</span>
+                </h2>
+                <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                  At Asset Aura, we believe informed investors make better financial decisions. As an Authorized Person/Sub-Broker of Angel One, we provide educational support to help clients understand financial markets and the investment products available through the Angel One platform. Our objective is to improve financial awareness—not to provide guaranteed returns or personalized investment advice.
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="btn-gold py-3 px-6 text-xs font-bold shadow-lg shadow-gold/15"
+                  >
+                    Inquire Education Schedule
+                  </button>
+                </div>
+              </div>
+
+              <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: "Market Fundamentals",
+                    desc: "Learn the basics of the Indian stock market, stock exchanges, market participants, and the factors that influence market movements."
+                  },
+                  {
+                    title: "Trading Platform Guidance",
+                    desc: "Understand how to use the Angel One platform, including account management, watchlists, order placement, portfolio tracking, market research tools, and other platform features."
+                  },
+                  {
+                    title: "Mutual Funds, SIPs, SWPs & STPs",
+                    desc: "Learn how Mutual Funds, SIPs, SWPs, and STPs work, their benefits, associated risks, and how they can support long-term financial planning."
+                  },
+                  {
+                    title: "Stocks & Equity Markets",
+                    desc: "Understand equity investing, company fundamentals, market risks, and the trading process through the Angel One platform."
+                  },
+                  {
+                    title: "Insurance & Financial Awareness",
+                    desc: "Gain knowledge about Life and Health Insurance products available through the Angel One platform, including their features, benefits, and the importance of financial protection as part of overall financial planning."
+                  }
+                ].map((point, index) => (
+                  <div key={index} className="glass-card border-white/5 bg-slate-900/20 p-6 text-left space-y-3">
+                    <div className="w-8 h-8 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center text-gold font-bold text-xs shrink-0">
+                      {index + 1}
+                    </div>
+                    <h4 className="text-sm font-bold text-white">{point.title}</h4>
+                    <p className="text-slate-400 text-[11px] leading-relaxed">{point.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </section>
+
+          {/* --- DEMAT ONBOARDING SECTION --- */}
+          <section id="demat-onboarding" className="py-24 px-6 bg-slate-950/40 border-y border-white/5 relative z-10">
+            <div className="max-w-7xl mx-auto">
+
+              <div className="text-center mb-16 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
+                  SECTION 1 – ONBOARDING ROADMAP
+                </div>
+                <h2 className="text-3xl md:text-5xl font-display font-bold">
+                  OPEN YOUR ACCOUNT <br className="hidden md:block" />
+                  <span className="gold-gradient-text text-2xl md:text-3xl mt-2 block">Start Investing Through the Angel One Platform</span>
+                </h2>
+                <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                  Open your Demat and Trading Account through the trusted Angel One platform with assistance from Asset Aura. Our team helps you complete the onboarding process quickly and securely.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+                {[
+                  {
+                    step: "01",
+                    title: "Register Online",
+                    desc: "Submit your basic details to begin your Demat and Trading Account opening through the Angel One platform.",
+                    perk: "Simple Online Registration"
+                  },
+                  {
+                    step: "02",
+                    title: "Complete KYC",
+                    desc: "Upload your PAN, Aadhaar, and other required documents to complete the digital KYC process as per regulatory requirements.",
+                    perk: "Paperless Verification"
+                  },
+                  {
+                    step: "03",
+                    title: "Account Verification",
+                    desc: "Your details are verified and your Demat and Trading Account is activated through the Angel One platform.",
+                    perk: "Secure & SEBI-Compliant Process"
+                  },
+                  {
+                    step: "04",
+                    title: "Start Investing",
+                    desc: "Access equities, mutual funds, ETFs, IPOs, derivatives, and other financial products available through the Angel One platform.",
+                    perk: "Platform Ready"
+                  }
+                ].map((item, idx) => (
+                  <div key={idx} className="glass-card border-white/5 bg-slate-900/30 p-6 flex flex-col justify-between space-y-6 hover:border-white/10 hover:bg-slate-900/50 transition-all">
+                    <div className="space-y-3">
+                      <span className="text-[10px] text-gold uppercase tracking-widest font-extrabold">Step {item.step}</span>
+                      <h3 className="text-base font-bold text-white">{item.title}</h3>
+                      <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+                    </div>
+                    <div className="pt-3 border-t border-white/5 flex items-center gap-1.5 text-[10px] text-slate-500 font-semibold uppercase">
+                      <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>{item.perk}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-12 text-center">
+                <button
+                  onClick={() => setIsDematModalOpen(true)}
+                  className="px-8 py-3.5 bg-gold hover:bg-gold-dark text-slate-50 rounded-full font-bold text-xs shadow-lg shadow-gold/15 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center mx-auto gap-2"
+                >
+                  Open Your Angel One Demat Account <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+
+            </div>
+          </section>
+
+          {/* --- TESTIMONIALS SLIDER SECTION --- */}
+          <section className="py-24 px-6 relative z-10">
+            <div className="max-w-5xl mx-auto">
+
+              <div className="text-center mb-16 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-gold text-xs font-bold uppercase tracking-wider">
+                  SECTION 2 – WHY CLIENTS CHOOSE US
+                </div>
+                <h2 className="text-3xl md:text-5xl font-display font-bold">
+                  CLIENT EXPERIENCES <br className="hidden md:block" />
+                  <span className="gold-gradient-text text-2xl md:text-4xl mt-2 block">Why Investors Choose Asset Aura</span>
+                </h2>
+                <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+                  Asset Aura helps clients access the Angel One platform with a smooth onboarding experience, dedicated support, and investor education designed to simplify investing.
+                </p>
+              </div>
+
+              {/* Testimonial Box */}
+              <div className="relative">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={testimonialIdx}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="glass-card border-white/10 bg-slate-900/60 p-8 md:p-12 shadow-2xl relative overflow-hidden text-left"
+                  >
+                    <div className="absolute right-8 top-4 text-white/[0.02] text-[180px] font-serif select-none pointer-events-none font-bold">
+                      “
+                    </div>
+
+                    <div className="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
+                      <div className="space-y-6 max-w-2xl">
+                        <div className="flex items-center gap-1 text-gold">
+                          {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-3.5 h-3.5 fill-gold text-gold" />)}
+                        </div>
+
+                        <p className="text-slate-200 text-sm md:text-base italic font-medium leading-relaxed">
+                          "{TESTIMONIALS_DATA[testimonialIdx].quote}"
+                        </p>
+
+                        <div className="flex items-center gap-4">
+                          <div className={cn(
+                            "w-10 h-10 rounded-full bg-gradient-to-tr flex items-center justify-center font-display font-black text-white shadow-md shrink-0 text-xs",
+                            TESTIMONIALS_DATA[testimonialIdx].avatarGrad
+                          )}>
+                            {TESTIMONIALS_DATA[testimonialIdx].name.charAt(0)}
+                          </div>
+
+                          <div className="space-y-0.5">
+                            <h4 className="font-bold text-white text-sm">{TESTIMONIALS_DATA[testimonialIdx].name}</h4>
+                            <p className="text-slate-500 text-[10px] font-semibold">{TESTIMONIALS_DATA[testimonialIdx].role} &bull; {TESTIMONIALS_DATA[testimonialIdx].location}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Payout highlight card */}
+                      <div className="w-full md:w-auto shrink-0 bg-slate-950/60 p-4 rounded-xl border border-white/5 text-center md:text-left space-y-1 max-w-[200px] mx-auto md:mx-0">
+                        <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Client Profile</span>
+                        <div className="text-lg font-display font-black text-gold-light">{TESTIMONIALS_DATA[testimonialIdx].stats}</div>
+                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-white text-[9px] font-bold uppercase tracking-wide">
+                          <Check className="w-2.5 h-2.5 text-emerald-400 shrink-0" /> {TESTIMONIALS_DATA[testimonialIdx].badge}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Slide Arrows */}
+                <div className="flex justify-center md:justify-end gap-3 mt-6">
+                  <button
+                    onClick={prevTestimonial}
+                    className="w-10 h-10 rounded-full border border-white/10 hover:border-white/20 bg-slate-900/60 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-95 animate-none"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={nextTestimonial}
+                    className="w-10 h-10 rounded-full border border-white/10 hover:border-white/20 bg-slate-900/60 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-95 animate-none"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-12 p-6 rounded-2xl bg-slate-900/50 border border-white/5 text-center space-y-3">
+                <div className="text-gold font-bold text-sm tracking-wider uppercase">Trusted Support • Secure Onboarding • Angel One Platform Access</div>
+                <p className="text-slate-400 text-xs leading-relaxed max-w-3xl mx-auto">
+                  Asset Aura is an Authorized Person/Sub-Broker of Angel One, helping clients open Demat and Trading Accounts and access financial products available through the Angel One platform.
+                </p>
+              </div>
+
+            </div>
+          </section>
         </>
       )}
 
       {/* --- FOOTER --- */}
       <footer className="pt-20 pb-10 px-6 border-t border-white/5 bg-slate-950/80 relative z-10 text-left">
         <div className="max-w-7xl mx-auto space-y-12">
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
-            
+
             {/* Column 1: Info */}
             <div className="lg:col-span-5 space-y-4">
               <a href="#" className="flex items-center gap-2">
@@ -2326,7 +2531,7 @@ export default function App() {
                 <span className="text-lg font-display font-extrabold text-white">Asset Aura</span>
               </a>
               <p className="text-slate-500 text-xs leading-relaxed max-w-sm">
-                <strong className="text-slate-400">About Asset Aura</strong><br/>
+                <strong className="text-slate-400">About Asset Aura</strong><br />
                 Asset Aura is an Authorized Person/Sub-Broker of Angel One, providing seamless access to the Angel One platform. We assist clients with Demat & Trading Account opening, onboarding, platform support, and access to a wide range of financial products, including Equities, Mutual Funds, ETFs, IPOs, Derivatives, Insurance, and other investment solutions available through the Angel One platform.
               </p>
               <div className="flex gap-2">
@@ -2336,9 +2541,9 @@ export default function App() {
                   { Icon: Instagram, link: "#" },
                   { Icon: Facebook, link: "#" }
                 ].map((item, i) => (
-                  <a 
-                    key={i} 
-                    href={item.link} 
+                  <a
+                    key={i}
+                    href={item.link}
                     className="w-8 h-8 rounded-full bg-white/5 border border-white/5 flex items-center justify-center hover:bg-gold/15 hover:border-gold/30 hover:text-gold transition-all text-slate-400"
                   >
                     <item.Icon className="w-3.5 h-3.5 animate-none" />
@@ -2402,7 +2607,7 @@ export default function App() {
           {/* Detailed compliance regulatory disclosures */}
           <div className="pt-8 border-t border-white/5 space-y-4 text-[10px] text-slate-600 leading-relaxed">
             <p>
-              <strong className="text-slate-400">Footer Disclaimer:</strong><br/>
+              <strong className="text-slate-400">Footer Disclaimer:</strong><br />
               Asset Aura is an Authorized Person/Sub-Broker of Angel One. We facilitate access to financial products and services available through the Angel One platform. Investments in securities and mutual funds are subject to market risks. Please read all related documents carefully before investing.
             </p>
           </div>
