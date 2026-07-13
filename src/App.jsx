@@ -1512,7 +1512,7 @@ export default function App() {
         <div className="flex-1 flex items-center justify-start">
           <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center gap-3 sm:gap-4 select-none shrink-0 group">
             <div className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-xl flex items-center justify-center shrink-0 bg-white">
-              <img src="/asset.jpeg" alt="Asset Aura Logo" className="w-full h-full object-cover scale-[1.45]" />
+              <img src="/asset.jpeg" alt="Asset Aura Logo" className="w-full h-full object-cover scale-[1.55]" />
             </div>
             <div className="flex flex-col items-start leading-tight">
               <span className="font-display font-extrabold tracking-widest text-base sm:text-lg uppercase gold-gradient-text">ASSET AURA</span>
@@ -2531,7 +2531,7 @@ export default function App() {
             <div className="lg:col-span-5 space-y-4">
               <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center gap-3 sm:gap-4 select-none mb-4">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-xl flex items-center justify-center shrink-0 bg-white">
-                  <img src="/asset.jpeg" alt="Asset Aura Logo" className="w-full h-full object-cover scale-[1.45]" />
+                  <img src="/asset.jpeg" alt="Asset Aura Logo" className="w-full h-full object-cover scale-[1.55]" />
                 </div>
                 <span className="text-lg font-display font-extrabold text-white">Asset Aura</span>
               </a>
