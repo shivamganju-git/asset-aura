@@ -1510,9 +1510,14 @@ export default function App() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-700/70 transition-all duration-300 px-6 md:px-12 py-3.5 flex items-center justify-between shadow-sm">
         {/* Left: Brand Logo */}
         <div className="flex-1 flex items-center justify-start">
-          <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex flex-col items-start leading-tight select-none shrink-0 group">
-            <span className="font-display font-extrabold tracking-widest text-base sm:text-lg uppercase gold-gradient-text">ASSET AURA</span>
-            <span className="text-[6px] sm:text-[7.5px] tracking-[0.22em] uppercase font-sans font-extrabold text-slate-400 group-hover:text-gold transition-colors">Investment Services</span>
+          <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center gap-3 sm:gap-4 select-none shrink-0 group">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-xl flex items-center justify-center shrink-0 bg-white">
+              <img src="/asset.jpeg" alt="Asset Aura Logo" className="w-full h-full object-cover scale-[1.45]" />
+            </div>
+            <div className="flex flex-col items-start leading-tight">
+              <span className="font-display font-extrabold tracking-widest text-base sm:text-lg uppercase gold-gradient-text">ASSET AURA</span>
+              <span className="text-[6px] sm:text-[7.5px] tracking-[0.22em] uppercase font-sans font-extrabold text-slate-400 group-hover:text-gold transition-colors">Investment Services</span>
+            </div>
           </a>
         </div>
 
@@ -2524,9 +2529,9 @@ export default function App() {
 
             {/* Column 1: Info */}
             <div className="lg:col-span-5 space-y-4">
-              <a href="#" className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-tr from-gold-dark to-gold rounded-lg flex items-center justify-center">
-                  <TrendingUp className="text-slate-50 w-4 h-4" />
+              <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center gap-3 sm:gap-4 select-none mb-4">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-xl flex items-center justify-center shrink-0 bg-white">
+                  <img src="/asset.jpeg" alt="Asset Aura Logo" className="w-full h-full object-cover scale-[1.45]" />
                 </div>
                 <span className="text-lg font-display font-extrabold text-white">Asset Aura</span>
               </a>
@@ -2537,8 +2542,8 @@ export default function App() {
               <div className="flex gap-2">
                 {[
                   { Icon: Twitter, link: "#" },
-                  { Icon: Linkedin, link: "#" },
-                  { Icon: Instagram, link: "#" },
+                  { Icon: Linkedin, link: "https://www.linkedin.com/in/asset-aura-84267b411/?trk=public-profile-join-page" },
+                  { Icon: Instagram, link: "https://www.instagram.com/assetaura_?igsh=MTZkc2ZhMGhzbnNzag%3D%3D&utm_source=qr" },
                   { Icon: Facebook, link: "#" }
                 ].map((item, i) => (
                   <a
@@ -2571,12 +2576,12 @@ export default function App() {
             <div className="lg:col-span-2 space-y-4">
               <h4 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400">Company</h4>
               <ul className="space-y-2.5 text-xs text-slate-500 font-semibold">
-                <li><a href="#about-us" className="hover:text-gold transition-colors">About Asset Aura</a></li>
-                <li><a href="#why-us" className="hover:text-gold transition-colors">Why Choose Asset Aura</a></li>
-                <li><a href="#methodology" className="hover:text-gold transition-colors">How It Works</a></li>
-                <li><a href="#demat-onboarding" className="hover:text-gold transition-colors">Angel One Platform</a></li>
-                <li><a href="#faqs" className="hover:text-gold transition-colors">FAQs</a></li>
-                <li><a href="#about-us" className="hover:text-gold transition-colors">Contact Us</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors">About Asset Aura</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setTimeout(() => document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-gold transition-colors">Why Choose Asset Aura</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setTimeout(() => document.getElementById('methodology')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-gold transition-colors">How It Works</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setTimeout(() => document.getElementById('demat-onboarding')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-gold transition-colors">Angel One Platform</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('faq'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors">FAQs</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors">Contact Us</a></li>
               </ul>
             </div>
 
