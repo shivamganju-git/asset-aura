@@ -1507,7 +1507,7 @@ export default function App() {
       <DematAccountModal isOpen={isDematModalOpen} onClose={() => { setIsDematModalOpen(false); setPrefilledPhone(''); }} prefilledPhone={prefilledPhone} />
 
       {/* Redesigned Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-700/70 transition-all duration-300 px-6 md:px-12 py-3.5 flex items-center justify-between shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-700/70 transition-all duration-300 px-6 md:px-12 py-3.5 flex items-center justify-between gap-4 lg:gap-8 shadow-sm">
         {/* Left: Brand Logo */}
         <div className="flex-1 flex items-center justify-start">
           <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center gap-3 sm:gap-4 select-none shrink-0 group">
