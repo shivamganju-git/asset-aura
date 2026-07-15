@@ -106,6 +106,56 @@ const FAQ_DATA = [
     question: "8. Does Asset Aura charge separately for opening a Demat Account?",
     answer: "Our team will inform you about any applicable account opening charges or promotional offers offered through the Angel One platform, if applicable.",
     category: "Onboarding"
+  },
+  {
+    question: "1. Why is financial education important before investing?",
+    answer: "Financial education helps you understand investment products, market risks, and long-term wealth creation so you can make informed financial decisions with confidence.",
+    category: "Education"
+  },
+  {
+    question: "2. Do I need prior stock market knowledge?",
+    answer: "No. Our educational resources are designed for beginners as well as experienced investors who want to improve their understanding of financial markets.",
+    category: "Education"
+  },
+  {
+    question: "3. What topics are covered?",
+    answer: "Our educational content includes: Stock Market Basics, Equity Investing, Mutual Funds, SIPs, ETFs, IPOs, Futures & Options (Basics), Risk Management, Portfolio Diversification, and Financial Planning Concepts.",
+    category: "Education"
+  },
+  {
+    question: "4. Is the education free?",
+    answer: "Yes. We provide educational resources, articles, webinars, and investor awareness content to help individuals better understand financial markets.",
+    category: "Education"
+  },
+  {
+    question: "5. Does educational content include investment recommendations?",
+    answer: "No. Our educational content is intended solely to improve financial awareness and market understanding. It should not be considered personalized investment advice or a recommendation to buy or sell any security.",
+    category: "Education"
+  },
+  {
+    question: "6. Can beginners start learning?",
+    answer: "Absolutely. Our learning resources begin with basic concepts and gradually cover more advanced topics, making them suitable for investors at all experience levels.",
+    category: "Education"
+  },
+  {
+    question: "7. How can I start investing after learning?",
+    answer: "Once you're comfortable with the basics, you can open a Demat and Trading Account through the Angel One platform with assistance from Asset Aura and begin your investment journey.",
+    category: "Education"
+  },
+  {
+    question: "8. What investment products can I learn about?",
+    answer: "You can learn about: Equities, Mutual Funds, SIPs, ETFs, IPOs, Bonds, Fixed Income Products, Derivatives (Basics), Insurance, and Portfolio Diversification.",
+    category: "Education"
+  },
+  {
+    question: "9. Will I learn how to use the Angel One platform?",
+    answer: "Yes. We provide guidance on account onboarding and explain the key features of the Angel One platform, including market watchlists, order placement, portfolio tracking, and investment tools.",
+    category: "Education"
+  },
+  {
+    question: "10. How do I continue my learning journey?",
+    answer: "Continue learning through our educational articles, webinars, investor awareness sessions, and platform resources while gaining practical experience with the Angel One platform.",
+    category: "Education"
   }
 ];
 
@@ -224,112 +274,317 @@ const OFFERINGS_DATA = {
       { name: "Insurance", key: "insurance" }
     ]
   },
-  platform: {
-    column1: [
-      { name: "Asset Aura Web", key: "web_platform" },
-      { name: "Asset Aura Mobile App", key: "mobile_platform" },
-      { name: "Trade Terminal", key: "trade_terminal" },
-      { name: "Partner Dashboard", key: "partner_dashboard" }
-    ],
-    column2: [
-      { name: "Mutual Fund Portal", key: "mf_portal" },
-      { name: "PMS Tracker", key: "pms_tracker" },
-      { name: "API Access", key: "api_access" },
-      { name: "Backoffice Support", key: "backoffice" }
-    ]
-  },
   plan: {
     column1: [
-      { name: "Wealth Builders Plan", key: "wealth_plan" },
-      { name: "Retirement Income Plan", key: "retirement_plan" },
-      { name: "Tax Savings Guide", key: "tax_plan" },
-      { name: "Children Education Plan", key: "education_plan" }
+      { name: "Wealth Builder Journey", key: "wealth_plan" },
+      { name: "Retirement Planning", key: "retirement_plan" },
+      { name: "Tax Saving Investments", key: "tax_plan" },
+      { name: "Children's Future Planning", key: "education_plan" }
     ],
     column2: [
-      { name: "Custom Portfolio Plan", key: "custom_portfolio" },
-      { name: "High Networth (HNI) Wealth", key: "hni_wealth" },
-      { name: "Corporate Treasury Management", key: "corporate_treasury" },
-      { name: "Startup Investment Fund", key: "startup_fund" }
+      { name: "Portfolio Solutions", key: "portfolio_solutions" },
+      { name: "HNI Investment Solutions", key: "hni_wealth" },
+      { name: "Corporate Investment Solutions", key: "corporate_treasury" },
+      { name: "Alternative Investment Opportunities", key: "alternative_opportunities" }
     ]
   }
 };
 
 const PRODUCT_DETAILS = {
   equity: {
-    name: "Equity Investment",
-    title: "Love Equity?",
-    sub: "Whatever your investing style, we have a solution for you!",
-    image: "/equity_bull.png",
-    whyTitle: "Why Choose Asset Aura for Equities?",
-    whyDesc: "Experience seamless equity investing through the trusted Angel One platform with dedicated onboarding assistance, platform support, and access to powerful trading tools.",
-    stats: [
-      { value: "30+", label: "Years of experience" },
-      { value: "9 Lakh+", label: "Registered Customers" },
-      { value: "90+", label: "Own branches" }
-    ],
+    name: "Equity",
+    title: "Equity Trading Through the Angel One Platform",
+    sub: "Invest in India's Leading Companies with Confidence",
+    whyTitle: "Why Invest in Equities?",
+    whyDesc: "Access equity markets through the Angel One platform with support from Asset Aura. We assist you with Demat & Trading Account opening, digital onboarding, and platform guidance, helping you invest in companies listed on the NSE and BSE.",
     points: [
-      "Trusted Angel One Platform: Trade in equities through the secure and technology-driven Angel One platform, with access to NSE & BSE markets.",
-      "Easy Demat & Trading Account Opening: Enjoy a quick, paperless account opening process with complete assistance from the Asset Aura team.",
-      "Advanced Trading Technology: Access real-time market data, advanced charting tools, watchlists, fast order execution, and a seamless mobile & web trading experience.",
-      "Dedicated Platform Support: Receive ongoing assistance with account onboarding, platform navigation, and customer support throughout your investment journey.",
-      "Access to Multiple Investment Products: Explore Equities, ETFs, IPOs, Mutual Funds, Bonds, Derivatives, and other investment opportunities available through the Angel One platform.",
-      "Secure & Transparent Experience: Your investments remain in your own Demat and Trading Account. Asset Aura never requests your trading credentials, OTPs, or direct fund transfers."
-    ]
+      "Invest in NSE & BSE listed companies",
+      "Long-term wealth creation opportunities",
+      "Real-time trading platform",
+      "Advanced charts & market tools",
+      "Secure Demat & Trading Account"
+    ],
+    ctaText: "Open Demat Account"
+  },
+  aif: {
+    name: "Alternative Investment Fund (AIF)",
+    title: "Alternative Investment Funds Through the Angel One Platform",
+    sub: "Explore Alternative Investment Opportunities",
+    whyTitle: "Key Benefits",
+    whyDesc: "Eligible investors can access Alternative Investment Funds (AIFs) through the Angel One platform. These professionally managed funds provide exposure to alternative asset classes beyond traditional investments.",
+    points: [
+      "Diversified investment opportunities",
+      "Professionally managed funds",
+      "Long-term wealth creation",
+      "Access for eligible investors"
+    ],
+    ctaText: "Learn More"
+  },
+  mutual_funds: {
+    name: "Mutual Funds",
+    title: "Mutual Funds Through the Angel One Platform",
+    sub: "Invest for Every Financial Goal",
+    whyTitle: "Benefits",
+    whyDesc: "Access thousands of mutual fund schemes through the Angel One platform. Choose from Equity, Debt, Hybrid, Index, and Thematic Funds while investing through SIP or Lump Sum.",
+    points: [
+      "SIP & Lump Sum Investments",
+      "Goal-based investing",
+      "Professional fund management",
+      "Easy online investing"
+    ],
+    ctaText: "Start SIP"
+  },
+  investment_basket: {
+    name: "Investment Baskets",
+    title: "Curated Investment Baskets",
+    sub: "Diversify with Ready-Made Portfolios",
+    whyTitle: "Benefits",
+    whyDesc: "Investment Baskets available through the Angel One platform help investors diversify by investing in carefully selected groups of stocks based on themes and sectors.",
+    points: [
+      "One-click investing",
+      "Diversified portfolio",
+      "Theme-based strategies",
+      "Easy portfolio management"
+    ],
+    ctaText: "Explore Baskets"
+  },
+  nri: {
+    name: "NRI Investing",
+    title: "NRI Investment Services",
+    sub: "Invest in India from Anywhere",
+    whyTitle: "Available Products",
+    whyDesc: "Asset Aura assists eligible NRIs with account opening and access to investment opportunities through the Angel One platform, subject to applicable regulations.",
+    points: [
+      "Equity",
+      "Mutual Funds",
+      "IPOs",
+      "Fixed Income"
+    ],
+    ctaText: "Open NRI Account"
+  },
+  fixed_income: {
+    name: "Fixed Income (Bonds & FDs)",
+    title: "Bonds & Fixed Income Investments",
+    sub: "Stable Investment Solutions",
+    whyTitle: "Benefits",
+    whyDesc: "Access Fixed Income investment products including Bonds and Fixed Deposits available through the Angel One platform.",
+    points: [
+      "Stable returns",
+      "Capital preservation",
+      "Portfolio diversification",
+      "Regular income opportunities"
+    ],
+    ctaText: "Explore Fixed Income"
   },
   derivatives: {
     name: "Derivatives",
-    title: "Love Futures & Options?",
-    sub: "Whatever your investing style, we have a solution for you!",
-    image: "/derivatives_chart.png",
-    whyTitle: "Why Asset Aura for Derivatives?",
-    whyDesc: "Simple and intuitive derivative trading backed by expert research and low latency tools.",
-    stats: [
-      { value: "Competitive", label: "Brokerage Rates" },
-      { value: "Award-Winning*", label: "Research Advisory" },
-      { value: "Advanced", label: "Derivatives Tools" }
-    ],
+    title: "Futures & Options Trading",
+    sub: "Advanced Trading Through the Angel One Platform",
+    whyTitle: "Platform Features",
+    whyDesc: "Trade Futures & Options using Angel One's advanced trading technology with fast execution and real-time market insights.",
     points: [
-      "Real-time hedging strategies and option chain analytics",
-      "High leverage and margin trading facilities matching industry standards",
-      "Intraday calls and advisory from SEBI-registered analysts"
-    ]
+      "Live market data",
+      "Advanced charting",
+      "Fast order execution",
+      "Risk management tools"
+    ],
+    ctaText: "Start Trading"
   },
-  nri: {
-    name: "NRI",
-    title: "Love investing in emerging India?",
-    sub: "Whatever your investing style, we have a solution for you!",
-    image: "/nri_india.png",
-    whyTitle: "Why Asset Aura for NRI Services?",
-    whyDesc: "Personalized investment strategies for non-resident Indians looking to grow wealth in India.",
-    hasKnowMore: true,
-    stats: [
-      { value: "Global", label: "Reach & Compliance" },
-      { value: "Tailor-Made", label: "Solutions for NRIs" },
-      { value: "Expert", label: "Dedicated NRI Support" }
-    ],
+  ipos: {
+    name: "IPOs",
+    title: "Apply for IPOs Online",
+    sub: "Invest in New Opportunities",
+    whyTitle: "Benefits",
+    whyDesc: "Apply for IPOs digitally through the Angel One platform using a quick and secure online application process.",
     points: [
-      "Assistance with NRE/NRO Demat account opening and banking integration",
-      "Tax-compliant investment advisory and documentation support",
-      "Portfolio management customized for international clients"
-    ]
+      "Online IPO applications",
+      "UPI payments",
+      "Real-time application tracking",
+      "Paperless process"
+    ],
+    ctaText: "Apply for IPO"
+  },
+  pms: {
+    name: "Portfolio Management Services (PMS)",
+    title: "Portfolio Management Services",
+    sub: "Access PMS Through the Angel One Platform",
+    whyTitle: "Benefits",
+    whyDesc: "Eligible investors can access Portfolio Management Services offered through the Angel One platform. These services are managed by SEBI-registered Portfolio Managers based on individual investment objectives and risk profiles.",
+    points: [
+      "Professional portfolio management",
+      "Customized investment approach",
+      "Transparent reporting",
+      "Long-term wealth management"
+    ],
+    ctaText: "Know More"
+  },
+  mtf: {
+    name: "Margin Trading Facility (MTF)",
+    title: "Margin Trading Facility",
+    sub: "Increase Your Buying Power",
+    whyTitle: "Benefits",
+    whyDesc: "The Margin Trading Facility available through the Angel One platform enables eligible investors to buy securities by paying only a portion of the total value, subject to applicable regulations.",
+    points: [
+      "Higher purchasing power",
+      "Flexible funding",
+      "Transparent charges",
+      "Easy online monitoring"
+    ],
+    ctaText: "Explore MTF"
+  },
+  commodity: {
+    name: "Commodity",
+    title: "Commodity Trading",
+    sub: "Trade Commodities Through the Angel One Platform",
+    whyTitle: "Benefits",
+    whyDesc: "Access commodity markets including precious metals, energy, and agricultural commodities using Angel One's secure trading platform.",
+    points: [
+      "Live commodity prices",
+      "Advanced trading tools",
+      "Fast execution",
+      "Secure trading platform"
+    ],
+    ctaText: "Start Commodity Trading"
+  },
+  insurance: {
+    name: "Insurance",
+    title: "Insurance Solutions",
+    sub: "Protect What Matters Most",
+    whyTitle: "Available Products",
+    whyDesc: "Access Life and Health Insurance products through the Angel One platform. Our team helps you understand policy features and complete the onboarding process.",
+    points: [
+      "Life Insurance",
+      "Health Insurance",
+      "Term Plans",
+      "Family Protection Plans"
+    ],
+    ctaText: "Explore Insurance"
+  },
+  wealth_plan: {
+    name: "Wealth Builder Journey",
+    title: "Build Long-Term Wealth Through the Angel One Platform",
+    sub: "Create a Strong Financial Future",
+    whyTitle: "Suitable For",
+    whyDesc: "Whether you're beginning your investment journey or looking to grow your portfolio, Asset Aura helps you access investment opportunities through the Angel One platform. Build wealth over time with equities, mutual funds, ETFs, SIPs, and other investment products that align with your long-term financial goals.",
+    points: [
+      "Young Professionals",
+      "Salaried Individuals",
+      "Business Owners",
+      "First-Time Investors"
+    ],
+    ctaText: "Start Your Wealth Journey"
+  },
+  retirement_plan: {
+    name: "Retirement Planning",
+    title: "Plan Today for a Secure Tomorrow",
+    sub: "Invest for Your Retirement Goals",
+    whyTitle: "Investment Options",
+    whyDesc: "A well-planned retirement strategy helps create financial independence. Through the Angel One platform, you can access investment products designed for long-term wealth accumulation and retirement planning.",
+    points: [
+      "Mutual Funds",
+      "SIPs",
+      "Bonds",
+      "Fixed Income",
+      "Equity Investments"
+    ],
+    ctaText: "Plan Your Retirement"
+  },
+  tax_plan: {
+    name: "Tax Saving Investments",
+    title: "Save Tax While Building Wealth",
+    sub: "Explore Tax-Efficient Investment Options",
+    whyTitle: "Investment Options",
+    whyDesc: "Asset Aura helps clients access eligible tax-saving investment products available through the Angel One platform. Understand available options and invest according to applicable tax laws.",
+    points: [
+      "ELSS Mutual Funds",
+      "Tax-efficient investments",
+      "SIP Investments"
+    ],
+    ctaText: "Explore Tax Saving Investments"
+  },
+  education_plan: {
+    name: "Children's Future Planning",
+    title: "Invest for Your Child's Dreams",
+    sub: "Build a Financial Foundation",
+    whyTitle: "Suitable Goals",
+    whyDesc: "Plan today for your child's education and future aspirations by investing through the Angel One platform.",
+    points: [
+      "Higher Education",
+      "Overseas Studies",
+      "Marriage Planning",
+      "Long-term Savings"
+    ],
+    ctaText: "Start Future Planning"
+  },
+  portfolio_solutions: {
+    name: "Portfolio Solutions",
+    title: "Access Portfolio Solutions Through the Angel One Platform",
+    sub: "Diversified Investment Opportunities",
+    whyTitle: "Benefits",
+    whyDesc: "Eligible investors can access professionally managed portfolio solutions available through the Angel One platform, subject to applicable eligibility criteria.",
+    points: [
+      "Diversification",
+      "Professional management",
+      "Transparent reporting",
+      "Long-term investing"
+    ],
+    ctaText: "Learn More"
+  },
+  hni_wealth: {
+    name: "HNI Investment Solutions",
+    title: "Investment Solutions for High Net Worth Individuals",
+    sub: "Premium Investment Opportunities",
+    whyTitle: "Available Products",
+    whyDesc: "Explore investment products and wealth solutions available for High Net Worth Individuals through the Angel One platform.",
+    points: [
+      "Equity Investments",
+      "PMS (where applicable)",
+      "AIF (where applicable)",
+      "Bonds",
+      "Alternative Investments"
+    ],
+    ctaText: "Connect With Us"
+  },
+  corporate_treasury: {
+    name: "Corporate Investment Solutions",
+    title: "Investment Solutions for Businesses",
+    sub: "Manage Corporate Investments Efficiently",
+    whyTitle: "Available Services",
+    whyDesc: "Asset Aura assists eligible corporate clients in accessing investment products and treasury solutions available through the Angel One platform.",
+    points: [
+      "Corporate Demat Account",
+      "Treasury Investments",
+      "Bonds",
+      "Mutual Funds",
+      "Equity Investments"
+    ],
+    ctaText: "Contact Our Team"
+  },
+  alternative_opportunities: {
+    name: "Alternative Investment Opportunities",
+    title: "Explore Alternative Investments",
+    sub: "Diversify Beyond Traditional Investments",
+    whyTitle: "Investment Opportunities",
+    whyDesc: "Eligible investors can access Alternative Investment opportunities available through the Angel One platform, subject to regulatory guidelines and eligibility requirements.",
+    points: [
+      "Alternative Investment Funds (AIFs)",
+      "Structured Investment Products",
+      "Premium Investment Solutions"
+    ],
+    ctaText: "Explore Opportunities"
   },
   default: {
     name: "Financial Services",
     title: "Premium Investing Solutions",
     sub: "Whatever your investing style, we have a solution for you!",
-    image: "/dashboard.png",
     whyTitle: "Why Invest with Asset Aura?",
     whyDesc: "Elite portfolio management and direct market access backed by SEBI-registered professionals.",
-    stats: [
-      { value: "Elite", label: "Portfolio Management" },
-      { value: "Direct", label: "Market Access" },
-      { value: "SEBI", label: "Registered Advisory" }
-    ],
     points: [
       "Complete transparency and security with funds in your demat account",
       "Data-backed research reports and market-beating strategies",
       "Integrated tools for tracking returns, risk, and goals"
-    ]
+    ],
+    ctaText: "Start Investing"
   }
 };
 
@@ -378,13 +633,12 @@ const ConsultationModal = ({ isOpen, onClose }) => {
 
           {!isSuccess ? (
             <div className="mt-6">
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/15 border border-gold/30 text-gold text-xs font-bold mb-3 uppercase tracking-wider">
-                  <Award className="w-3 h-3 text-gold" /> SEBI Registered Advisory
+                <div className="text-center space-y-2 mb-8">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold text-[9px] font-bold uppercase tracking-wider mb-2">
+                    <Award className="w-3 h-3 text-gold" /> Angel One Ltd. is a SEBI-registered Stock Broker
+                  </div>
+                  <h2 className="text-3xl font-display font-bold text-slate-100">Book Free <span className="gold-gradient-text">Consultation</span></h2>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-white">Book Free <span className="gold-gradient-text">Consultation</span></h3>
-                <p className="text-slate-400 text-xs mt-1">Get customized investment strategies from SEBI-registered professionals.</p>
-              </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
@@ -784,7 +1038,7 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>Support Line: <span className="text-white font-semibold">Support@assetaura.in</span></span>
+                  <span>Support Line: <span className="text-white font-semibold">sardararshpreetsingh@gmail.com</span></span>
                 </div>
               </div>
 
@@ -803,6 +1057,23 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
   const product = PRODUCT_DETAILS[offeringKey] || PRODUCT_DETAILS.default;
   const [phone, setPhone] = useState('');
 
+  const [heroImageIdx, setHeroImageIdx] = useState(0);
+  const heroImages = [
+    '/1.jpeg',
+    '/2.jpeg',
+    '/3.jpeg',
+    '/4.jpeg',
+    '/5.jpeg',
+    '/6.jpeg'
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroImageIdx((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [heroImages.length]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (phone.length === 10 && /^\d+$/.test(phone)) {
@@ -816,22 +1087,26 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
   return (
     <div className="relative pt-24 pb-16 px-6 md:px-12 bg-slate-950 text-slate-200 z-10">
       <div className="max-w-7xl mx-auto">
-        {/* Breadcrumbs */}
-        <div className="flex items-center gap-1.5 text-xs text-slate-500 py-4 font-semibold">
-          <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-gold transition-colors">Home</a>
-          <span>&gt;</span>
-          <span className="text-slate-200">{product.name}</span>
-        </div>
+
 
         {/* Hero Grid */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center pt-6">
           {/* Left: Content */}
           <div className="lg:col-span-7 text-left space-y-6">
-            <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-tight text-gold">
-                {product.title}
+            <div className="space-y-6 mb-8 relative">
+              <div className="absolute -left-6 top-0 w-1 h-full bg-gradient-to-b from-gold via-gold/50 to-transparent rounded-r-full hidden md:block"></div>
+              
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/20 text-gold text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+                <Star className="w-3.5 h-3.5" /> {product.name}
+              </div>
+              
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-display font-black leading-tight tracking-tight">
+                {product.title.split(' ').map((word, i) => (
+                  i < 2 ? <span key={i} className="gold-gradient-text">{word} </span> : <span key={i} className="text-black font-black">{word} </span>
+                ))}
               </h1>
-              <p className="text-base sm:text-lg text-slate-300 font-sans">
+              
+              <p className="text-base sm:text-lg text-slate-600 font-sans leading-relaxed">
                 {product.sub}
               </p>
             </div>
@@ -859,7 +1134,7 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
                     type="submit"
                     className="px-5 py-2.5 bg-gold hover:bg-gold-dark text-slate-50 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
                   >
-                    Start Investing
+                    {product.ctaText || "Start Investing"}
                   </button>
                 </div>
               </form>
@@ -875,14 +1150,16 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
             )}
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 border-t border-slate-800 pt-8 mt-8">
-              {product.stats.map((stat, i) => (
-                <div key={i} className="text-left border-r border-slate-800 last:border-none pr-4">
-                  <div className="text-lg sm:text-xl md:text-2xl font-display font-black text-gold leading-none">{stat.value}</div>
-                  <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1.5 leading-tight">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+            {product.stats && product.stats.length > 0 && (
+              <div className="grid grid-cols-3 gap-4 border-t border-slate-800 pt-8 mt-8">
+                {product.stats.map((stat, i) => (
+                  <div key={i} className="text-left border-r border-slate-800 last:border-none pr-4">
+                    <div className="text-lg sm:text-xl md:text-2xl font-display font-black text-gold leading-none">{stat.value}</div>
+                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1.5 leading-tight">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Value propositions */}
             <div className="border-t border-slate-800 pt-8 space-y-4">
@@ -904,28 +1181,62 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
           </div>
 
           {/* Right: Graphic and QR Code */}
-          <div className="lg:col-span-5 flex flex-col items-center gap-6 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 p-2 max-w-[420px] w-full">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="rounded-2xl w-full h-auto object-cover"
-              />
-            </div>
-
-            {/* Floating QR Code */}
-            <div className="bg-slate-950 border border-slate-700 p-4 rounded-xl shadow-lg flex items-center gap-4 max-w-xs self-center lg:self-end">
-              <div className="w-16 h-16 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center p-1.5 shrink-0">
-                <svg className="w-full h-full text-slate-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 3h6v6H3V3zM15 3h6v6h-6V3zM3 15h6v6H3v-6zM18 15h3M15 18h3M18 21h3M15 15h3M21 18v3" />
-                </svg>
-              </div>
-              <div className="text-left space-y-1">
-                <div className="text-[10px] font-bold text-slate-200 uppercase tracking-wider">Fast Access</div>
-                <p className="text-[9px] text-slate-400 leading-tight">Scan QR code to instantly open your Demat account.</p>
+          <div className="lg:col-span-5 relative mt-8 lg:mt-0 flex justify-center items-center">
+            <div className="relative mx-auto max-w-md lg:max-w-none flex flex-col items-center sm:flex-row lg:flex-col xl:flex-row gap-6 justify-center w-full">
+              {/* Hero Image Slider */}
+              <div className="relative overflow-hidden shadow-2xl shadow-slate-950/80 rounded-2xl w-full max-w-[450px] sm:max-w-[550px] md:max-w-[650px] lg:max-w-[750px] xl:max-w-[850px] shrink-0 aspect-[4/5] sm:aspect-[4/3] bg-slate-900 border border-slate-800">
+                <AnimatePresence>
+                  <motion.img
+                    key={heroImageIdx}
+                    src={heroImages[heroImageIdx]}
+                    alt="Asset Aura Features"
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </AnimatePresence>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Common Section: Why Asset Aura? */}
+        <div className="border-t border-slate-800/80 pt-16 mt-8">
+          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto items-center">
+            <div className="space-y-4">
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-100">Why Choose Asset Aura?</h2>
+              <p className="text-sm md:text-base text-slate-400 leading-relaxed">
+                As an Authorized Person/Sub-Broker of Angel One, Asset Aura provides seamless access to investment products available through the Angel One platform. Our team assists with account opening, digital onboarding, platform navigation, and customer support, helping you invest with confidence.
+              </p>
+            </div>
+            <div className="space-y-5 bg-slate-900/50 p-6 md:p-8 rounded-2xl border border-slate-800">
+              <ul className="grid grid-cols-1 gap-4 text-sm font-medium text-slate-300">
+                <li className="flex items-start gap-2.5"><Check className="w-4 h-4 text-gold shrink-0 mt-0.5"/> <span>Authorized Person/Sub-Broker of Angel One</span></li>
+                <li className="flex items-start gap-2.5"><Check className="w-4 h-4 text-gold shrink-0 mt-0.5"/> <span>Quick Digital Demat & Trading Account Opening</span></li>
+                <li className="flex items-start gap-2.5"><Check className="w-4 h-4 text-gold shrink-0 mt-0.5"/> <span>Secure Angel One Platform Access</span></li>
+                <li className="flex items-start gap-2.5"><Check className="w-4 h-4 text-gold shrink-0 mt-0.5"/> <span>Dedicated Onboarding Assistance</span></li>
+                <li className="flex items-start gap-2.5"><Check className="w-4 h-4 text-gold shrink-0 mt-0.5"/> <span>Investor Education & Platform Guidance</span></li>
+                <li className="flex items-start gap-2.5"><Check className="w-4 h-4 text-gold shrink-0 mt-0.5"/> <span>Trusted Customer Support</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Common CTA */}
+        <div className="mt-16 bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto space-y-6 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />
+          <h2 className="text-2xl md:text-4xl font-display font-bold text-white">Start Your Investment Journey Today</h2>
+          <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Open your Demat & Trading Account through the Angel One platform with assistance from Asset Aura and explore investment opportunities designed to support your financial goals.
+          </p>
+          <button
+            onClick={() => setIsDematModalOpen(true)}
+            className="inline-flex items-center justify-center px-8 py-4 bg-gold hover:bg-gold-dark text-slate-950 rounded-full font-bold text-sm shadow-lg shadow-gold/20 transition-all hover:scale-105 active:scale-95 gap-2 mt-4"
+          >
+            Open Demat Account
+          </button>
         </div>
       </div>
     </div>
@@ -1159,10 +1470,10 @@ const ContactUsPage = ({ setIsModalOpen }) => {
                 },
                 {
                   title: "Email",
-                  desc: "hrassetaura@gmail.com",
+                  desc: "sardararshpreetsingh@gmail.com",
                   sub: "For general inquiries",
                   icon: Mail,
-                  href: "mailto:hrassetaura@gmail.com"
+                  href: "mailto:sardararshpreetsingh@gmail.com"
                 },
                 {
                   title: "Address",
@@ -1450,6 +1761,24 @@ export default function App() {
   // Testimonials Carousel state
   const [testimonialIdx, setTestimonialIdx] = useState(0);
 
+  // Hero Image Slider state
+  const [heroImageIdx, setHeroImageIdx] = useState(0);
+  const heroImages = [
+    '/1.jpeg',
+    '/2.jpeg',
+    '/3.jpeg',
+    '/4.jpeg',
+    '/5.jpeg',
+    '/6.jpeg'
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroImageIdx((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [heroImages.length]);
+
   // Handle header background transition on scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -1510,14 +1839,8 @@ export default function App() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-700/70 transition-all duration-300 px-6 md:px-12 py-3.5 flex items-center justify-between gap-4 lg:gap-8 shadow-sm">
         {/* Left: Brand Logo */}
         <div className="flex-1 flex items-center justify-start">
-          <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center gap-3 sm:gap-4 select-none shrink-0 group">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-xl flex items-center justify-center shrink-0 bg-white">
-              <img src="/asset.jpeg" alt="Asset Aura Logo" className="w-full h-full object-cover scale-[1.55]" />
-            </div>
-            <div className="flex flex-col items-start leading-tight">
-              <span className="font-display font-extrabold tracking-widest text-base sm:text-lg uppercase gold-gradient-text">ASSET AURA</span>
-              <span className="text-[6px] sm:text-[7.5px] tracking-[0.22em] uppercase font-sans font-extrabold text-slate-400 group-hover:text-gold transition-colors">Investment Services</span>
-            </div>
+          <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center select-none shrink-0 group">
+            <img src="/assetlogo.jpeg" alt="Asset Aura Logo" className="h-16 sm:h-20 w-auto object-contain scale-[1.3] sm:scale-[1.4] origin-left mix-blend-multiply" />
           </a>
         </div>
 
@@ -1560,7 +1883,6 @@ export default function App() {
                   <div className="flex gap-2 border-b border-slate-100 pb-3 mb-4">
                     {[
                       { id: 'product', label: 'Product' },
-                      { id: 'platform', label: 'Platform' },
                       { id: 'plan', label: 'Plan' }
                     ].map((tab) => (
                       <button
@@ -1815,13 +2137,20 @@ export default function App() {
                   transition={{ duration: 1, delay: 0.2 }}
                   className="relative mx-auto max-w-md lg:max-w-none flex flex-col items-center sm:flex-row lg:flex-col xl:flex-row gap-6 justify-center"
                 >
-                  {/* Shaking Hands Image */}
-                  <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-slate-950/80 bg-slate-950/10 p-2 max-w-[340px] shrink-0">
-                    <img
-                      src="/handshake_partners.png"
-                      alt="Asset Aura Shaking Hands Partnership"
-                      className="w-full h-auto rounded-2xl opacity-90 border border-white/5"
-                    />
+                  {/* Hero Image Slider */}
+                  <div className="relative overflow-hidden shadow-2xl shadow-slate-950/80 rounded-2xl w-full max-w-[450px] sm:max-w-[550px] md:max-w-[650px] lg:max-w-[750px] xl:max-w-[850px] shrink-0 aspect-[4/5] sm:aspect-[4/3]">
+                    <AnimatePresence>
+                      <motion.img
+                        key={heroImageIdx}
+                        src={heroImages[heroImageIdx]}
+                        alt="Asset Aura Hero"
+                        initial={{ opacity: 0, y: -80 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 80 }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                      />
+                    </AnimatePresence>
                   </div>
 
 
@@ -2529,11 +2858,8 @@ export default function App() {
 
             {/* Column 1: Info */}
             <div className="lg:col-span-5 space-y-4">
-              <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center gap-3 sm:gap-4 select-none mb-4">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-xl flex items-center justify-center shrink-0 bg-white">
-                  <img src="/asset.jpeg" alt="Asset Aura Logo" className="w-full h-full object-cover scale-[1.55]" />
-                </div>
-                <span className="text-lg font-display font-extrabold text-white">Asset Aura</span>
+              <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); window.scrollTo(0,0); }} className="inline-block select-none mb-4">
+                <img src="/assetlogo.jpeg" alt="Asset Aura Logo" className="h-20 sm:h-28 w-auto object-contain scale-[1.3] sm:scale-[1.4] origin-left mix-blend-multiply" />
               </a>
               <p className="text-slate-500 text-xs leading-relaxed max-w-sm">
                 <strong className="text-slate-400">About Asset Aura</strong><br />
@@ -2541,10 +2867,9 @@ export default function App() {
               </p>
               <div className="flex gap-2">
                 {[
-                  { Icon: Twitter, link: "#" },
+                  { Icon: Facebook, link: "https://www.facebook.com/share/1DTQufEsoD/?mibextid=wwXIfr" },
                   { Icon: Linkedin, link: "https://www.linkedin.com/in/asset-aura-84267b411/?trk=public-profile-join-page" },
-                  { Icon: Instagram, link: "https://www.instagram.com/assetaura_?igsh=MTZkc2ZhMGhzbnNzag%3D%3D&utm_source=qr" },
-                  { Icon: Facebook, link: "#" }
+                  { Icon: Instagram, link: "https://www.instagram.com/assetaura_?igsh=MTZkc2ZhMGhzbnNzag%3D%3D&utm_source=qr" }
                 ].map((item, i) => (
                   <a
                     key={i}
@@ -2591,7 +2916,7 @@ export default function App() {
               <ul className="space-y-2 text-xs text-slate-500 font-semibold">
                 <li className="flex items-center gap-2">
                   <Mail className="w-3.5 h-3.5 text-gold shrink-0" />
-                  <a href="mailto:Hrassetaura@gmail.com" className="text-slate-400 hover:text-gold transition-colors">Hrassetaura@gmail.com</a>
+                  <a href="mailto:sardararshpreetsingh@gmail.com" className="text-slate-400 hover:text-gold transition-colors">sardararshpreetsingh@gmail.com</a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5 text-gold shrink-0" />
@@ -2612,8 +2937,8 @@ export default function App() {
           {/* Detailed compliance regulatory disclosures */}
           <div className="pt-8 border-t border-white/5 space-y-4 text-[10px] text-slate-600 leading-relaxed">
             <p>
-              <strong className="text-slate-400">Footer Disclaimer:</strong><br />
-              Asset Aura is an Authorized Person/Sub-Broker of Angel One. We facilitate access to financial products and services available through the Angel One platform. Investments in securities and mutual funds are subject to market risks. Please read all related documents carefully before investing.
+              <strong className="text-slate-400">Common Disclaimer:</strong><br />
+              Investments in securities market are subject to market risk, read all the related documents carefully before investing. We collect, retain, and use your contact information for legitimate business purposes only, to contact you and to provide you information & latest updates regarding our products & services. We do not sell or rent your contact information to third parties. Please note that by submitting the above-mentioned details, you are authorizing us to Call/SMS you even though you may be registered under DND. We shall Call/SMS you for a period of 12 months. Brokerage will not exceed the SEBI prescribed limit.
             </p>
           </div>
 
