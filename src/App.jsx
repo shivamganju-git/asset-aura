@@ -2089,7 +2089,7 @@ export default function App() {
           {/* Open MF A/C */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="hidden sm:inline-block px-4 py-2 bg-slate-950 border border-slate-700 hover:border-slate-650 text-slate-200 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all"
+            className="hidden sm:inline-block px-4 py-2 bg-slate-950 border border-slate-200 hover:border-slate-300 text-slate-200 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all"
           >
             Open MF A/C
           </button>
@@ -2097,7 +2097,7 @@ export default function App() {
           {/* Partner Program Button */}
           <button 
             onClick={() => setIsPartnerModalOpen(true)}
-            className="px-4 py-2 border border-slate-700 text-slate-200 hover:text-gold hover:border-gold rounded-md text-[10px] font-bold uppercase tracking-wider transition-all shrink-0"
+            className="px-4 py-2 bg-slate-950 border border-slate-200 text-slate-200 hover:text-gold hover:border-gold rounded-md text-[10px] font-bold uppercase tracking-wider transition-all shrink-0"
           >
             Partner Program
           </button>
