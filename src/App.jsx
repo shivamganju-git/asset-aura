@@ -1966,7 +1966,7 @@ export default function App() {
       <PartnerProgramModal isOpen={isPartnerModalOpen} onClose={() => setIsPartnerModalOpen(false)} />
 
       {/* Redesigned Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-700/70 transition-all duration-300 px-6 md:px-12 py-3.5 flex items-center justify-between gap-4 lg:gap-8 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-700/70 transition-all duration-300 px-4 md:px-6 xl:px-12 py-3.5 flex items-center justify-between gap-4 shadow-sm">
         {/* Left: Brand Logo */}
         <div className="flex-1 flex items-center justify-start">
           <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center select-none shrink-0 group">
@@ -1977,7 +1977,7 @@ export default function App() {
         </div>
 
         {/* Center: Navigation Links */}
-        <nav className="hidden lg:flex items-center justify-center gap-8 xl:gap-12 relative">
+        <nav className="hidden lg:flex items-center justify-center gap-4 xl:gap-10 relative">
           <button onClick={() => { setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className={cn("hover:text-gold transition-colors text-xs font-bold uppercase tracking-wider flex items-center gap-1 shrink-0", currentPage === 'home' && !activeOffering ? "text-gold" : "text-slate-200")}>
             Home
           </button>
@@ -2072,7 +2072,7 @@ export default function App() {
         </nav>
 
         {/* Right: Actions */}
-        <div className="flex-1 flex items-center justify-end gap-1.5 shrink-0">
+        <div className="flex-1 flex items-center justify-end gap-1.5">
           {/* Search */}
           <button className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-50 transition-all shrink-0">
             <Search className="w-4 h-4" />
