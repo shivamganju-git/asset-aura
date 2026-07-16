@@ -1391,11 +1391,9 @@ const BlogDetail = ({ blog, onBack }) => {
             />
           </div>
 
-          <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings:text-gold prose-a:text-gold">
+          <div className="blog-content-html prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings:text-gold prose-a:text-gold">
             {blog.content ? (
-              blog.content.split('\n\n').map((paragraph, idx) => (
-                <p key={idx} className="text-slate-300 leading-relaxed mb-6">{paragraph}</p>
-              ))
+              <div dangerouslySetInnerHTML={{ __html: blog.content }} />
             ) : (
               <p className="text-slate-300 leading-relaxed mb-6">{blog.excerpt}</p>
             )}
