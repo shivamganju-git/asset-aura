@@ -1097,6 +1097,90 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
   );
 };
 
+const PartnerProgramModal = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+    }, 1200);
+  };
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="absolute inset-0 bg-slate-950/85 backdrop-blur-md"
+          onClick={onClose}
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 30 }}
+          className="relative w-full max-w-xl glass-card border-white/10 bg-slate-900/95 shadow-2xl p-6 md:p-8 overflow-hidden z-10"
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors bg-white/5 p-2 rounded-full border border-white/5 hover:border-white/20"
+          >
+            <X className="w-4 h-4" />
+          </button>
+          
+          {!isSuccess ? (
+            <div className="mt-2 text-center">
+              <h2 className="text-3xl font-display font-bold text-slate-100 mb-4">Grow Your Business with <br/><span className="gold-gradient-text">Asset Aura</span></h2>
+              <p className="text-slate-300 text-sm mb-8 leading-relaxed">
+                Join our Partner Program and unlock opportunities to earn by referring clients for Demat accounts, investment products, and financial services. Benefit from dedicated support, digital tools, and a trusted financial ecosystem.
+              </p>
+
+              <form onSubmit={handleSubmit} className="space-y-4 text-left">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-300">Full Name</label>
+                    <input type="text" required placeholder="e.g. John Doe" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-300">Phone Number</label>
+                    <input type="tel" required pattern="[0-9]{10}" placeholder="e.g. 9988988208" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs" />
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-slate-300">Email Address</label>
+                  <input type="email" required placeholder="e.g. partner@example.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs" />
+                </div>
+                <button type="submit" disabled={isSubmitting} className="w-full bg-gold hover:bg-gold-dark text-slate-50 py-3.5 mt-2 rounded-xl font-bold uppercase tracking-wider text-xs shadow-lg shadow-gold/20 flex items-center justify-center gap-2">
+                  {isSubmitting ? 'Submitting...' : 'Become a Partner'}
+                </button>
+              </form>
+            </div>
+          ) : (
+            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center py-8 space-y-4">
+              <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+              </div>
+              <h3 className="text-2xl font-display font-bold text-white">Application Received!</h3>
+              <p className="text-slate-300 text-sm max-w-sm mx-auto leading-relaxed">
+                Thank you for your interest in the Asset Aura Partner Program, <span className="text-white font-bold">{formData.name}</span>. Our team will contact you shortly.
+              </p>
+              <button onClick={onClose} className="border border-slate-700 text-slate-200 hover:text-white hover:bg-slate-800 w-full py-3 mt-4 text-xs font-bold rounded-xl transition-all">Close</button>
+            </motion.div>
+          )}
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+};
+
 const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, setPrefilledPhone }) => {
   const product = PRODUCT_DETAILS[offeringKey] || PRODUCT_DETAILS.default;
   const [phone, setPhone] = useState('');
@@ -1753,6 +1837,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDematModalOpen, setIsDematModalOpen] = useState(false);
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const [activeOffering, setActiveOffering] = useState(null);
@@ -1878,6 +1963,7 @@ export default function App() {
 
       <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <DematAccountModal isOpen={isDematModalOpen} onClose={() => { setIsDematModalOpen(false); setPrefilledPhone(''); }} prefilledPhone={prefilledPhone} />
+      <PartnerProgramModal isOpen={isPartnerModalOpen} onClose={() => setIsPartnerModalOpen(false)} />
 
       {/* Redesigned Navbar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-700/70 transition-all duration-300 px-6 md:px-12 py-3.5 flex items-center justify-between gap-4 lg:gap-8 shadow-sm">
@@ -2008,9 +2094,12 @@ export default function App() {
             Open MF A/C
           </button>
 
-          {/* Login Button */}
-          <button className="px-4 py-2 border border-slate-700 text-slate-200 hover:text-gold hover:border-gold rounded-md text-[10px] font-bold uppercase tracking-wider transition-all shrink-0">
-            LOGIN
+          {/* Partner Program Button */}
+          <button 
+            onClick={() => setIsPartnerModalOpen(true)}
+            className="px-4 py-2 border border-slate-700 text-slate-200 hover:text-gold hover:border-gold rounded-md text-[10px] font-bold uppercase tracking-wider transition-all shrink-0"
+          >
+            Partner Program
           </button>
         </div>
       </header>
