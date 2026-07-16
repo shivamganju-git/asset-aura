@@ -40,7 +40,9 @@ import {
   Layers,
   MapPin,
   Clock,
-  BriefcaseBusiness
+  BriefcaseBusiness,
+  Target,
+  Leaf
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -48,6 +50,48 @@ import { twMerge } from 'tailwind-merge';
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
+
+const AssetAuraLogo = ({ className = "" }) => (
+  <div className={`flex items-center gap-3 sm:gap-4 ${className}`}>
+    {/* Left Icon Image */}
+    <img src="/asset9.jpeg" alt="Asset Aura Icon" className="h-14 sm:h-16 w-auto object-contain mix-blend-multiply shrink-0" />
+
+    {/* Vertical divider */}
+    <div className="w-[1.5px] h-12 sm:h-14 bg-slate-300 rounded-full shrink-0"></div>
+
+    {/* Text */}
+    <div className="flex flex-col items-center justify-center gap-[2px]">
+      <div className="flex items-baseline gap-1.5 leading-none">
+        <span className="text-[22px] sm:text-[28px] font-black tracking-normal bg-clip-text text-transparent bg-gradient-to-r from-[#1e3b12] via-[#447833] to-[#1e3b12]" style={{ fontFamily: 'Arial, sans-serif' }}>ASSET</span>
+        <span className="text-[22px] sm:text-[28px] font-black tracking-normal bg-clip-text text-transparent bg-gradient-to-r from-[#a37910] via-[#d4af37] to-[#a37910]" style={{ fontFamily: 'Arial, sans-serif' }}>AURA</span>
+      </div>
+      
+      <div className="flex items-center gap-1.5 w-full mt-0.5">
+        <div className="h-[1.5px] bg-[#447833] flex-1"></div>
+        <span className="text-[8px] sm:text-[10px] font-bold tracking-[0.18em] text-[#447833] leading-none whitespace-nowrap" style={{ fontFamily: 'Arial, sans-serif' }}>
+          INVESTMENT SERVICES
+        </span>
+        <div className="h-[1.5px] bg-[#447833] flex-1"></div>
+      </div>
+
+      <div className="flex items-center gap-1.5 w-full">
+        <div className="h-[1px] bg-[#d4af37] flex-1 opacity-60"></div>
+        <span className="text-[5.5px] sm:text-[7px] font-bold tracking-[0.15em] text-[#666666] leading-none whitespace-nowrap uppercase" style={{ fontFamily: 'Arial, sans-serif' }}>
+          Aura that creates appreciating assets
+        </span>
+        <div className="h-[1px] bg-[#d4af37] flex-1 opacity-60"></div>
+      </div>
+      
+      <div className="flex items-center gap-1 sm:gap-2 text-[5px] sm:text-[6.5px] font-bold text-[#447833] whitespace-nowrap uppercase tracking-widest justify-between w-full mt-0.5">
+        <span className="flex items-center gap-0.5"><Target className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#447833]" /> PLAN SMART</span>
+        <span className="text-[#447833]/40">|</span>
+        <span className="flex items-center gap-0.5"><BarChart3 className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#447833]" /> INVEST WISE</span>
+        <span className="text-[#447833]/40">|</span>
+        <span className="flex items-center gap-0.5"><Leaf className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#447833]" /> GROW TOGETHER</span>
+      </div>
+    </div>
+  </div>
+);
 
 const HighlightText = ({ text }) => {
   if (!text) return null;
@@ -1102,11 +1146,11 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
               
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-display font-black leading-tight tracking-tight">
                 {product.title.split(' ').map((word, i) => (
-                  i < 2 ? <span key={i} className="gold-gradient-text">{word} </span> : <span key={i} className="text-black font-black">{word} </span>
+                  i < 2 ? <span key={i} className="gold-gradient-text">{word} </span> : <span key={i} className="text-white font-black">{word} </span>
                 ))}
               </h1>
               
-              <p className="text-base sm:text-lg text-slate-600 font-sans leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-300 font-sans leading-relaxed">
                 {product.sub}
               </p>
             </div>
@@ -1840,7 +1884,9 @@ export default function App() {
         {/* Left: Brand Logo */}
         <div className="flex-1 flex items-center justify-start">
           <a href="#" onClick={(e) => { e.preventDefault(); setActiveOffering(null); setIsOfferingsOpen(false); setCurrentPage('home'); window.scrollTo(0,0); }} className="flex items-center select-none shrink-0 group">
-            <img src="/assetlogo.jpeg" alt="Asset Aura Logo" className="h-16 sm:h-20 w-auto object-contain scale-[1.3] sm:scale-[1.4] origin-left mix-blend-multiply" />
+            <div className="origin-left">
+              <AssetAuraLogo />
+            </div>
           </a>
         </div>
 
@@ -1909,6 +1955,7 @@ export default function App() {
                           onClick={() => {
                             setActiveOffering(item.key);
                             setIsOfferingsOpen(false);
+                            window.scrollTo(0,0);
                           }}
                           className="w-full text-left text-xs font-semibold text-slate-200 hover:text-gold transition-colors py-0.5 block"
                         >
@@ -1923,6 +1970,7 @@ export default function App() {
                           onClick={() => {
                             setActiveOffering(item.key);
                             setIsOfferingsOpen(false);
+                            window.scrollTo(0,0);
                           }}
                           className="w-full text-left text-xs font-semibold text-slate-200 hover:text-gold transition-colors py-0.5 block"
                         >
@@ -2168,13 +2216,16 @@ export default function App() {
             {/* Offerings Grid Content */}
             <div className="mt-12 grid md:grid-cols-2 gap-6 lg:gap-8">
               {/* Card 1: PMS */}
-              <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
+              <div 
+                onClick={() => { setActiveOffering('pms'); window.scrollTo(0,0); }}
+                className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30 cursor-pointer group"
+              >
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                     <Briefcase className="text-gold w-6 h-6" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl md:text-2xl font-bold text-white">Portfolio Management Services (PMS)</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-gold transition-colors">Portfolio Management Services (PMS)</h3>
                     <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
                       Access professionally managed Portfolio Management Services (PMS) through the Angel One platform. These portfolios are managed by SEBI-registered Portfolio Managers and are customized according to your financial goals and risk profile. Your investments remain in your own Demat and bank accounts, and all services are delivered in accordance with applicable SEBI regulations.
                     </p>
@@ -2183,13 +2234,16 @@ export default function App() {
               </div>
 
               {/* Card 2: Mutual Funds */}
-              <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
+              <div 
+                onClick={() => { setActiveOffering('mutual_funds'); window.scrollTo(0,0); }}
+                className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30 cursor-pointer group"
+              >
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                     <Activity className="text-gold w-6 h-6" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl md:text-2xl font-bold text-white">Mutual Funds, SIPs, SWPs & STPs</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-gold transition-colors">Mutual Funds, SIPs, SWPs & STPs</h3>
                     <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
                       Invest in a comprehensive range of Mutual Funds, SIPs, SWPs, and STPs through the Angel One platform. We help you understand various fund categories—including Equity, Debt, Hybrid, Index, and Thematic Funds—and assist you in selecting investment options that align with your financial objectives. Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.
                     </p>
@@ -2198,13 +2252,16 @@ export default function App() {
               </div>
 
               {/* Card 3: Stocks */}
-              <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
+              <div 
+                onClick={() => { setActiveOffering('equity'); window.scrollTo(0,0); }}
+                className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30 cursor-pointer group"
+              >
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                     <LineChart className="text-gold w-6 h-6" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl md:text-2xl font-bold text-white">Stocks & Equity Markets</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-gold transition-colors">Stocks & Equity Markets</h3>
                     <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
                       Trade and invest in equities through the Angel One platform, with access to the NSE and BSE. We assist you with Demat account opening, onboarding, and platform guidance, while Angel One provides the trading infrastructure, research tools, and order execution. Investments in the stock market are subject to market risks.
                     </p>
@@ -2213,13 +2270,16 @@ export default function App() {
               </div>
 
               {/* Card 4: Insurance */}
-              <div className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30">
+              <div 
+                onClick={() => { setActiveOffering('insurance'); window.scrollTo(0,0); }}
+                className="glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between space-y-6 text-left border-white/5 bg-slate-900/30 cursor-pointer group"
+              >
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                     <ShieldCheck className="text-gold w-6 h-6" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl md:text-2xl font-bold text-white">Insurance Solutions</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-gold transition-colors">Insurance Solutions</h3>
                     <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
                       Access a range of Life and Health Insurance products through the Angel One platform. We help you understand policy features, benefits, coverage, and documentation, enabling you to make informed insurance decisions as part of your overall financial planning. Insurance products are regulated by IRDAI and are subject to the terms and conditions of the respective insurers.
                     </p>
@@ -2848,10 +2908,10 @@ export default function App() {
 
             {/* Column 1: Info */}
             <div className="lg:col-span-5 space-y-4">
-              <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); window.scrollTo(0,0); }} className="inline-block select-none mb-4">
-                <img src="/assetlogo.jpeg" alt="Asset Aura Logo" className="h-20 sm:h-28 w-auto object-contain scale-[1.3] sm:scale-[1.4] origin-left mix-blend-multiply" />
-              </a>
-              <p className="text-slate-500 text-xs leading-relaxed max-w-sm">
+              <div className="origin-left mb-6">
+                <AssetAuraLogo className="scale-110 sm:scale-125 origin-left" />
+              </div>
+              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm mt-4">
                 <strong className="text-slate-400">About Asset Aura</strong><br />
                 Asset Aura is an Authorized Person/Sub-Broker of Angel One, providing seamless access to the Angel One platform. We assist clients with Demat & Trading Account opening, onboarding, platform support, and access to a wide range of financial products, including Equities, Mutual Funds, ETFs, IPOs, Derivatives, Insurance, and other investment solutions available through the Angel One platform.
               </p>
@@ -2873,22 +2933,22 @@ export default function App() {
             </div>
 
             {/* Column 2: Links */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-4 relative z-20">
               <h4 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400">Offerings</h4>
               <ul className="space-y-2.5 text-xs text-slate-500 font-semibold">
-                <li><a href="#offerings" className="hover:text-gold transition-colors">Equity Trading</a></li>
-                <li><a href="#offerings" className="hover:text-gold transition-colors">Mutual Funds</a></li>
-                <li><a href="#offerings" className="hover:text-gold transition-colors">ETFs & IPOs</a></li>
-                <li><a href="#offerings" className="hover:text-gold transition-colors">Futures & Options</a></li>
-                <li><a href="#offerings" className="hover:text-gold transition-colors">Insurance Solutions</a></li>
-                <li><a href="#offerings" className="hover:text-gold transition-colors">Bonds & Fixed Income</a></li>
-                <li><a href="#demat-onboarding" className="hover:text-gold transition-colors">Demat & Trading Account</a></li>
-                <li><a href="#education" className="hover:text-gold transition-colors">Investor Education</a></li>
+                <li><button onClick={() => { setActiveOffering('equity'); setCurrentPage('home'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors text-left cursor-pointer w-full">Equity Trading</button></li>
+                <li><button onClick={() => { setActiveOffering('mutual_funds'); setCurrentPage('home'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors text-left cursor-pointer w-full">Mutual Funds</button></li>
+                <li><button onClick={() => { setActiveOffering('ipos'); setCurrentPage('home'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors text-left cursor-pointer w-full">ETFs & IPOs</button></li>
+                <li><button onClick={() => { setActiveOffering('derivatives'); setCurrentPage('home'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors text-left cursor-pointer w-full">Futures & Options</button></li>
+                <li><button onClick={() => { setActiveOffering('insurance'); setCurrentPage('home'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors text-left cursor-pointer w-full">Insurance Solutions</button></li>
+                <li><button onClick={() => { setActiveOffering('fixed_income'); setCurrentPage('home'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors text-left cursor-pointer w-full">Bonds & Fixed Income</button></li>
+                <li><button onClick={() => { setActiveOffering(null); setCurrentPage('home'); setTimeout(() => document.getElementById('demat-onboarding')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-gold transition-colors text-left cursor-pointer w-full">Demat & Trading Account</button></li>
+                <li><button onClick={() => { setActiveOffering(null); setCurrentPage('home'); setTimeout(() => document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-gold transition-colors text-left cursor-pointer w-full">Investor Education</button></li>
               </ul>
             </div>
 
             {/* Column 3: Legal */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-4 relative z-20">
               <h4 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400">Company</h4>
               <ul className="space-y-2.5 text-xs text-slate-500 font-semibold">
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); window.scrollTo(0,0); }} className="hover:text-gold transition-colors">About Asset Aura</a></li>
@@ -2901,7 +2961,7 @@ export default function App() {
             </div>
 
             {/* Column 4: Contact */}
-            <div className="lg:col-span-3 space-y-4">
+            <div className="lg:col-span-3 space-y-4 relative z-20">
               <h4 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400">Contact</h4>
               <ul className="space-y-2 text-xs text-slate-500 font-semibold">
                 <li className="flex items-center gap-2">
