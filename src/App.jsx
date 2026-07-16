@@ -2081,7 +2081,7 @@ export default function App() {
           {/* Open Demat A/C */}
           <button
             onClick={() => setIsDematModalOpen(true)}
-            className="hidden sm:inline-block px-4 py-2 bg-gold hover:bg-gold-dark text-slate-50 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all"
+            className="hidden sm:inline-block px-4 py-2 bg-gold hover:bg-gold-dark text-slate-50 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all shrink-0 whitespace-nowrap"
           >
             Open Demat A/C
           </button>
@@ -2089,7 +2089,7 @@ export default function App() {
           {/* Open MF A/C */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="hidden sm:inline-block px-4 py-2 bg-slate-950 border border-slate-700 hover:border-slate-650 text-slate-200 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all"
+            className="hidden sm:inline-block px-4 py-2 bg-slate-950 border border-slate-700 hover:border-slate-650 text-slate-200 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all shrink-0 whitespace-nowrap"
           >
             Open MF A/C
           </button>
@@ -2097,7 +2097,7 @@ export default function App() {
           {/* Partner Program Button */}
           <button 
             onClick={() => setIsPartnerModalOpen(true)}
-            className="hidden sm:inline-block px-4 py-2 bg-slate-950 border border-slate-700 hover:border-slate-650 text-slate-200 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all shrink-0"
+            className="hidden sm:inline-block px-4 py-2 bg-slate-950 border border-slate-700 hover:border-slate-650 text-slate-200 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-sm transition-all shrink-0 whitespace-nowrap"
           >
             Partner Program
           </button>
