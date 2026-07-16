@@ -243,61 +243,10 @@ const TESTIMONIALS_DATA = [
 ];
 
 const BLOGS_DATA = [
-  {
-    id: 1,
-    title: "Understanding SIPs: The Power of Compounding",
-    excerpt: "Discover how Systematic Investment Plans can help you build long-term wealth through the magic of compounding, even with small monthly contributions.",
-    date: "July 12, 2026",
-    category: "Mutual Funds",
-    readTime: "5 min read",
-    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop"
-  },
-  {
-    id: 2,
-    title: "Navigating the Stock Market: A Beginner's Guide",
-    excerpt: "Everything you need to know before you make your first trade on the Angel One platform. Learn the basics of equity trading and risk management.",
-    date: "June 28, 2026",
-    category: "Equity Trading",
-    readTime: "8 min read",
-    imageUrl: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop"
-  },
-  {
-    id: 3,
-    title: "Why Portfolio Management Services (PMS)?",
-    excerpt: "Is PMS right for you? We break down the benefits of professional portfolio management for high-net-worth individuals and how it differs from mutual funds.",
-    date: "June 15, 2026",
-    category: "Wealth Management",
-    readTime: "6 min read",
-    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
-  },
-  {
-    id: 4,
-    title: "Top 5 Mistakes to Avoid in Derivatives Trading",
-    excerpt: "Futures and options can be highly profitable but carry significant risk. Learn the common pitfalls and how to protect your capital while trading F&O.",
-    date: "May 30, 2026",
-    category: "F&O Trading",
-    readTime: "7 min read",
-    imageUrl: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=2070&auto=format&fit=crop"
-  },
-  {
-    id: 5,
-    title: "The Ultimate Guide to Tax-Saving Investments (ELSS)",
-    excerpt: "Maximize your tax savings under Section 80C while participating in equity markets. We explain how ELSS mutual funds offer the best of both worlds.",
-    date: "May 12, 2026",
-    category: "Tax Planning",
-    readTime: "5 min read",
-    imageUrl: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2071&auto=format&fit=crop"
-  },
-  {
-    id: 6,
-    title: "IPO Allotment Process Explained",
-    excerpt: "Curious about how IPO shares are allocated? We dive deep into the allotment process, bidding strategies, and how to increase your chances of getting shares.",
-    date: "April 25, 2026",
-    category: "IPO",
-    readTime: "6 min read",
-    imageUrl: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2070&auto=format&fit=crop"
-  }
-];
+  {"id": 7, "title": "Beginner Investing: Start Your Investment Journey with Confidence", "excerpt": "Investing is an important step towards building long-term wealth and achieving your financial goals.", "date": "July 16, 2026", "category": "Education", "readTime": "5 min read", "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop", "content": "Beginner Investing: Start Your Investment Journey with Confidence\n\nMeta Title: Beginner Investing Guide | Asset AuraMeta Description: Learn the basics of investing, understand financial products, and start your investment journey through the Angel One platform with Asset Aura.\n\nBeginner Investing\n\nInvesting is an important step towards building long-term wealth and achieving your financial goals. Whether you're a student, salaried professional, or first-time investor, understanding the basics can help you make informed financial decisions.\n\nAsset Aura, an Authorized Person (AP) of Angel One Limited, assists you with Demat & Trading Account opening, digital onboarding, and platform support, giving you access to a wide range of investment products through the Angel One platform.\n\nWhat You Can Explore\n\nEquity Investments \u2013 Invest in companies listed on NSE & BSE.\n\nMutual Funds & SIPs \u2013 Build wealth through professionally managed funds.\n\nETFs & IPOs \u2013 Diversify your portfolio with modern investment opportunities.\n\nBonds & Fixed Income \u2013 Explore investment options for portfolio stability.\n\nWhy Start Investing Early?\n\nBuild long-term wealth\n\nStay ahead of inflation\n\nAchieve financial goals\n\nBenefit from disciplined investing\n\nGrow your investments over time\n\nHow to Get Started\n\nOpen a Demat & Trading Account.\n\nComplete your digital KYC.\n\nLearn about different investment products.\n\nStart investing according to your financial goals and risk tolerance.\n\nWhy Choose Asset Aura?\n\nAuthorized Person of Angel One Limited\n\nQuick & Paperless Account Opening\n\nDedicated Platform Support\n\nInvestor Education & Financial Awareness\n\nSecure Access to the Angel One Platform\n\nStart Your Investment Journey Today\n\nOpen your Demat & Trading Account with Asset Aura and access a comprehensive range of investment opportunities through the trusted Angel One platform.\n\nDisclaimer: Asset Aura is an Authorized Person (AP) of Angel One Limited. We facilitate account opening, onboarding, and access to financial products through the Angel One platform. This content is for educational purposes only and does not constitute investment advice. Investments are subject to market risks. Please read all related documents carefully before investing."},
+  {"id": 8, "title": "Top 5 Reasons Health Insurance Gets Rejected", "excerpt": "Understanding why claims get flagged is the absolute best way to make sure your financial safety net actually catches you when you fall.", "date": "July 16, 2026", "category": "Insurance", "readTime": "7 min read", "imageUrl": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2071&auto=format&fit=crop", "content": "The Heartbreak of a Denied Claim: Top 5 Reasons Health Insurance Gets Rejected (and How to Shield Yourself)\n\nThere is nothing quite like the stomach-drop moment of opening an email from your health insurance provider, expecting a reimbursement confirmation, and seeing the word REJECTED in bold text.\n\nYou paid your premiums on time, you went to the hospital, you got treated- so what gives?\n\nIn reality, a massive chunk of health insurance claim denials don't happen because the insurer is trying to cheat you. They happen because of preventable technicalities, hidden clauses, or honest mistakes made during application or discharge.\n\nUnderstanding why claims get flagged is the absolute best way to make sure your financial safety net actually catches you when you fall. Let's break down the top five culprits behind claim rejections and exactly how to beat them.\n\n1. Non-Disclosure of Pre-Existing Conditions (PED)\n\nThis is the reigning heavyweight champion of claim rejections, accounting for a staggering percentage of denied payouts.\n\nWhen you buy a policy, insurers ask about your medical history. If you omit a diagnosis\u2014like high blood pressure, asthma, diabetes, or a minor surgery from three years ago\u2014you risk a total claim rejection later. When you file a claim, insurers scrutinize your hospital records. If a doctor notes that your condition is linked to a long-term issue you never declared, the insurer has full legal grounds to deny the claim and even cancel your policy for fraud.\n\nHow to avoid it: Be brutally honest during the application stage. It is always better to pay a slightly higher premium due to a declared condition than to pay a lower premium for a policy that gives you zero coverage when it matters.\n\n2. Walking Right Into a \"Waiting Period\"\n\nMany policyholders are shocked to learn that just because a policy is active doesn't mean everything is covered instantly. Standard health insurance policies feature layered waiting periods:\n\nInitial Waiting Period: Usually the first 30 days of a new policy (except for accidental hospitalizations).\n\nSpecific Illness Waiting Period: A 1-to-2-year wait for slow-growing, predictable conditions like cataracts, hernias, kidney stones, or joint replacements.\n\nPED Waiting Period: A 2-to-4-year wait before any pre-existing conditions are covered.  Filing a claim for these conditions before the clock runs out results in an automatic rejection.\n\nHow to avoid it: Read your policy wordings to know exactly what the timelines are. If you have a known issue like a hernia, check your specific waiting period matrix before scheduling a non-emergency procedure.\n\n3. The Paperwork Trap (Missing or Incomplete Docs)\n\nIf you opt for a reimbursement claim instead of a cashless settlement, you become the administrative bridge between the hospital and the insurer.\n\nMissing a single original pharmacy receipt, submitting an illegible handwritten doctor's note, or failing to provide diagnostic test reports (like an X-ray film or blood report) to back up your diagnosis will cause the insurer to pull the plug on your claim.\n\nHow to avoid it: Treat documentation like a high-stakes audit.\n\nCollect the Discharge Summary\n\nAt the billing desk.\n\nEnsure the doctor explicitly lists the diagnosis, treatment given, and the exact times of admission and discharge.\n\nGather itemized original bills\n\nNo summaries.\n\nAsk for detailed, itemized receipts for every capsule, syringe, and room charge. Insurers reject vague \"package deals\" or missing receipts.\n\nCross-verify names and codes\n\nDouble check details.\n\nEnsure your name matches your insurance card exactly. Check that the hospital entered the correct treatment codes to avoid diagnostic mismatches.\n\n4. Missing the Strict \"Intimation\" Window\n\nDid you know you can't just file your paperwork whenever you feel like it? Insurers enforce strict deadlines.\n\nCashless Claims: The insurer usually requires notification at least 48 to 72 hours before a planned surgery, or within 24 hours of an emergency admission.\n\nReimbursement Claims: You generally have a strict 7-to-30-day window post-discharge to submit all physical documents.\n\nIf you blow past these deadlines without a rock-solid, legally documented excuse, your claim will face procedural rejection.\n\nHow to avoid it: The moment a doctor mentions hospitalization, call your insurer's toll-free number or drop an email to officially \"intimate\" the claim. Take down the claim reference number immediately.\n\n5. Overlooking Policy Exclusions and Room Rent Caps\n\nEvery insurance policy has a \"no-go zone\" called permanent exclusions. Standard policies routinely exclude cosmetic procedures, fertility treatments, or admissions purely for diagnostic testing or observation (where no active treatment is given).\n\nFurthermore, many people face partial rejections because of room rent sub-limits. If your policy caps your room rent at 1% of your sum insured (e.g., \u20b95,000 a day on a \u20b95 Lakh policy), but you check into a luxury suite costing \u20b910,000 a day, the insurer won't just reject the extra room cost\u2014they will proportionately slash your coverage for everything linked to that stay, including doctor visits and surgery costs.\n\nHow to avoid it: Check the \"Exclusions\" section of your policy during your 15-day free-look period. Before checking into a hospital, ask the administrative desk for a room that aligns exactly with your policy\u2019s daily cap.\n\nThe Golden Rule\n\nInsurance is a contract based on absolute good faith. Being fully transparent at the start and meticulously organized at the finish line is your absolute best defense against a denied claim."},
+  {"id": 9, "title": "Why Skipping Health Insurance at 25 is a Risky Gamble", "excerpt": "Health insurance isn't a medical product; it's a financial one. Let's break down exactly why skipping it right now is the most expensive gamble.", "date": "July 16, 2026", "category": "Insurance", "readTime": "6 min read", "imageUrl": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop", "content": "You\u2019re 25. You crush your workouts, your diet is reasonably clean, and the only \"doctor\" you\u2019ve seen in the last three years is the one who cleared you for a driver's license renewal. You feel invincible, and honestly, you have every right to feel that way. Your body is operating at its peak. So, when a personal finance checklist tells you to go shell out hard-earned money on a health insurance premium, it\u2019s completely natural to think: \u201cWhy? Isn\u2019t that just burning money for something I\u2019m not even using?\u201d It feels like buying an extended warranty for a smartphone you plan to upgrade in six months. But here is the perspective shift that almost everyone misses in their mid-20s: Health insurance isn't a medical product; it\u2019s a financial one.\n\nLet's break down exactly why skipping it right now is actually the most expensive gamble you can make.\n\n1. The \"Invincibility\" Myth Meets Reality\n\nYou might have zero chronic conditions, but healthy habits don't make you immune to life. The unexpected stuff: Acute appendicitis, food poisoning that puts you on an IV, or a sudden bout of dengue don't care about your gym routine.\n\nThe accidental stuff: A slick road, an erratic driver, or a bad fall while playing weekend sports can land you in a private hospital instantly.\n\nA standard 3-day hospital stay for something as ordinary as a severe infection or a minor fracture can easily rack up a massive bill. If you don't have insurance, that money comes straight out of your hard-earned savings, completely derailing your short-term financial goals.\n\n2. You\u2019ll Never Be This \"Cheap\" Again\n\nInsurance companies calculate your premium based on risk. At 25, you represent almost zero risk to them, which means they will offer you the lowest premiums you will see in your entire adult life.\n\nBuying at 25  -->  Lowest Premium Possible (Locked-in Advantage)\n\nBuying at 35  -->  ~40% Higher Premium + Potential Lifestyle Diseases\n\nBuying at 45  -->  ~100%+ Higher Premium + Strict Medical Screenings\n\nBy lock-in, it means you can secure a high sum insured (like \u20b910 Lakhs or more) for a tiny annual premium. If you wait until your 30s or 40s, not only do the prices skyrocket, but the likelihood of having a mild lifestyle condition (like high blood pressure or early signs of diabetes) rises. Once you have those, insurers will either hike your premiums even further or exclude coverage for those conditions entirely.\n\n3. The \"Waiting Period\" Strategy\n\nEvery health insurance policy comes with a catch called a waiting period. For certain slow-growing ailments or pre-existing conditions, you cannot file a claim for the first 2 to 4 years of the policy.\n\nThe Pro Move: Buy insurance when you don't need it. By doing this, you run down those mandatory waiting periods while you are perfectly healthy. By the time you actually do need to use the policy years down the line, every single benefit is fully active and unlocked.\n\n4. Free Upgrades: The No-Claim Bonus (NCB)\n\nBecause you're healthy, you likely won't claim insurance for the first few years. Insurers reward this through a No-Claim Bonus. For every year you don't make a claim, they automatically increase your coverage amount (often by 10% to 50%) without raising your premium.\n\nBy the time you reach your 30s, a policy you bought with a \u20b95 Lakh cover could have grown into a \u20b910 Lakh cover entirely for free.\n\n5. The Corporate Cover Fallacy\n\n\u201cBut my company gives me free health insurance!\u201d\n\nThis is the most common reason 25-year-olds skip individual policies. Relying only on employer-provided insurance is a major financial risk because:\n\nIt vanishes when you leave: The moment you switch jobs, get laid off, or take a break to pursue higher studies or start a business, you are left completely uninsured.\n\nSub-limits: Corporate policies often come with heavy restrictions, like capping room rents or specific disease payouts, forcing you to pay the difference out of pocket.\n\nThe Verdict\n\nThink of buying health insurance at 25 as buying a protective shield for your bank account. It ensures that no matter what curveball life throws at you, your savings, your investments, and your financial independence remain completely untouched. It\u2019s cheap, it builds a massive bonus over time, and it gives you total peace of mind to take risks in your career and life. Don't wait for a medical wake-up call to figure this out."},
+  {"id": 10, "title": "Nominee vs. Legal Heir: Don't Let Your Family Fight Over Claims", "excerpt": "If your nominations and estate planning are not aligned, you might unintentionally be setting your family up for a prolonged legal battle.", "date": "July 16, 2026", "category": "Wealth Management", "readTime": "8 min read", "imageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop", "content": "Nominee vs. Legal Heir: Don't Let Your Family Fight Over Claims\n\nImagine this scenario: A family is grieving the sudden loss of a patriarch. Once the initial shock settles, they begin the process of wrapping up his financial affairs. The daughter knows she was officially named as the nominee on her father's bank accounts and stock portfolio. Relief washes over her\u2014until her brother and mother step in with a lawyer, claiming that the money legally belongs to all three of them equally.\n\nA dramatic family feud ensues, all because of a massive financial misconception.\n\nMost people fill out the \"Nominee\" section on bank forms, mutual funds, or insurance applications believing they have successfully secured that asset for that specific person. In reality, under Indian law, a nominee is rarely the ultimate owner of your wealth.\n\nIf your nominations and estate planning are not aligned, you might unintentionally be setting your family up for a prolonged legal battle. Let\u2019s break down the critical difference between a Nominee and a Legal Heir so you can protect your loved ones.\n\nThe Core Difference: Custodian vs. Owner\n\nThe simplest way to understand the two roles is by looking at their legal definitions:\n\nThe Nominee (The Custodian): A nominee is merely a trustee or a convenient point of contact chosen by you to receive the assets from a financial institution upon your death. The bank or insurance company\u2019s job ends once they hand the money over to the nominee. However, the nominee cannot just keep or spend the money as they please\u2014they are legally obligated to hold it in trust until it can be distributed to the rightful owners.\n\nThe Legal Heir (The True Owner): A legal heir is the individual legally entitled to inherit and own your assets. This is determined either by a valid Will you leave behind, or by the personal succession laws governing your religion (e.g., the Hindu Succession Act or the Indian Succession Act) if you die without a Will.\n\nThe Golden Rule: The nominee receives the money from the financial institution, but the legal heir ultimately owns the money. If the nominee and the legal heir are different people, the nominee must legally hand over the asset to the legal heir.\n\nHow it Works Across Different Financial Assets?\n\nThe law treats various asset classes differently, which can add to the confusion. Landmark Supreme Court rulings have firmly established that succession law overrides nomination rules for almost all assets. Here is how it breaks down across your portfolio:\n\nBank Accounts & Fixed Deposits: The nominee can withdraw the funds easily to clear the account, but they act strictly as a temporary custodian. The ultimate ownership rests entirely with the Legal Heirs.\n\nMutual Funds & Shares (Demat): The nominee receives the units or shares transferred into their name from the fund house or depository. However, the Supreme Court has reaffirmed that a Demat nominee is just a trustee, and the final legal right belongs to the Legal Heirs.\n\nLife Insurance: The nominee receives the entire claim payout directly from the insurer. However, if you name an immediate family member (spouse, children, or parents), they become Beneficial Nominees and legally own the money. If you name a friend or distant relative, they act only as trustees for the Legal Heirs.\n\nEPF & PPF: The nominee receives the accumulated retirement corpus. Employees' Provident Fund rules strictly mandate nominating a family member, and the nominee generally holds strong statutory rights over the fund compared to other assets.\n\nReal Estate (Property): There is no formal nomination system for physical real estate. Property passes solely through a Will or personal succession laws to the Legal Heirs.\n\nHow to Prevent Family Conflicts: A Step-by-Step Guide\n\nMismatches between who is named in the bank records and who is named in a Will are the single most common cause of painful, multi-year court cases within families. Here is how you can completely eliminate the risk of an estate dispute:\n\n1. Harmonize Your Nominations and Your Will\n\nThe ultimate \"pro move\" in estate planning is alignment. If you want your spouse to inherit your mutual funds, ensure that they are both the Nominee in the mutual fund folio and the Beneficiary named in your Will. When both match, there is absolutely zero ground for a legal dispute.\n\n2. Write a Valid Will\n\nDo not rely solely on nominations to distribute your wealth. A Will is a supreme legal document that explicitly states your wishes and overrides general personal succession laws. Even a simple, typed Will signed by two independent witnesses can save your family from a mountain of legal paperwork.\n\n3. Review Details After Major Life Events\n\nMany people fill out a nomination form when they start their first job at age 22, naming a parent or sibling. Fast-forward fifteen years: they are married with children, but the old nomination remains unchanged. Make it a habit to audit and update your nominations across all bank accounts, insurance policies, and Demat accounts after major milestones like marriage, the birth of a child, or the passing of a family member.\n\n4. Talk Openly with Your Family\n\nTransparency is the enemy of conflict. Sit down with your primary family members and clearly explain where your assets are, who you have nominated, and how you intend for your estate to be divided.\n\nThe Takeaway\n\nNominations are designed to make life easy for financial institutions and give your family immediate financial relief without waiting months for court succession certificates. But to guarantee that the money stays with the people you love, you must back up those nominations with a solid Will. Take an hour this week to check your financial dashboards\u2014your family's future peace of mind depends on it."}];
 
 const OFFERINGS_DATA = {
   product: {
@@ -1371,12 +1320,16 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
   );
 };
 
-const FAQItem = ({ faq, isInitiallyOpen }) => {
+const FAQItem = ({ faq, index, isInitiallyOpen }) => {
   const [isOpen, setIsOpen] = useState(isInitiallyOpen);
 
   useEffect(() => {
     setIsOpen(isInitiallyOpen);
   }, [isInitiallyOpen]);
+
+  // Strip hardcoded number like "1. ", "10. " from the beginning
+  const cleanQuestion = faq.question.replace(/^\d+\.\s*/, '');
+  const displayQuestion = index !== undefined ? `${index + 1}. ${cleanQuestion}` : cleanQuestion;
 
   return (
     <div className="border-b border-white/5 last:border-none pb-2 last:pb-0">
@@ -1384,7 +1337,7 @@ const FAQItem = ({ faq, isInitiallyOpen }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between py-3 text-left hover:text-gold transition-colors group"
       >
-        <span className="text-xs md:text-sm font-bold text-slate-200 group-hover:text-white transition-colors">{faq.question}</span>
+        <span className="text-xs md:text-sm font-bold text-slate-200 group-hover:text-white transition-colors">{displayQuestion}</span>
         <div className="w-6 h-6 bg-white/5 border border-white/5 rounded-full flex items-center justify-center shrink-0 ml-4 group-hover:border-white/20 transition-all">
           {isOpen ? <Minus className="text-gold w-3.5 h-3.5" /> : <Plus className="text-gold w-3.5 h-3.5" />}
         </div>
@@ -1409,7 +1362,61 @@ const FAQItem = ({ faq, isInitiallyOpen }) => {
   );
 };
 
+const BlogDetail = ({ blog, onBack }) => {
+  return (
+    <div className="pt-24 min-h-screen bg-slate-950 text-white">
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <button 
+          onClick={onBack}
+          className="flex items-center gap-2 text-slate-400 hover:text-gold transition-colors mb-8 text-sm font-semibold"
+        >
+          <ChevronLeft className="w-4 h-4" /> Back to Blogs
+        </button>
+
+        <div className="space-y-6">
+          <h1 className="text-3xl md:text-5xl font-display font-bold leading-tight">
+            {blog.title}
+          </h1>
+          
+          <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-400">
+            <span className="px-3 py-1 bg-gold/10 border border-gold/20 text-gold rounded-full uppercase tracking-wider">
+              {blog.category}
+            </span>
+            <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {blog.date}</span>
+            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {blog.readTime}</span>
+          </div>
+
+          <div className="w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden mt-8 mb-12">
+            <img 
+              src={blog.imageUrl} 
+              alt={blog.title} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings:text-gold prose-a:text-gold">
+            {blog.content ? (
+              blog.content.split('\n\n').map((paragraph, idx) => (
+                <p key={idx} className="text-slate-300 leading-relaxed mb-6">{paragraph}</p>
+              ))
+            ) : (
+              <p className="text-slate-300 leading-relaxed mb-6">{blog.excerpt}</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 const BlogsPage = () => {
+  const [selectedBlog, setSelectedBlog] = useState(null);
+
+  if (selectedBlog) {
+    return <BlogDetail blog={selectedBlog} onBack={() => setSelectedBlog(null)} />;
+  }
+
   return (
     <div className="pt-24 min-h-screen">
       <div className="text-center space-y-4 pt-12 pb-8 px-6">
@@ -1422,7 +1429,7 @@ const BlogsPage = () => {
       <section className="py-12 px-6 bg-slate-950/40 relative z-10 border-t border-white/5">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {BLOGS_DATA.map((blog) => (
-            <div key={blog.id} className="glass-card glass-card-hover border-white/10 bg-slate-900/40 rounded-3xl overflow-hidden flex flex-col group cursor-pointer">
+            <div key={blog.id} onClick={() => setSelectedBlog(blog)} className="glass-card glass-card-hover border-white/10 bg-slate-900/40 rounded-3xl overflow-hidden flex flex-col group cursor-pointer">
               <div className="h-48 overflow-hidden relative">
                 <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10" />
                 <img 
@@ -1534,6 +1541,7 @@ const FAQPage = () => {
               filteredFAQs.map((faq, index) => (
                 <FAQItem
                   key={index}
+                  index={index}
                   faq={faq}
                   isInitiallyOpen={index === 0 && !searchQuery}
                 />
