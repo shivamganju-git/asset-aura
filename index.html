@@ -4,9 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Asset Aura</title>
+    <!-- UX4G PREMIUM BRANDING & FIXES -->
+    <style>
+      /* Floating Button Icon Background */
+      .uw-widget-custom-trigger {
+        background-color: #d4af37 !important;
+        box-shadow: 0px 13px 14px -6px rgba(13, 148, 136, 0.35) !important;
+        z-index: 999999 !important;
+      }
+      /* Panel Header Bar */
+      .second-panel, .uwaw-header {
+        background-color: #d4af37 !important;
+      }
+      /* Active States */
+      .ux4g-accessibility-feature-active .uwaw-features__item__i {
+        border-color: #d4af37 !important;
+      }
+      .ux4g-accessibility-active {
+        color: #d4af37 !important;
+      }
+      /* Reset Button */
+      #reset-all-settings,
+      .reset-panel button {
+        background-color: #d4af37 !important;
+        color: white !important;
+      }
+      /* Icon Overrides */
+      .ux4g-accessibility-feature-active div[class^="icon-"], 
+      .ux4g-accessibility-feature-active div[class*=" icon-"] {
+        background-color: #d4af37 !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- UX4G OFFICIAL PREMIUM WIDGET -->
+    <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
+    <script 
+      src="https://cdn.ux4g.gov.in/tools/accessibility-widget.js" 
+      data-primary-color="#d4af37" 
+      data-layout="grid"
+      data-no-ticker="true" 
+      data-header-id="ux4g-safe-header">
+    </script>
   </body>
 </html>
