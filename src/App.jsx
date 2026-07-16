@@ -1938,7 +1938,7 @@ export default function App() {
         </nav>
 
         {/* Right: Actions */}
-        <div className="flex-1 flex items-center justify-end gap-3 shrink-0">
+        <div className="flex-1 flex items-center justify-end gap-1.5 shrink-0">
           {/* Search */}
           <button className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-50 transition-all shrink-0">
             <Search className="w-4 h-4" />
@@ -1960,20 +1960,10 @@ export default function App() {
             Open MF A/C
           </button>
 
-          {/* Login Dropdown */}
-          <div className="relative group">
-            <button className="px-4 py-2 border border-slate-700 text-slate-200 hover:text-gold hover:border-gold rounded-md text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-1 shrink-0">
-              LOGIN <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-gold" />
-            </button>
-            <div className="absolute right-0 mt-2 w-48 bg-slate-950 border border-slate-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 p-2 text-left">
-              <a href="#login-client" className="block px-4 py-2.5 text-[10px] font-bold text-slate-200 hover:text-gold hover:bg-gold/5 rounded-md transition-all uppercase tracking-wider">
-                Client Portal
-              </a>
-              <a href="#login-partner" className="block px-4 py-2.5 text-[10px] font-bold text-slate-200 hover:text-gold hover:bg-gold/5 rounded-md transition-all uppercase tracking-wider">
-                Growth Partner
-              </a>
-            </div>
-          </div>
+          {/* Login Button */}
+          <button className="px-4 py-2 border border-slate-700 text-slate-200 hover:text-gold hover:border-gold rounded-md text-[10px] font-bold uppercase tracking-wider transition-all shrink-0">
+            LOGIN
+          </button>
         </div>
       </header>
 
