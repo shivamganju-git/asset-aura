@@ -1123,7 +1123,7 @@ const ContactUsPage = ({ setIsModalOpen }) => {
                 },
                 {
                   title: "Address",
-                  desc: "Asset Aura, D-254, 5th Floor, GR Square Building, Sector 75, Mohali, Punjab",
+                  desc: "D235 A, Starkedge Towers, 2nd floor near Hindustan Times, Phase 8B, Industrial Area, Sector 74, Sahibzada Ajit Singh Nagar, Punjab 160074",
                   sub: "Headquarters",
                   icon: MapPin,
                   href: "https://maps.google.com/?q=Asset+Aura+Mohali"
@@ -2579,8 +2579,8 @@ export default function App() {
                 <li className="flex items-start gap-2">
                   <Globe className="w-3.5 h-3.5 text-gold shrink-0 mt-0.5" />
                   <span className="text-slate-400 leading-normal">
-                    Asset Aura, 5th Floor, GR Square Building, Sector 75,<br />
-                    Mohali, Punjab, India
+                    D235 A, Starkedge Towers, 2nd floor near Hindustan Times,<br />
+                    Phase 8B, Industrial Area, Sector 74, Sahibzada Ajit Singh Nagar, Punjab 160074
                   </span>
                 </li>
               </ul>
