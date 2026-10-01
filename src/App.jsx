@@ -370,29 +370,11 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    try {
-      const response = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'demat',
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email
-        })
-      });
-      if (response.ok) {
-        setStep(3);
-      } else {
-        console.warn("API returned error, but proceeding to success step for UX.");
-        setStep(3);
-      }
-    } catch (error) {
-      console.error(error);
-      setStep(3);
-    } finally {
+    // Simulate e-Sign processing time, lead was already tracked on Step 1
+    setTimeout(() => {
       setIsSubmitting(false);
-    }
+      setStep(3);
+    }, 1200);
   };
 
   return (
