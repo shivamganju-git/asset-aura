@@ -345,6 +345,28 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
 
   if (!isOpen) return null;
 
+  const handleStep1Submit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'demat',
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email
+        })
+      });
+    } catch (error) {
+      console.error('Error tracking step 1 lead:', error);
+    } finally {
+      setIsSubmitting(false);
+      setStep(2);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -423,7 +445,7 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                 <p className="text-slate-400 text-xs mt-1">Start your wealth creation journey in less than 5 minutes.</p>
               </div>
 
-              <form onSubmit={(e) => { e.preventDefault(); setStep(2); }} className="space-y-4">
+              <form onSubmit={handleStep1Submit} className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">Your Full Name</label>
                   <input
@@ -461,9 +483,14 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
 
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="btn-gold w-full py-3 mt-4 text-xs font-bold text-slate-50 flex items-center justify-center gap-1.5"
                 >
-                  Continue to e-Sign <ArrowRight className="w-4 h-4" />
+                  {isSubmitting ? (
+                    <span className="w-4 h-4 border-2 border-slate-50 border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <>Continue to e-Sign <ArrowRight className="w-4 h-4" /></>
+                  )}
                 </button>
               </form>
             </div>
