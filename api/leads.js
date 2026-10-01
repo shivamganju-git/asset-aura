@@ -53,13 +53,6 @@ export default async function handler(req, res) {
       const result = await pool.sql`
         INSERT INTO leads (type, name, phone, email, extra_data)
         VALUES (${type}, ${name}, ${phone}, ${email || null}, ${extraDataJson})
-        ON CONFLICT (phone) DO UPDATE 
-        SET 
-          type = EXCLUDED.type,
-          name = EXCLUDED.name,
-          email = EXCLUDED.email,
-          extra_data = EXCLUDED.extra_data,
-          updated_at = CURRENT_TIMESTAMP
         RETURNING id;
       `;
       
