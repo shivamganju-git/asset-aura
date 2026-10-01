@@ -68,11 +68,13 @@ const AdminPanel = () => {
     );
   }
 
-  const filteredLeads = leads.filter(lead => 
-    lead.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    lead.phone.includes(searchTerm) || 
-    lead.type.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredLeads = leads.filter(lead => {
+    const searchLower = searchTerm.toLowerCase();
+    const nameMatch = lead.name ? lead.name.toLowerCase().includes(searchLower) : false;
+    const phoneMatch = lead.phone ? lead.phone.includes(searchTerm) : false;
+    const typeMatch = lead.type ? lead.type.toLowerCase().includes(searchLower) : false;
+    return nameMatch || phoneMatch || typeMatch;
+  });
 
   return (
     <div className="min-h-screen bg-slate-950 p-4 md:p-8">
@@ -131,7 +133,7 @@ const AdminPanel = () => {
                             lead.type === 'consultation' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 
                             'bg-green-500/10 text-green-400 border-green-500/20'
                           }`}>
-                            {lead.type.toUpperCase()}
+                            {(lead.type || 'UNKNOWN').toUpperCase()}
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap font-medium text-white">
