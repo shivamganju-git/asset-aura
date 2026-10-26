@@ -117,6 +117,7 @@ import AdminPanel from './AdminPanel.jsx';
 
 const ConsultationModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', city: '', service: 'Portfolio Management (PMS)', slot: 'Virtual Meeting' });
+  const [hpVal, setHpVal] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -134,6 +135,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
           name: formData.name,
           phone: formData.phone,
           email: formData.email,
+          hp_val: hpVal,
           extraData: { city: formData.city, service: formData.service, slot: formData.slot }
         })
       });
@@ -202,14 +204,26 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                     <input
                       type="tel"
                       required
-                      pattern="[0-9]{10}"
+                      pattern="[6-9][0-9]{9}"
+                      title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9"
                       placeholder="e.g. 9988988208"
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10) })}
                       className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                     />
                   </div>
                 </div>
+
+                {/* Honeypot field - traps automated bots */}
+                <input
+                  type="text"
+                  name="company_url"
+                  value={hpVal}
+                  onChange={(e) => setHpVal(e.target.value)}
+                  style={{ position: 'absolute', opacity: 0, zIndex: -1, pointerEvents: 'none', height: 0, width: 0 }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-1">
@@ -334,12 +348,14 @@ const ConsultationModal = ({ isOpen, onClose }) => {
 const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({ name: '', phone: prefilledPhone, email: '', pan: '', kycCheck: false });
+  const [hpVal, setHpVal] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setStep(1);
       setFormData({ name: '', phone: prefilledPhone, email: '', pan: '', kycCheck: false });
+      setHpVal('');
     }
   }, [isOpen, prefilledPhone]);
 
@@ -356,7 +372,8 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
           type: 'demat',
           name: formData.name,
           phone: formData.phone,
-          email: formData.email
+          email: formData.email,
+          hp_val: hpVal
         })
       });
     } catch (error) {
@@ -444,10 +461,11 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                   <input
                     type="tel"
                     required
-                    pattern="[0-9]{10}"
+                    pattern="[6-9][0-9]{9}"
+                    title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9"
                     placeholder="e.g. 9988988208"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10) })}
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
                 </div>
@@ -462,6 +480,17 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
                     className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs"
                   />
                 </div>
+
+                {/* Honeypot trap for bots */}
+                <input
+                  type="text"
+                  name="company_url"
+                  value={hpVal}
+                  onChange={(e) => setHpVal(e.target.value)}
+                  style={{ position: 'absolute', opacity: 0, zIndex: -1, pointerEvents: 'none', height: 0, width: 0 }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
 
                 <button
                   type="submit"
@@ -553,6 +582,7 @@ const DematAccountModal = ({ isOpen, onClose, prefilledPhone = '' }) => {
 
 const PartnerProgramModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
+  const [hpVal, setHpVal] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -569,7 +599,8 @@ const PartnerProgramModal = ({ isOpen, onClose }) => {
           type: 'partner',
           name: formData.name,
           phone: formData.phone,
-          email: formData.email
+          email: formData.email,
+          hp_val: hpVal
         })
       });
       if (response.ok) {
@@ -624,13 +655,32 @@ const PartnerProgramModal = ({ isOpen, onClose }) => {
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">Phone Number</label>
-                    <input type="tel" required pattern="[0-9]{10}" placeholder="e.g. 9988988208" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs" />
+                    <input 
+                      type="tel" 
+                      required 
+                      pattern="[6-9][0-9]{9}" 
+                      title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" 
+                      placeholder="e.g. 9988988208" 
+                      value={formData.phone} 
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10) })} 
+                      className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs" 
+                    />
                   </div>
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-300">Email Address</label>
                   <input type="email" required placeholder="e.g. partner@example.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all text-xs" />
                 </div>
+                {/* Honeypot trap for bots */}
+                <input
+                  type="text"
+                  name="company_url"
+                  value={hpVal}
+                  onChange={(e) => setHpVal(e.target.value)}
+                  style={{ position: 'absolute', opacity: 0, zIndex: -1, pointerEvents: 'none', height: 0, width: 0 }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
                 <button type="submit" disabled={isSubmitting} className="w-full bg-gold hover:bg-gold-dark text-slate-50 py-3.5 mt-2 rounded-xl font-bold uppercase tracking-wider text-xs shadow-lg shadow-gold/20 flex items-center justify-center gap-2">
                   {isSubmitting ? 'Submitting...' : 'Become a Partner'}
                 </button>
@@ -674,11 +724,11 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (phone.length === 10 && /^\d+$/.test(phone)) {
+    if (phone.length === 10 && /^[6-9]\d{9}$/.test(phone)) {
       setPrefilledPhone(phone);
       setIsDematModalOpen(true);
     } else {
-      alert("Please enter a valid 10-digit mobile number.");
+      alert("Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.");
     }
   };
 
@@ -722,7 +772,8 @@ const ProductDetailView = ({ offeringKey, setIsDematModalOpen, setIsModalOpen, s
                   <input
                     type="tel"
                     required
-                    pattern="[0-9]{10}"
+                    pattern="[6-9][0-9]{9}"
+                    title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9"
                     placeholder="Enter your mobile"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
@@ -1395,11 +1446,11 @@ export default function App() {
 
   const handleHeroSubmit = (e) => {
     e.preventDefault();
-    if (heroPhone.length === 10 && /^\d+$/.test(heroPhone)) {
+    if (heroPhone.length === 10 && /^[6-9]\d{9}$/.test(heroPhone)) {
       setPrefilledPhone(heroPhone);
       setIsDematModalOpen(true);
     } else {
-      alert("Please enter a valid 10-digit mobile number.");
+      alert("Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.");
     }
   };
 
@@ -1716,7 +1767,8 @@ export default function App() {
                       <input
                         type="tel"
                         required
-                        pattern="[0-9]{10}"
+                        pattern="[6-9][0-9]{9}"
+                        title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9"
                         placeholder="Enter your mobile"
                         value={heroPhone}
                         onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
