@@ -157,3 +157,28 @@
 .blog-content-html strong {
   @apply text-gold font-bold;
 }
+
+/* Hide UX4G Promotional Upgrade Banner & Badge */
+#uw-upgrade-promo,
+.uw-upgrade-promo,
+#uw-upgrade-badge,
+.uw-upgrade-badge,
+.uwaw-upgrade-promo,
+.uwaw-upgrade-badge,
+.uwaw-upgrade,
+#uwaw-upgrade,
+.uw-upgrade,
+#uw-upgrade,
+.uw-upgrade-btn,
+.uw-upgrade-button,
+[data-action="upgrade"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+}

@@ -6,6 +6,22 @@
     <title>Asset Aura</title>
     <!-- UX4G PREMIUM BRANDING & FIXES -->
     <style>
+      /* === FLASH-OF-UNSTYLED-WIDGET FIX ===
+         Hide the entire widget container until UX4G CSS has loaded,
+         preventing the raw/unstyled panel from flickering on refresh */
+      #ux4g-widget-container,
+      .ux4g-widget-container,
+      #accessibility-widget-container,
+      .accessibility-widget-container,
+      #uwaw-container,
+      .uwaw-container,
+      #uw-widget,
+      .uw-widget {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
       /* Floating Button Icon Background */
       .uw-widget-custom-trigger {
         background-color: #d4af37 !important;
@@ -34,6 +50,54 @@
       .ux4g-accessibility-feature-active div[class*=" icon-"] {
         background-color: #d4af37 !important;
       }
+      /* Hide UX4G Promotional Upgrade Banner & Badge */
+      #uw-upgrade-promo,
+      .uw-upgrade-promo,
+      #uw-upgrade-badge,
+      .uw-upgrade-badge,
+      .uwaw-upgrade-promo,
+      .uwaw-upgrade-badge,
+      .uwaw-upgrade,
+      #uwaw-upgrade,
+      .uw-upgrade,
+      #uw-upgrade,
+      .uw-upgrade-btn,
+      .uw-upgrade-button,
+      [data-action="upgrade"],
+      [aria-label*="Upgrade" i],
+      [aria-label*="upgrade" i] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        overflow: hidden !important;
+      }
+      /* Hide "Created by" UX4G branding at bottom of panel */
+      .uwaw-footer,
+      .uw-footer,
+      .uwaw-branding,
+      .uw-branding,
+      .uwaw-powered-by,
+      .uw-powered-by,
+      .uwaw-credit,
+      .uw-credit,
+      [class*="created-by"],
+      [class*="createdBy"],
+      [class*="powered-by"],
+      [class*="poweredBy"],
+      [class*="branding"],
+      [class*="footer"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+      }
     </style>
   </head>
   <body>
@@ -48,6 +112,75 @@
       data-layout="grid"
       data-no-ticker="true" 
       data-header-id="ux4g-safe-header">
+    </script>
+    <script>
+      (function() {
+        const UPGRADE_SELECTORS = [
+          '#uw-upgrade-promo',
+          '.uw-upgrade-promo',
+          '#uw-upgrade-badge',
+          '.uw-upgrade-badge',
+          '.uwaw-upgrade-promo',
+          '.uwaw-upgrade-badge',
+          '.uwaw-upgrade',
+          '#uwaw-upgrade',
+          '.uw-upgrade',
+          '#uw-upgrade',
+          '.uw-upgrade-btn',
+          '.uw-upgrade-button',
+          '[data-action="upgrade"]',
+          '.uwaw-footer',
+          '.uw-footer',
+          '.uwaw-branding',
+          '.uw-branding',
+          '.uwaw-powered-by',
+          '.uw-powered-by',
+          '.uwaw-credit',
+          '.uw-credit'
+        ];
+
+        const cleanWidget = () => {
+          // Remove upgrade/promo/branding elements
+          document.querySelectorAll(UPGRADE_SELECTORS.join(',')).forEach(el => el.remove());
+
+          // Remove any button/link/span with "Upgrade" text in widget header or panel
+          document.querySelectorAll(
+            '.uwaw-header *, .second-panel *, .uwaw-panel *, .uw-panel *'
+          ).forEach(el => {
+            if (el.children.length === 0 && el.textContent.trim().toLowerCase().includes('upgrade')) {
+              el.closest('button, a, span, div') && el.closest('button, a, span, div').remove();
+            }
+          });
+
+          // Remove "Created by" / branding text nodes deep in the widget
+          document.querySelectorAll(
+            '.uwaw-footer, .uw-footer, [class*="footer"], [class*="branding"], [class*="credit"], [class*="powered"]'
+          ).forEach(el => el.remove());
+
+          // After widget is cleaned, make it visible (remove flash-prevention)
+          const containers = document.querySelectorAll(
+            '#ux4g-widget-container, .ux4g-widget-container, #accessibility-widget-container, .accessibility-widget-container, #uwaw-container, .uwaw-container, #uw-widget, .uw-widget'
+          );
+          containers.forEach(el => {
+            el.style.visibility = 'visible';
+            el.style.opacity = '1';
+          });
+        };
+
+        // Run immediately, on DOM ready, and on load
+        cleanWidget();
+        window.addEventListener('DOMContentLoaded', cleanWidget);
+        window.addEventListener('load', () => {
+          cleanWidget();
+          // Final sweep after slight delay for async widget injection
+          setTimeout(cleanWidget, 500);
+          setTimeout(cleanWidget, 1500);
+        });
+
+        // Watch for any new elements injected by the widget script
+        const observer = new MutationObserver(cleanWidget);
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+      })();
     </script>
   </body>
 </html>
