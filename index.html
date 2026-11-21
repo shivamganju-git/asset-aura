@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Asset Aura</title>
-    <!-- UX4G PREMIUM BRANDING & FIXES -->
+
+    <!-- UX4G CSS loaded FIRST in <head> to prevent flash of unstyled widget -->
+    <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
+
+    <!-- UX4G BRANDING OVERRIDES & PROMO SUPPRESSION -->
     <style>
-      /* === FLASH-OF-UNSTYLED-WIDGET FIX ===
-         Hide the entire widget container until UX4G CSS has loaded,
-         preventing the raw/unstyled panel from flickering on refresh */
+      /* === FLASH-OF-UNSTYLED-WIDGET PREVENTION ===
+         Hide ALL possible widget wrapper divs until UX4G JS initializes them. */
       #ux4g-widget-container,
       .ux4g-widget-container,
       #accessibility-widget-container,
@@ -16,22 +19,30 @@
       #uwaw-container,
       .uwaw-container,
       #uw-widget,
-      .uw-widget {
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.2s ease;
+      .uw-widget,
+      body > div[id*="ux4g"],
+      body > div[id*="uwaw"],
+      body > div[id*="uw-"],
+      body > div[class*="ux4g"],
+      body > div[class*="uwaw"],
+      body > div[class*="uw-"] {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transition: opacity 0.25s ease;
       }
 
-      /* Floating Button Icon Background */
+      /* Floating Button */
       .uw-widget-custom-trigger {
         background-color: #d4af37 !important;
         box-shadow: 0px 13px 14px -6px rgba(13, 148, 136, 0.35) !important;
         z-index: 999999 !important;
       }
+
       /* Panel Header Bar */
       .second-panel, .uwaw-header {
         background-color: #d4af37 !important;
       }
+
       /* Active States */
       .ux4g-accessibility-feature-active .uwaw-features__item__i {
         border-color: #d4af37 !important;
@@ -39,18 +50,21 @@
       .ux4g-accessibility-active {
         color: #d4af37 !important;
       }
+
       /* Reset Button */
       #reset-all-settings,
       .reset-panel button {
         background-color: #d4af37 !important;
         color: white !important;
       }
+
       /* Icon Overrides */
-      .ux4g-accessibility-feature-active div[class^="icon-"], 
+      .ux4g-accessibility-feature-active div[class^="icon-"],
       .ux4g-accessibility-feature-active div[class*=" icon-"] {
         background-color: #d4af37 !important;
       }
-      /* Hide UX4G Promotional Upgrade Banner & Badge */
+
+      /* ===  HIDE UPGRADE PROMO BANNER & BUTTON === */
       #uw-upgrade-promo,
       .uw-upgrade-promo,
       #uw-upgrade-badge,
@@ -78,7 +92,8 @@
         border: none !important;
         overflow: hidden !important;
       }
-      /* Hide "Created by" UX4G branding at bottom of panel */
+
+      /* === HIDE "CREATED BY" / FOOTER BRANDING === */
       .uwaw-footer,
       .uw-footer,
       .uwaw-branding,
@@ -105,79 +120,80 @@
     <script type="module" src="/src/main.jsx"></script>
 
     <!-- UX4G OFFICIAL PREMIUM WIDGET -->
-    <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
-    <script 
-      src="https://cdn.ux4g.gov.in/tools/accessibility-widget.js" 
-      data-primary-color="#d4af37" 
+    <script
+      src="https://cdn.ux4g.gov.in/tools/accessibility-widget.js"
+      data-primary-color="#d4af37"
       data-layout="grid"
-      data-no-ticker="true" 
+      data-no-ticker="true"
       data-header-id="ux4g-safe-header">
     </script>
+
+    <!-- WIDGET CLEANUP: Remove promo, upgrade, branding elements -->
     <script>
-      (function() {
-        const UPGRADE_SELECTORS = [
-          '#uw-upgrade-promo',
-          '.uw-upgrade-promo',
-          '#uw-upgrade-badge',
-          '.uw-upgrade-badge',
-          '.uwaw-upgrade-promo',
-          '.uwaw-upgrade-badge',
-          '.uwaw-upgrade',
-          '#uwaw-upgrade',
-          '.uw-upgrade',
-          '#uw-upgrade',
-          '.uw-upgrade-btn',
-          '.uw-upgrade-button',
+      (function () {
+        const REMOVE_SELECTORS = [
+          '#uw-upgrade-promo', '.uw-upgrade-promo',
+          '#uw-upgrade-badge', '.uw-upgrade-badge',
+          '.uwaw-upgrade-promo', '.uwaw-upgrade-badge',
+          '.uwaw-upgrade', '#uwaw-upgrade',
+          '.uw-upgrade', '#uw-upgrade',
+          '.uw-upgrade-btn', '.uw-upgrade-button',
           '[data-action="upgrade"]',
-          '.uwaw-footer',
-          '.uw-footer',
-          '.uwaw-branding',
-          '.uw-branding',
-          '.uwaw-powered-by',
-          '.uw-powered-by',
-          '.uwaw-credit',
-          '.uw-credit'
+          '.uwaw-footer', '.uw-footer',
+          '.uwaw-branding', '.uw-branding',
+          '.uwaw-powered-by', '.uw-powered-by',
+          '.uwaw-credit', '.uw-credit'
+        ];
+
+        const REVEAL_SELECTORS = [
+          '#ux4g-widget-container', '.ux4g-widget-container',
+          '#accessibility-widget-container', '.accessibility-widget-container',
+          '#uwaw-container', '.uwaw-container',
+          '#uw-widget', '.uw-widget'
         ];
 
         const cleanWidget = () => {
-          // Remove upgrade/promo/branding elements
-          document.querySelectorAll(UPGRADE_SELECTORS.join(',')).forEach(el => el.remove());
+          // Remove all promo/upgrade/branding elements
+          const removeEl = document.querySelectorAll(REMOVE_SELECTORS.join(','));
+          removeEl.forEach(el => el.remove());
 
-          // Remove any button/link/span with "Upgrade" text in widget header or panel
+          // Remove any "Upgrade" text buttons/links inside header or panel
           document.querySelectorAll(
             '.uwaw-header *, .second-panel *, .uwaw-panel *, .uw-panel *'
           ).forEach(el => {
             if (el.children.length === 0 && el.textContent.trim().toLowerCase().includes('upgrade')) {
-              el.closest('button, a, span, div') && el.closest('button, a, span, div').remove();
+              const btn = el.closest('button, a, span, div');
+              if (btn) btn.remove();
             }
           });
 
-          // Remove "Created by" / branding text nodes deep in the widget
+          // Remove "Created by" footer/branding elements
           document.querySelectorAll(
-            '.uwaw-footer, .uw-footer, [class*="footer"], [class*="branding"], [class*="credit"], [class*="powered"]'
+            '[class*="footer"], [class*="branding"], [class*="credit"], [class*="powered"]'
           ).forEach(el => el.remove());
 
-          // After widget is cleaned, make it visible (remove flash-prevention)
-          const containers = document.querySelectorAll(
-            '#ux4g-widget-container, .ux4g-widget-container, #accessibility-widget-container, .accessibility-widget-container, #uwaw-container, .uwaw-container, #uw-widget, .uw-widget'
-          );
-          containers.forEach(el => {
+          // Reveal widget containers that were hidden to prevent flash
+          document.querySelectorAll(REVEAL_SELECTORS.join(',')).forEach(el => {
             el.style.visibility = 'visible';
             el.style.opacity = '1';
           });
         };
 
-        // Run immediately, on DOM ready, and on load
+        // Run immediately
         cleanWidget();
+
+        // Run on DOM content loaded
         window.addEventListener('DOMContentLoaded', cleanWidget);
+
+        // Run after full load + delayed sweeps for async widget injection
         window.addEventListener('load', () => {
           cleanWidget();
-          // Final sweep after slight delay for async widget injection
-          setTimeout(cleanWidget, 500);
-          setTimeout(cleanWidget, 1500);
+          setTimeout(cleanWidget, 300);
+          setTimeout(cleanWidget, 800);
+          setTimeout(cleanWidget, 2000);
         });
 
-        // Watch for any new elements injected by the widget script
+        // Watch for DOM mutations (widget injects elements asynchronously)
         const observer = new MutationObserver(cleanWidget);
         observer.observe(document.documentElement, { childList: true, subtree: true });
       })();
