@@ -8,6 +8,31 @@
     <!-- UX4G CSS loaded first in <head> — prevents flash of unstyled widget -->
     <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
 
+    <!--
+      NUCLEAR INTERCEPT: Override insertAdjacentHTML on <body> BEFORE the UX4G widget
+      script runs. The widget calls document.body.insertAdjacentHTML('beforeend', widgetHTML).
+      We intercept that call, strip out the upgrade badge, promo section, and "Created by"
+      link from the HTML string itself, then let the cleaned HTML be inserted normally.
+      This runs BEFORE any DOM is inserted so there is ZERO flash.
+    -->
+    <script>
+      (function () {
+        const _origInsert = Element.prototype.insertAdjacentHTML;
+        Element.prototype.insertAdjacentHTML = function (position, html) {
+          // Only intercept UX4G widget HTML (detected by the uw-main marker)
+          if (typeof html === 'string' && html.includes('uw-main')) {
+            // Strip the upgrade badge link from the header
+            html = html.replace(/<a[^>]*class="[^"]*uw-upgrade-badge[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
+            // Strip the upgrade promo section
+            html = html.replace(/<section[^>]*id="uw-upgrade-promo"[^>]*>[\s\S]*?<\/section>/gi, '');
+            // Strip the "Created by" copyright link
+            html = html.replace(/<a[^>]*class="[^"]*copyright-text[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
+          }
+          return _origInsert.call(this, position, html);
+        };
+      })();
+    </script>
+
     <style>
       /* ========================================
          UX4G WIDGET BRANDING & PROMO OVERRIDES
@@ -49,32 +74,10 @@
         background-color: #d4af37 !important;
       }
 
-      /* ========================================
-         HIDE: "Upgrade" badge in header (exact id/class from widget JS)
-         ======================================== */
-      #uw-upgrade-badge,
-      .uw-upgrade-badge {
-        display: none !important;
-      }
-
-      /* ========================================
-         HIDE: "Enhanced Accessibility" promo section (exact id/class)
-         ======================================== */
-      #uw-upgrade-promo,
-      .uw-upgrade-promo {
-        display: none !important;
-      }
-
-      /* ========================================
-         HIDE: "Created by" footer link (exact class from widget JS)
-         .copyright-text = the <a> wrapper
-         .ux4g-copy / .ux4g-copyright = "Created by" text span
-         .ux4g-logo = UX4G logo span
-         ======================================== */
-      .copyright-text,
-      .ux4g-copy,
-      .ux4g-copyright,
-      .ux4g-logo {
+      /* CSS backup hide — in case anything slips through the intercept */
+      #uw-upgrade-badge, .uw-upgrade-badge,
+      #uw-upgrade-promo, .uw-upgrade-promo,
+      .copyright-text, .ux4g-copy, .ux4g-copyright, .ux4g-logo {
         display: none !important;
       }
     </style>
@@ -90,32 +93,6 @@
       data-layout="grid"
       data-no-ticker="true"
       data-header-id="ux4g-safe-header">
-    </script>
-
-    <!-- SAFETY NET: DOM removal for any elements that escape CSS hiding -->
-    <script>
-      (function () {
-        const cleanWidget = () => {
-          // Remove upgrade badge + promo (exact IDs/classes from widget source)
-          ['#uw-upgrade-badge', '.uw-upgrade-badge',
-           '#uw-upgrade-promo', '.uw-upgrade-promo',
-           '.copyright-text', '.ux4g-logo'
-          ].forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => el.remove());
-          });
-        };
-
-        cleanWidget();
-        window.addEventListener('DOMContentLoaded', cleanWidget);
-        window.addEventListener('load', () => {
-          cleanWidget();
-          setTimeout(cleanWidget, 400);
-          setTimeout(cleanWidget, 1200);
-        });
-        new MutationObserver(cleanWidget).observe(document.documentElement, {
-          childList: true, subtree: true
-        });
-      })();
     </script>
   </body>
 </html>
