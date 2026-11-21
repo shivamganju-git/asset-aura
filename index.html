@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Asset Aura</title>
 
-    <!--
+  <!-- UX4G CSS loaded first in <head> — prevents flash of unstyled widget -->
+  <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
+
+  <!--
       INLINE CSS MUST come BEFORE the CDN link.
       These rules use NO external resources — they apply instantly and
       keep the widget panel and overlay invisible until CDN CSS loads.
@@ -17,11 +16,13 @@
          The CDN stylesheet overrides these once it loads.
          ===================================================== */
 
-      /* Main widget panel — keep it off-screen to the right */
+      /* Main widget panel — keep it off-screen to the right.
+         NO !important on 'right' — allows the widget JS to override
+         it with element.style.right = '0' when user clicks the button. */
       #uw-main {
         position: fixed !important;
         top: 0 !important;
-        right: -600px !important;
+        right: -600px;         /* no !important — JS can override this */
         width: 530px !important;
         height: 100vh !important;
         overflow: hidden !important;
@@ -29,18 +30,14 @@
         transition: right 0.3s ease !important;
       }
 
-      /* Floating trigger button — fixed bottom-right */
-      #uw-widget-custom-trigger,
+      /* Floating trigger button — gold color only, let widget handle position */
       .uw-widget-custom-trigger {
-        position: fixed !important;
-        bottom: 20px !important;
-        right: 20px !important;
-        z-index: 999999 !important;
         background-color: #d4af37 !important;
         box-shadow: 0px 13px 14px -6px rgba(13, 148, 136, 0.35) !important;
+        z-index: 999999 !important;
       }
 
-      /* Skip-link overlay — hide it (it's for screen readers) */
+      /* Skip-link overlay — visually hide, keep accessible */
       #accessibility-overlay {
         position: absolute !important;
         left: -9999px !important;
@@ -117,13 +114,13 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- UX4G OFFICIAL PREMIUM WIDGET -->
-    <script
-      src="https://cdn.ux4g.gov.in/tools/accessibility-widget.js"
-      data-primary-color="#d4af37"
-      data-layout="grid"
-      data-no-ticker="true"
-      data-header-id="ux4g-safe-header">
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+
+  <!-- UX4G OFFICIAL PREMIUM WIDGET -->
+  <script src="https://cdn.ux4g.gov.in/tools/accessibility-widget.js" data-primary-color="#d4af37" data-layout="grid"
+    data-no-ticker="true" data-header-id="ux4g-safe-header">
     </script>
-  </body>
+</body>
 </html>
