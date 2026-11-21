@@ -5,53 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Asset Aura</title>
 
-    <!-- UX4G CSS loaded first in <head> — prevents flash of unstyled widget -->
-    <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
-
     <!--
-      NUCLEAR INTERCEPT: Override insertAdjacentHTML on <body> BEFORE the UX4G widget
-      script runs. The widget calls document.body.insertAdjacentHTML('beforeend', widgetHTML).
-      We intercept that call, strip out the upgrade badge, promo section, and "Created by"
-      link from the HTML string itself, then let the cleaned HTML be inserted normally.
-      This runs BEFORE any DOM is inserted so there is ZERO flash.
+      INLINE CSS MUST come BEFORE the CDN link.
+      These rules use NO external resources — they apply instantly and
+      keep the widget panel and overlay invisible until CDN CSS loads.
     -->
-    <script>
-      (function () {
-        const _origInsert = Element.prototype.insertAdjacentHTML;
-        Element.prototype.insertAdjacentHTML = function (position, html) {
-          // Only intercept UX4G widget HTML (detected by the uw-main marker)
-          if (typeof html === 'string' && html.includes('uw-main')) {
-            // Strip the upgrade badge link from the header
-            html = html.replace(/<a[^>]*class="[^"]*uw-upgrade-badge[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
-            // Strip the upgrade promo section
-            html = html.replace(/<section[^>]*id="uw-upgrade-promo"[^>]*>[\s\S]*?<\/section>/gi, '');
-            // Strip the "Created by" copyright link
-            html = html.replace(/<a[^>]*class="[^"]*copyright-text[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
-          }
-          return _origInsert.call(this, position, html);
-        };
-      })();
-    </script>
-
     <style>
-      /* ========================================
-         UX4G WIDGET BRANDING & PROMO OVERRIDES
-         Class names verified from widget JS source
-         ======================================== */
+      /* =====================================================
+         ZERO-FLASH FIX: Pre-position widget elements OFF-SCREEN
+         using INLINE CSS (no CDN needed, applies immediately).
+         The CDN stylesheet overrides these once it loads.
+         ===================================================== */
 
-      /* --- Floating trigger button --- */
-      .uw-widget-custom-trigger {
-        background-color: #d4af37 !important;
-        box-shadow: 0px 13px 14px -6px rgba(13, 148, 136, 0.35) !important;
-        z-index: 999999 !important;
+      /* Main widget panel — keep it off-screen to the right */
+      #uw-main {
+        position: fixed !important;
+        top: 0 !important;
+        right: -600px !important;
+        width: 530px !important;
+        height: 100vh !important;
+        overflow: hidden !important;
+        z-index: 999998 !important;
+        transition: right 0.3s ease !important;
       }
 
-      /* --- Panel header bar --- */
+      /* Floating trigger button — fixed bottom-right */
+      #uw-widget-custom-trigger,
+      .uw-widget-custom-trigger {
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 999999 !important;
+        background-color: #d4af37 !important;
+        box-shadow: 0px 13px 14px -6px rgba(13, 148, 136, 0.35) !important;
+      }
+
+      /* Skip-link overlay — hide it (it's for screen readers) */
+      #accessibility-overlay {
+        position: absolute !important;
+        left: -9999px !important;
+        top: auto !important;
+        width: 1px !important;
+        height: 1px !important;
+        overflow: hidden !important;
+      }
+
+      /* =====================================================
+         UX4G BRAND OVERRIDES (verified class names from source)
+         ===================================================== */
+
+      /* Panel header bar */
       .second-panel, .uwaw-header {
         background-color: #d4af37 !important;
       }
 
-      /* --- Active feature states --- */
+      /* Active feature states */
       .ux4g-accessibility-feature-active .uwaw-features__item__i {
         border-color: #d4af37 !important;
       }
@@ -59,7 +67,7 @@
         color: #d4af37 !important;
       }
 
-      /* --- Reset button --- */
+      /* Reset / Reset All button */
       #reset-all-settings,
       #reset-all,
       .btn-reset-all,
@@ -68,19 +76,42 @@
         color: white !important;
       }
 
-      /* --- Icon active overrides --- */
-      .ux4g-accessibility-feature-active div[class^="icon-"],
-      .ux4g-accessibility-feature-active div[class*=" icon-"] {
-        background-color: #d4af37 !important;
-      }
-
-      /* CSS backup hide — in case anything slips through the intercept */
-      #uw-upgrade-badge, .uw-upgrade-badge,
-      #uw-upgrade-promo, .uw-upgrade-promo,
-      .copyright-text, .ux4g-copy, .ux4g-copyright, .ux4g-logo {
+      /* =====================================================
+         HIDE: Upgrade badge, promo banner, "Created by" credit
+         (class names verified directly from UX4G widget JS source)
+         ===================================================== */
+      #uw-upgrade-badge,
+      .uw-upgrade-badge,
+      #uw-upgrade-promo,
+      .uw-upgrade-promo,
+      .copyright-text,
+      .ux4g-copy,
+      .ux4g-copyright,
+      .ux4g-logo {
         display: none !important;
       }
     </style>
+
+    <!-- UX4G CSS — loaded in <head> so it applies before body renders -->
+    <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
+
+    <!-- INTERCEPT: Strip upgrade/branding HTML BEFORE it's inserted into DOM -->
+    <script>
+      (function () {
+        const _orig = Element.prototype.insertAdjacentHTML;
+        Element.prototype.insertAdjacentHTML = function (pos, html) {
+          if (typeof html === 'string' && html.includes('uw-main')) {
+            // Remove upgrade badge
+            html = html.replace(/<a[^>]*class="[^"]*uw-upgrade-badge[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
+            // Remove upgrade promo section
+            html = html.replace(/<section[^>]*id="uw-upgrade-promo"[^>]*>[\s\S]*?<\/section>/gi, '');
+            // Remove "Created by" copyright link
+            html = html.replace(/<a[^>]*class="[^"]*copyright-text[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
+          }
+          return _orig.call(this, pos, html);
+        };
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
