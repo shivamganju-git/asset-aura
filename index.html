@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asset Aura</title>
 
-  <!-- UX4G CSS loaded first in <head> — prevents flash of unstyled widget -->
-  <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
-
-  <!--
-      INLINE CSS MUST come BEFORE the CDN link.
-      These rules use NO external resources — they apply instantly and
-      keep the widget panel and overlay invisible until CDN CSS loads.
-    -->
     <style>
       /* =====================================================
          ZERO-FLASH FIX: Pre-position widget elements OFF-SCREEN
          using INLINE CSS (no CDN needed, applies immediately).
-         The CDN stylesheet overrides these once it loads.
          ===================================================== */
 
       /* Main widget panel — keep it off-screen to the right.
-         NO !important on 'right' — allows the widget JS to override
-         it with element.style.right = '0' when user clicks the button. */
+         NO !important on 'right' so widget JS can open it with right = '0' on click. */
       #uw-main {
         position: fixed !important;
         top: 0 !important;
-        right: -600px;         /* no !important — JS can override this */
+        right: -600px;
         width: 530px !important;
         height: 100vh !important;
         overflow: hidden !important;
@@ -30,14 +24,14 @@
         transition: right 0.3s ease !important;
       }
 
-      /* Floating trigger button — gold color only, let widget handle position */
+      /* Floating trigger button */
       .uw-widget-custom-trigger {
         background-color: #d4af37 !important;
         box-shadow: 0px 13px 14px -6px rgba(13, 148, 136, 0.35) !important;
         z-index: 999999 !important;
       }
 
-      /* Skip-link overlay — visually hide, keep accessible */
+      /* Skip-link overlay */
       #accessibility-overlay {
         position: absolute !important;
         left: -9999px !important;
@@ -48,11 +42,12 @@
       }
 
       /* =====================================================
-         UX4G BRAND OVERRIDES (verified class names from source)
+         UX4G BRAND OVERRIDES
          ===================================================== */
 
       /* Panel header bar */
-      .second-panel, .uwaw-header {
+      .second-panel,
+      .uwaw-header {
         background-color: #d4af37 !important;
       }
 
@@ -60,6 +55,7 @@
       .ux4g-accessibility-feature-active .uwaw-features__item__i {
         border-color: #d4af37 !important;
       }
+
       .ux4g-accessibility-active {
         color: #d4af37 !important;
       }
@@ -75,7 +71,6 @@
 
       /* =====================================================
          HIDE: Upgrade badge, promo banner, "Created by" credit
-         (class names verified directly from UX4G widget JS source)
          ===================================================== */
       #uw-upgrade-badge,
       .uw-upgrade-badge,
@@ -95,9 +90,16 @@
     <!-- INTERCEPT: Strip upgrade/branding HTML BEFORE it's inserted into DOM -->
     <script>
       (function () {
+        const originalSiteTitle = "Asset Aura";
+
         const _orig = Element.prototype.insertAdjacentHTML;
         Element.prototype.insertAdjacentHTML = function (pos, html) {
           if (typeof html === 'string' && html.includes('uw-main')) {
+            // Strip <title> tag so UX4G never overwrites the browser tab title
+            html = html.replace(/<title>[\s\S]*?<\/title>/gi, '');
+            // Strip duplicate <!DOCTYPE>, <html>, <head>, <body> tags
+            html = html.replace(/<!DOCTYPE[^>]*>/gi, '');
+            html = html.replace(/<\/?(html|head|body)[^>]*>/gi, '');
             // Remove upgrade badge
             html = html.replace(/<a[^>]*class="[^"]*uw-upgrade-badge[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
             // Remove upgrade promo section
@@ -105,8 +107,25 @@
             // Remove "Created by" copyright link
             html = html.replace(/<a[^>]*class="[^"]*copyright-text[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
           }
-          return _orig.call(this, pos, html);
+          const res = _orig.call(this, pos, html);
+
+          // Restore site title if UX4G overwrites it
+          if (document.title.includes('UX4G')) {
+            document.title = originalSiteTitle;
+          }
+          return res;
         };
+
+        // Watcher to prevent document.title from ever being changed to UX4G
+        const titleWatcher = new MutationObserver(() => {
+          if (document.title.includes('UX4G')) {
+            document.title = originalSiteTitle;
+          }
+        });
+        const titleTag = document.querySelector('title');
+        if (titleTag) {
+          titleWatcher.observe(titleTag, { childList: true, characterData: true, subtree: true });
+        }
       })();
     </script>
   </head>
@@ -114,13 +133,13 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-
-  <!-- UX4G OFFICIAL PREMIUM WIDGET -->
-  <script src="https://cdn.ux4g.gov.in/tools/accessibility-widget.js" data-primary-color="#d4af37" data-layout="grid"
-    data-no-ticker="true" data-header-id="ux4g-safe-header">
+    <!-- UX4G OFFICIAL PREMIUM WIDGET -->
+    <script
+      src="https://cdn.ux4g.gov.in/tools/accessibility-widget.js"
+      data-primary-color="#d4af37"
+      data-layout="grid"
+      data-no-ticker="true"
+      data-header-id="ux4g-safe-header">
     </script>
-</body>
+  </body>
 </html>
