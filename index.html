@@ -7,12 +7,12 @@
 
     <style>
       /* =====================================================
-         ZERO-FLASH FIX: Pre-position widget elements OFF-SCREEN
-         using INLINE CSS (no CDN needed, applies immediately).
+         ZERO-FLASH FIX: Inline critical CSS for UX4G widget
+         Pre-positions all elements properly before CDN loads.
          ===================================================== */
 
-      /* Main widget panel — keep it off-screen to the right.
-         NO !important on 'right' so widget JS can open it with right = '0' on click. */
+      /* Main widget panel — starts off-screen to the right.
+         No !important on 'right' so widget JS can slide it in on click. */
       #uw-main {
         position: fixed !important;
         top: 0 !important;
@@ -24,14 +24,64 @@
         transition: right 0.3s ease !important;
       }
 
-      /* Floating trigger button */
+      /* Floating trigger button — FIXED at bottom-right immediately */
+      #uw-widget-custom-trigger,
       .uw-widget-custom-trigger {
-        background-color: #d4af37 !important;
-        box-shadow: 0px 13px 14px -6px rgba(13, 148, 136, 0.35) !important;
+        position: fixed !important;
+        bottom: 24px !important;
+        right: 20px !important;
         z-index: 999999 !important;
+        background-color: #d4af37 !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 70px !important;
+        cursor: pointer !important;
+        height: 70px !important;
+        padding: 18px !important;
+        display: flex !important;
+        align-items: center !important;
+        overflow: hidden !important;
+        width: auto !important;
+        max-width: 70px !important;
+        text-align: left !important;
+        box-shadow: 0px 13px 14px -6px rgba(13, 148, 136, 0.35) !important;
+        transition: max-width 400ms ease !important;
       }
 
-      /* Skip-link overlay */
+      .uw-widget-custom-trigger:hover {
+        max-width: 300px !important;
+      }
+
+      .uw-widget-custom-trigger img {
+        width: 25px !important;
+        height: 25px !important;
+        margin-left: 5px !important;
+        margin-top: -10px !important;
+      }
+
+      .uw-widget-custom-trigger span {
+        white-space: nowrap !important;
+        padding-left: 5px !important;
+        font-size: 15px !important;
+        opacity: 0 !important;
+        transition: opacity 300ms ease !important;
+      }
+
+      .uw-widget-custom-trigger:hover span {
+        opacity: 1 !important;
+      }
+
+      .uw-widget-custom-trigger .short-key {
+        position: absolute !important;
+        bottom: 12px !important;
+        color: #ffffff !important;
+        right: 15px !important;
+        font-size: 11px !important;
+        left: 17px !important;
+        cursor: pointer !important;
+      }
+
+      /* Skip-link overlay — hide off-screen */
       #accessibility-overlay {
         position: absolute !important;
         left: -9999px !important;
@@ -84,8 +134,8 @@
       }
     </style>
 
-    <!-- UX4G CSS — loaded in <head> so it applies before body renders -->
-    <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.10/accessibility-widget.css">
+    <!-- UX4G Official CSS (valid 200 URL) loaded in <head> -->
+    <link rel="stylesheet" href="https://cdn.ux4g.gov.in/tools/accessibility-widget.css">
 
     <!-- INTERCEPT: Strip upgrade/branding HTML BEFORE it's inserted into DOM -->
     <script>
